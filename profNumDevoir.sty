@@ -1,0 +1,109 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{profNumDevoir}[2014/05/19]
+
+%% texte personnalisé pour le numéro du devoir
+%% utilisation de random.tex
+\newcount\randnb
+\newcommand{\numdevoir}[1]{%
+  \ifcase#1 \or \un \or \deux \or \trois \or \quatre \or \cinq
+  \or \six \or \sept \or \huit \or \neuf \or \dix \fi
+}
+\newcommand{\un}{%
+  \setrannum{\randnb}{1}{2}%
+  \ifcase\randnb\or%
+  1 n'est pas un nombre premier.%
+  \or%
+  1 est  élément neutre pour la  multiplication dans {\bfseries\sffamily
+  N},      {\bfseries\sffamily      Z},     {\bfseries\sffamily      Q},
+  {\bfseries\sffamily R}, {\bfseries\sffamily C}, etc.%
+  \fi%
+}
+\newcommand{\deux}{%
+  \setrannum{\randnb}{1}{2}%
+  \ifcase\randnb\or%
+  2 est le plus petit entier pouvant servir de base de numération.%
+  \or%
+  2 est  le plus petit nombre  chanceux, nombres $A$  tels que $x^2+x+A$
+  soit premier pour $0\leqslant x <A-1$.%
+  \fi%
+} 
+\newcommand{\trois}{%
+  \setrannum{\randnb}{1}{2}%
+  \ifcase\randnb\or%
+  3 est le plus petit nombre premier impair.%
+  \or%
+  3 est le plus petit nombre de Mersenne premier~: $2^2-1=3$.%
+  \fi%
+}
+\newcommand{\quatre}{%
+  \setrannum{\randnb}{1}{2}%
+  \ifcase\randnb\or%
+  4 est l'un  des deux carrés de la forme $n^3-4$.  L'autre est 121. Ils
+  ont été déterminés par Fermat.%
+  \or%
+  Tout nombre entier  peut s'écrire sous la forme  d'une somme de quatre
+  carrés.%
+  \fi%
+}
+\newcommand{\cinq}{%
+  \setrannum{\randnb}{1}{2}%
+  \ifcase\randnb\or%
+  5 est le deuxième nombre  de Fermat, c'est-à-dire nombre premier de la
+  forme $2^{2^n}+1$.%
+  \or%
+  5 est le nombre de polyèdres réguliers, dits \og solides de
+Platon\fg.% 
+  \fi%
+}
+\newcommand{\six}{%
+  \setrannum{\randnb}{1}{2}%
+  \ifcase\randnb\or%
+  Plus petit  nombre parfait pair, c'est-à-dire  égal à la  somme de ses
+  diviseurs propres~: $6=1+2+3$.%
+  \or%
+  6 est le plus petit entier dont  le cube est la somme de trois cubes~:
+  $6^3=3^3+4^3+5^3$.%
+  \fi%
+} 
+\newcommand{\sept}{%
+  \setrannum{\randnb}{1}{2}%
+  \ifcase\randnb\or%
+  7  est le  nombre de  côtés du  plus petit  polygone régulier  dont la
+  construction ne peut pas se faire à l'aide de la règle et du compas.%
+  \or%
+  7 est le second nombre de Mersenne premier~: $2^3-1=7$.%
+  \fi%
+}
+\newcommand{\huit}{%
+  \setrannum{\randnb}{1}{2}%
+  \ifcase\randnb\or%
+  8 est l'un des six nombres égal  à la somme des chiffres de son cube~:
+  $8^3=512$.%
+  \or%
+  8 est  le nombre  de sommets du  cube et  par conséquent le  nombre de
+  faces de l'octaèdre.%
+  \fi%
+} 
+\newcommand{\neuf}{%
+  \setrannum{\randnb}{1}{3}%
+  \ifcase\randnb\or%
+  Le  produit de  neuf entiers  consécutifs n'est  jamais  une puissance
+  parfaite.%
+  \or%
+  9 est l'entier le plus proche de $\pi\cot\textrm{e}$.%
+  \or%
+  9 est le dernier chiffre de la base 10.
+  \fi%
+} 
+\newcommand{\dix}{%
+  \setrannum{\randnb}{1}{2}%
+  \ifcase\randnb\or%
+  10 est l'un  des sept entiers $n$ tels que le  nombre de ses diviseurs
+  est égal au nombre des entiers inférieurs à $n$ et premiers avec $n$.%
+  \or%
+  Il y a $\overline{10\,}{}^2$ sortes de  gens~: ceux qui savent compter en base
+  2 et les autres.%
+  \fi%
+}
+%
+\endinput

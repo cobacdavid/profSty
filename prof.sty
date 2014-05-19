@@ -1,0 +1,136 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{prof}[2014/05/17]
+%%
+%% les options supportées par mon package
+%% les dimensions
+
+\DeclareOption{a3}{%
+  \PassOptionsToPackage{a3paper,body={39cm,27.7cm}}{geometry}%
+}
+\DeclareOption{a3paysage}{%
+  \PassOptionsToPackage{a3paper,body={27.7cm,39cm}}{geometry}%
+}
+%%
+\DeclareOption{a4}{%
+  \PassOptionsToPackage{a4paper,body={18cm,27cm}}{geometry}%
+}
+%%
+\DeclareOption{a5}{%
+  \PassOptionsToPackage{a5paper,body={12cm,19cm}}{geometry}%
+}
+%%
+\DeclareOption{a4paysage}{%
+  \PassOptionsToPackage{a4paper,landscape,body={26.5cm,18.5cm}}{geometry}%
+}
+%%
+\DeclareOption{a5paysage}{%
+  \PassOptionsToPackage{a5paper,landscape,body={18cm,13cm}}{geometry}%
+}
+%% enlèvement du numéro de page
+\DeclareOption{unepage}{\AtEndOfPackage{\cfoot{}}}
+%% style collège
+\newif\if@college
+\@collegefalse
+\DeclareOption{college}{%
+  \@collegetrue
+}
+%% si option inconnue
+\DeclareOption*{}
+\ProcessOptions
+%%
+%% chargement des dimensions
+\RequirePackage{geometry}
+%% correction des modifications faites pas geometry
+\setlength{\topmargin}{-2.2cm}
+\setlength{\headsep}{.2cm}
+\setlength{\footskip}{6mm}
+%%
+%% génération aléatoire pour les entêtes d'exerices
+\input random
+%%
+\RequirePackage{graphicx}
+%%
+%% on charge lualatex
+\RequirePackage{ifluatex}
+\ifluatex
+  \RequirePackage[no-math]{fontspec}
+  \RequirePackage{luatexbase}
+  \RequireLuaModule{lualibs}
+  \RequirePackage{metalogo}
+  \RequirePackage{luacode}
+  \RequirePackage{fixltx2e}
+  \RequirePackage{luamplib}
+  \RequirePackage{luacolor}
+  \RequirePackage{unicode-math}
+  \RequirePackage[unicode=true]{hyperref}
+  \RequirePackage{luatexperso}
+  \setmainfont{Asana Math}
+  \setmathfont{Asana Math}
+\else
+  \RequirePackage{hyperref}
+  \RequirePackage{color}
+  \RequirePackage{pst-all}
+  \RequirePackage[utf8]{inputenc}
+  \RequirePackage{aeguill}
+  \RequirePackage{fourier}
+\fi
+\RequirePackage{auto-pst-pdf}
+%% tests
+\RequirePackage{ifthen}
+%% permet des calculs aisés avec les notations habituelles
+\RequirePackage{calc}
+%% package de soulignement
+\RequirePackage{ulem}
+%% package de mise en forme de tableaux
+\RequirePackage{array}
+%% packages de multi-colonnes
+\RequirePackage{multicol}
+%% packages AMS-TEX
+%%\RequirePackage{amsmath}
+%%\RequirePackage{amssymb}
+%% package de symboles (notammant l'euro)
+\RequirePackage{eurosym}
+%% gestion des espaces après macros
+\RequirePackage{xspace}
+%% packages fancy 
+\RequirePackage{fancyhdr}
+\RequirePackage{fancyvrb}
+\RequirePackage{fancybox}
+\setlength{\shadowsize}{2pt}
+%% package numérotation des pages 1/n 2/n etc
+\RequirePackage{lastpage}
+%% package de la fonte mathscr
+\RequirePackage{mathrsfs}
+%% package de francisation
+\ifluatex
+\RequirePackage{polyglossia}
+\setmainlanguage{french}
+\else
+\RequirePackage[frenchb]{babel}
+\fi
+\RequirePackage[autolanguage]{numprint}
+\ifluatex
+\newcommand{\nombre}{\numprint}
+\newcommand{\dfrac}{\displaystyle\frac}
+\newcommand{\degres}{\°}
+\newcommand{\text}{\textrm}
+\newcommand{\og}{«~}
+\newcommand{\fg}{~»}
+\newcommand{\ieme}{$^\textrm{e}\,$}
+\fi
+%%
+\RequirePackage{profNumeDevoir}
+\RequirePackage{profCitation}
+\RequirePackage{profDivers}%%
+\if@college
+\RequirePackage{profCollege}
+\else
+\RequirePackage{profLycee}
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\endinput

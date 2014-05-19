@@ -1,0 +1,321 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{profDivers}[2014/05/19]
+
+%%
+%% numérotation romaine
+\def\RRoman#1{{\sffamily\uppercase\expandafter{\romannumeral #1}}}
+%% personnalisation de la table des matières
+%%\setcounter{secnumdepth}{3}
+%%\setcounter{tocdepth}{3}
+%%
+\renewcommand{\section}{%%
+  \@startsection{section}{1}{0mm}{\baselineskip}{\baselineskip}%%
+  {\sffamily\bfseries\Large}%%
+}
+%%
+\renewcommand{\subsection}{%%
+  \@startsection{subsection}{2}{0cm}{\baselineskip}{\baselineskip}%%
+  {\sffamily\bfseries\large}%%
+ }
+%%
+\renewcommand{\subsubsection}{%%
+  \@startsection{subsubsection}{3}{0cm}{\baselineskip}{\baselineskip}%%
+  {\sffamily\bfseries\normalsize}%%
+ }
+%% personnalisation de la numérotation
+\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\alph{subsubsection}}
+\renewcommand{\partname}{Chapitre}
+%% Décalage dans la marge de la numérotation
+%%\renewcommand{\@hangfrom}[1]{\setbox\@tempboxa\hbox{{#1}}%%
+%%  \hangindent\wd\@tempboxa\noindent\llap{{#1}}%%
+%%}
+%% personnification de enumerate
+\renewcommand{\theenumi}{\arabic{enumi}}
+\renewcommand{\labelenumi}{\theenumi .}
+\renewcommand{\theenumii}{\alph{enumii}}
+\renewcommand{\labelenumii}{\theenumii)}
+\renewcommand{\theenumiii}{\arabic{enumiii}}
+\renewcommand{\labelenumiii}{\theenumii{\scriptsize\theenumiii}}
+%%----------------------------------------------------------%%
+%%----------------------------------------------------------%%
+%% répétition d'un motif
+\newcounter{nbrep}
+%% arg1=<nb de fois à répéter> arg2=<motif à répéter>
+\newcommand{\repete}[2]{
+  \setcounter{nbrep}{0}\noindent
+  \whiledo{\value{nbrep}<#1}{#2\stepcounter{nbrep}}
+}
+\newlength{\@largeurfilet}
+\newcounter{nbfois}
+%% arg1=<motif à utiliser> arg2=<dimension finale>
+\newcommand{\remplir}[2]{
+  \setcounter{nbfois}{0}
+  \setlength{\@largeurfilet}{\widthof{\repete{\thenbfois}{#2}}}
+  \whiledo{\lengthtest{\@largeurfilet<#1}}{
+    \stepcounter{nbfois}
+    \setlength{\@largeurfilet}{\widthof{\repete{\thenbfois}{#2}}}}
+    \hfill\repete{\thenbfois}{#2}\hfill\par
+}
+%%----------------------------------------------------------%%
+%%------------------ unité utiliisée------------------------%%
+\setlength{\unitlength}{1cm}
+%%
+\newcount\randnbtitre
+\newlength{\reste}
+\newcommand{\titrepolydeux}[1]{%%
+  \providecommand{\@titre}[1]{\LARGE\sffamily\bfseries##1}%%
+  \settowidth{\@largeurtitre}{\@titre #1}%%
+  \settodepth{\@profondtitre}{\@titre #1}%%
+%%   \setlength{\@restanttitre}{%%
+%%     (\linewidth              -              \@largeurtitre             -
+%%     \widthof{$\left<\vphantom{\text{\@titre #1}}\right>$}) / 2 -.315cm}%%
+  \begin{center}\mathversion{bold}
+    \rightarrowfill${\bigl<\!\!\Bigl<
+      \parbox[c]{\@largeurtitre}{%%
+        %% \rule{\@largeurtitre}{1bp}\par
+        \makebox[0mm][l]{\@titre #1}%%
+        %%      \rule[-\@profondtitre - 2.3bp]{\@largeurtitre}{1bp}
+      }\Bigr>\!\!\bigr>}$\leftarrowfill
+  \end{center}
+  \setlength{\reste}{\linewidth - \@largeurtitre}
+  %%\setrannum{\randnb}{1}{\reste}%
+  \rule{\reste}{2pt}
+}
+
+%% environnements de biblio/neto graphie
+\newcommand{\bng}[2][.3\linewidth]{%
+  \psframebox[linestyle=dashed,linewidth=.2pt]{%
+  \parbox[t]{#1}{%
+    \scriptsize%
+    \textsl{S'informer}\par
+    #2
+  }}%
+}
+%%
+\newcommand{\impression}{
+  \begin{flushright}
+    \hfill \tiny impression le \today
+  \end{flushright}
+}  
+\newcommand{\titrepolysarah}[1]{
+  \medskip
+  \settowidth{\@largeurtitre}{\large #1}
+  \noindent\begin{center}
+    \rule[.5ex]{\@largeurtitre}{2bp}\\
+    {\large #1}\\
+    \rule[1.2ex]{\@largeurtitre}{2bp}
+  \end{center}
+  \medskip
+}
+\newcommand{\pointiles}{%
+  \par\vspace{8pt}\noindent\dotfill
+  \par\vspace{8pt}
+}
+\newcommand{\pointilles}{%
+  \par\vspace{8pt}\noindent\dotfill
+  \par\vspace{8pt}\noindent\dotfill
+  \par\vspace{8pt}
+}
+\newcommand{\pointillles}{%
+  \par\vspace{8pt}\noindent\dotfill
+  \par\vspace{8pt}\noindent\dotfill
+  \par\vspace{8pt}\noindent\dotfill
+  \par\vspace{8pt}%
+}
+\newcommand{\pointilllles}{%
+  \par\vspace{8pt}\noindent\dotfill
+  \par\vspace{8pt}\noindent\dotfill
+  \par\vspace{8pt}\noindent\dotfill
+  \par\vspace{8pt}\noindent\dotfill
+  \par\vspace{8pt}%
+}
+\newcommand{\pointillllles}{%
+  \par\vspace{8pt}\noindent\dotfill
+  \par\vspace{8pt}\noindent\dotfill
+  \par\vspace{8pt}\noindent\dotfill
+  \par\vspace{8pt}\noindent\dotfill
+  \par\vspace{8pt}\noindent\dotfill
+  \par\vspace{8pt}%
+}
+\newcommand{\pointilllllles}{%
+  \par\vspace{8pt}\noindent\dotfill
+  \par\vspace{8pt}\noindent\dotfill
+  \par\vspace{8pt}\noindent\dotfill
+  \par\vspace{8pt}\noindent\dotfill
+  \par\vspace{8pt}\noindent\dotfill
+  \par\vspace{8pt}\noindent\dotfill
+  \par\vspace{8pt}%
+}
+%% titres de devoirs
+\newcommand{\ds}[3]{%%
+  \titrepoly{Devoir Surveillé \no#1}
+  {\sffamily#2\hfill{\itshape #3\hspace*{0ex}}}\par
+  \noindent${\overleftrightarrow{\hspace*{\linewidth}}}$\par
+  \vspace*{-.3\baselineskip}\noindent\hfill\parbox{.7\linewidth}{%
+  \scriptsize\centering \sffamily\numdevoir{#1}}%
+  \hfill\null\par\bigskip%%
+}
+\newcommand{\ie}[3]{%%
+  \titrepoly{Interrogation Écrite \no#1}
+  {\sffamily {NOM :}\makebox[5cm]{\dotfill}%
+    \hfill#2\hfill{\itshape #3\hspace*{0ex}}%
+  }\par
+  \noindent${\overleftrightarrow{\hspace*{\linewidth}}}$\par
+  \vspace*{-.5\baselineskip}\noindent\hfill%
+  {\scriptsize \sffamily\numdevoir{#1}}%
+  \hfill\null\par\bigskip
+}
+\newcommand{\cmental}[3]{%%
+  \titrepoly{Question Calcul Mental}
+  {\sffamily {NOM Prénom :}\makebox[5cm]{\dotfill}%
+    \hfill#1\hfill{\itshape #2\hspace*{0ex}}%
+  }\par
+  \noindent${\overleftrightarrow{\hspace*{\linewidth}}}$\par
+  \vspace*{-.5\baselineskip}\noindent\hfill%
+  \hfill\null\par\bigskip
+}
+\newcommand{\pie}[1]{%%
+  \titrepoly{Interrogations Écrites}
+  {\sffamily {NOM :}\makebox[5cm]{\dotfill}%
+    \hfill{\itshape #1\hspace*{0ex}}%
+  }\par
+  \noindent${\overleftrightarrow{\hspace*{\linewidth}}}$\par
+  \vspace*{-.5\baselineskip}\noindent\hfill%
+  %%{\scriptsize \sffamily\numdevoir{#1}}%
+  \hfill\null\par\bigskip
+}
+\newcommand{\dm}[3]{%%
+  \titrepoly{Devoir Maison \no#1}
+  {\sffamily#2\hfill{\itshape pour le #3\hspace*{2ex}}}\par
+  \noindent${\overleftrightarrow{\hspace*{\linewidth}}}$\par
+  \vspace*{-.3\baselineskip}\noindent\hfill\parbox{.7\linewidth}{%
+  \scriptsize\centering \sffamily\numdevoir{#1}}%
+  \hfill\null\par\bigskip
+}
+%%
+%% quelques commandes maths
+\newcommand{\R}{\hbox{\sffamily\bfseries R}\xspace}
+\newcommand{\N}{\hbox{\sffamily\bfseries N}\xspace}
+\newcommand{\vi}[1]{\ensuremath{\!\backslash\!\left\{#1\right\}}}
+\newcommand{\VI}{\vi}
+%% des beaux vecteurs sans modif de l'interligne
+\newcommand{\vect}[1]{%
+  \smash{\overrightarrow{%
+    \kern-2pt\mathstrut #1\kern2pt}}
+}
+%% des arcs
+\newlength{\@longarc}
+\newcommand{\arc}[1]{\settowidth{\@longarc}{$#1$}%
+  \addtolength{\@longarc}{-0.5em}%
+  \unitlength \@longarc%
+  \ensuremath{%
+    \stackrel{\begin{picture}(1,0.2)
+        \qbezier(0,0)(0.5,0.3)(1,0)
+      \end{picture}}
+    {#1}
+  }}
+%%
+\newcommand{\arcoriente}[1]{\settowidth{\@longarc}{$#1$}%
+  \addtolength{\@longarc}{-0.5em}%
+  \ensuremath{%
+    \unitlength \@longarc%
+    \stackrel{\begin{picture}(1,0.2)
+        \psset{unit=\@longarc}
+        \pscurve{->}(0,0)(0.5,0.3)(1,0)
+      \end{picture}}
+    {#1}
+  }}
+%%
+%%
+
+%% Boîtes PsTricks %%
+
+\newpsstyle{importantstyle}{framearc=0.2,fillstyle=solid,fillcolor=gray,framesep=4mm}
+\newsavebox\PBox
+\def\BoiteImportant#1#2#3{ %
+  \sbox\PBox{\psframebox[style=importantstyle]{%%
+      \parbox{#1}{#3}}} %%
+  \begin{pspicture}(0,-\ht\PBox)(\wd\PBox,1.2\ht\PBox) %%
+    %%\psgrid
+    \rput[l](0,0){\usebox\PBox}
+    \rput[l](5\fboxsep,\ht\PBox){%%
+      \colorbox{red}{#2\hspace{\fboxsep}}
+    }%%
+  \end{pspicture} %
+}
+
+%% #1 : dimension #2 : titre #3 : texte
+\newpsstyle{propstyle}{framearc=0.2,fillstyle=solid,fillcolor=white,framesep=4mm}
+\newsavebox\QBox
+\def\BoiteProp#1#2#3{ %
+  \sbox\QBox{\psframebox[style=propstyle]{%%
+      \parbox{#1}{#3}}} %%
+  \begin{pspicture}(0,-\ht\QBox)(\wd\QBox,1.2\ht\QBox) %%
+    %%\psgrid
+    \rput[l](0,0){\usebox\QBox}
+    \rput[l](5\fboxsep,\ht\QBox){%%
+      \colorbox{black}{\textcolor{white}{\bfseries #2~:}\hspace{\fboxsep}}
+    }%%
+  \end{pspicture} %
+}
+%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\lv}{\mbox{}\par}
+\newcommand{\lec}{\hfill\mbox{}}
+\newcommand{\ecrancalc}[1]{%%
+  \psframebox{%%
+    %%\setlength{\tempdimc}{13*\widthof{9}}%%
+      \parbox[b]{3cm}{%%
+        \raggedleft #1%%
+      }%
+  }%
+}
+%%
+\newcommand{\operation}[3]{%
+  \pstree[treemode=U,treesep=1cm,nodesep=3pt,levelsep=.8cm]%%
+  {\TR{$#1$}}{%%
+    #2%%
+    #3%%
+  }%%
+}
+\newcommand{\arbre}[1]{%
+  \psframebox[framearc=.1]{#1}
+}
+\newcommand{\calcularbre}[2]{%
+  \begin{tabular}[t]{c}
+    #1\\
+    \arbre{#2}
+  \end{tabular}
+}
+
+%%%%%%%%%%%%%%%%%%%%%
+
+% pour les exemple geogebra
+\DefineVerbatimEnvironment{verbatimgg}{Verbatim}{%%
+  label={Commande \texttt{GeoGebra}},frame=single,commandchars=\\__}
+%%
+\newcommand{\lua}{\texttt{Lua}\xspace}
+\DefineVerbatimEnvironment{verbatimlua}{Verbatim}{%%
+  label={Code \lua},frame=single,commandchars=\\\{\}}
+%% anciennes commandes lycée
+\let\dps=\displaystyle
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Q}{\mathbb{Q}}
+\newtheorem{definition}{Définition }
+\newtheorem{prop}{Propriété }
+\newtheorem{theo}{Théorème }
+\newtheorem{demo}{Démonstration }
+\newcommand{\intff}[2]{\ensuremath{[#1\!;#2]}}
+\newcommand{\intoo}[2]{\ensuremath{]#1\!;#2[}}
+\newcommand{\intof}[2]{\ensuremath{]#1\!;#2]}}
+\newcommand{\intfo}[2]{\ensuremath{[#1\!;#2[}}
+\newcommand{\rg}[1]{\ensuremath{\mathscr{C}_{#1}}}
+\newcommand{\ora}[1]{\overrightarrow{#1}}
+\newcommand{\calt}[1]{$\mathscr{#1}$}
+\newcommand{\infa}{\ensuremath{\leqslant}}
+%%
+
+\endinput

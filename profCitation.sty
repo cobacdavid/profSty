@@ -1,0 +1,48 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{profCitation}[2014/05/19]
+
+\newcount\randCit
+\newcommand{\numcitation}[1]{%
+  \ifcase#1 \or \Cun \or \Cdeux \or \Ctrois \or \Cquatre \or \Ccinq \or \Csix
+  \or \Csept \or \Chuit \or \Cneuf \or \Cdix \fi%
+}
+\newcommand{\formatcitation}[2]{%
+  #1\quad\textsc{#2}%%
+}
+
+\newcommand{\Cdeux}{%
+  \formatcitation{Les mathématiques ne sont écrites que pour les mathématiciens}{N. Copernic}%
+}
+\newcommand{\Cquatre}{%
+  \formatcitation{Un mathématicien est un aveugle qui, dans une pièce sombre, cherche un chat noir qui n'y est pas.}{C. Darwin}%
+}
+\newcommand{\Csix}{%
+  \formatcitation{Si vous touchez aux maths, vous ne devez être ni pressés, ni cupides, fussiez-vous roi ou reine.}{Euclide}%
+}
+\newcommand{\Csept}{%
+  \formatcitation{Ne tenez pour certain que ce qui est démontré.}{I. Newton}%
+}
+\newcommand{\Cun}{%
+  \formatcitation{La vie n'est bonne qu'à étudier et à enseigner les mathématiques.}{B. Pascal}%
+}
+\newcommand{\Cneuf}{%
+  \formatcitation{C'est avec la logique que nous prouvons et avec l'intuition que nous trouvons.}{H. POincaré}%
+}
+\newcommand{\Ccinq}{%
+  \formatcitation{Qui parle sème~; qui écoute récolte.}{Pythagore}%
+}
+\newcommand{\Chuit}{
+  \formatcitation{Toute chose est nombre.}{Pythagore}%
+}
+\newcommand{\Ctrois}{%
+  \formatcitation{La vérité est parfaite pour les mathématiques, la chimie, la philosophie, mais pas pour la vie.}{E. Sabato}%
+}
+\newcommand{\Cdix}{%
+\formatcitation{Aussi difficile que cela puisse paraître, si vous n'essayez pas, alors vous le ne ferez jamais.}{A. Wiles}%
+}
+\newcommand{\citationSci}{%
+  \setrannum{\randCit}{1}{10}%
+  {\tiny\numcitation{\randCit}}
+}
+
+\endinput

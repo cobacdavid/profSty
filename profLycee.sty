@@ -1,0 +1,158 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{profLycee}[2014/05/19]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                 style lycée 2014                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% personnalisation du module fancyhdr
+\pagestyle{fancy}
+\renewcommand{\footrulewidth}{0.25mm}
+\renewcommand{\footrule}{{\color{lightgray}%
+\vskip-\footruleskip\vskip-\footrulewidth
+\hrule width\headwidth height\footrulewidth\vskip\footruleskip}}
+\renewcommand{\headrulewidth}{0mm}
+%
+\newcommand{\rheadTexte}{\large\sffamily\slshape\white Mathématiques\/}
+\newcommand{\lfootTexte}{\color{lightgray}\tiny\sffamily\bfseries%
+  Composé avec Lua\LaTeX{} sous linux à~%
+  \directlua{tex.print(os.time())}%
+}
+\newcommand{\cfootTexte}{\color{lightgray}\thepage/\pageref{LastPage}}
+\newcommand{\rfootTexte}{\color{lightgray}\large\sffamily\slshape\RRoman{\number\year}~---~%
+      Collège F. Rabelais/Cobac}
+\newcommand{\rheadCitation}{\color{lightgray}\citationSci{}}
+%
+\newlength{\longauteur}
+\settowidth{\longauteur}{\rfootTexte}
+\newlength{\hautmatiere}
+\settoheight{\hautmatiere}{\rheadTexte}
+\newlength{\longmatiere}
+\settowidth{\longmatiere}{\rheadTexte}
+%
+\newlength{\rfootYOff}
+\setlength{\rfootYOff}{4.3ex}
+\newlength{\rheadXOff}
+\setlength{\rheadXOff}{3.7ex - \hautmatiere + 4ex} %% 3.7 correspond au bandeau sans matiere
+\newlength{\epaisTrait}
+\setlength{\epaisTrait}{3mm}
+\newlength{\citationOff}
+\setlength{\citationOff}{\longmatiere + 3pt + 1ex} % 3pt es la distance framesep d'une framebox
+\newlength{\hautcitation}
+\setlength{\hautcitation}{1.5mm + 1ex}
+%
+%% lalatex, fancyhdr et pstricks ne sont pas les meilleures amies
+%% du monde -> hack demandé sur fr.comp.text.tex
+\newlength{\etirement}
+\newsavebox\PSTBoxDroite
+\savebox\PSTBoxDroite{% 
+  \begin{postscript}
+    \setlength{\etirement}{\textheight - \longauteur + \rfootYOff}
+    \rput[tl](0,0){\psframe[linestyle=none,fillstyle=solid,fillcolor=lightgray](0,0)(\etirement,\epaisTrait)}%
+    \rput[bl](0,0){\psframebox[linestyle=none,fillstyle=solid,fillcolor=lightgray]{\rheadTexte}}%
+    \rput[bl](\citationOff,2ex){\psframebox[linestyle=none,fillstyle=none]{\rheadCitation}}%
+    %%\rput[bl](\citationOff,\hautCitation){\psframebox[linestyle=none,fillstyle=none]{\rheadCitation}}%
+  \end{postscript}%
+} 
+%
+\lhead{}
+\chead{}
+\rhead{\hbox to0pt{\hspace*{\rheadXOff}\vbox to0pt{\vspace*{3mm}\rotatebox{-90}{%%
+        \usebox\PSTBoxDroite%%
+      }\vss}\hss}}
+\rfoot{\hbox to0pt{\hspace*{\rfootYOff}\vbox to0pt{\vspace*{-\longauteur}%
+      \rotatebox{90}{\rfootTexte}
+    }}}
+\lfoot{\scalebox{-1}[1]{\lfootTexte}}
+\cfoot{\cfootTexte}
+%
+%% environnements exo et pb
+%% encadrements en pointillés
+%
+\newcommand{\encadrepointilles}[1]{%
+  \expandafter\begin{postscript}%
+    \psframebox[linestyle=none,fillcolor=lightgray,fillstyle=solid]{#1}%
+  \end{postscript}%
+}
+%
+\newcounter{numeroexo}
+\newlength{\htex}
+\newlength{\lgex}
+\settowidth{\htex}{\encadrepointilles{%
+    \scalebox{1.5}[1]{\sffamily Exercice \arabic{numeroexo}}%%
+  }}
+\addtolength{\htex}{-\baselineskip}
+\settoheight{\lgex}{\encadrepointilles{%%
+    \scalebox{1.5}[1]{\sffamily Exercice \arabic{numeroexo}}%%
+  }}
+\addtolength{\lgex}{10pt}
+\newenvironment{exercice}{%%
+  \ifthenelse{\equal{\value{numeroexo}}{0}}{}{%%
+    %% la séparation des exercices
+    \par\noindent{\color{lightgray}\hrule}%%
+  }%%
+  \par\noindent\stepcounter{numeroexo}\linebreak\hspace*{-\lgex}%
+   \smash{\raisebox{-\htex}{%
+       \rotatebox{90}{\encadrepointilles{%
+             \scalebox{1.5}[1]{\white \bfseries \sffamily Exercice \arabic{numeroexo}}%%
+       }}%
+       }}%
+   \hspace*{\lgex}\hspace*{3pt}%%
+ }{%
+   \vspace{.5\baselineskip}\par
+ }
+\newenvironment{niveau}{%%
+  \ifthenelse{\equal{\value{numeroexo}}{0}}{}{%%
+    %% la séparation des exercices
+    \par\noindent\hrule%%
+  }%%
+  \par\noindent\stepcounter{numeroexo}\linebreak\hspace*{-\lgex}%
+   \smash{\raisebox{-\htex}{%
+       \rotatebox{90}{\encadrepointilles{%
+             \scalebox{1.5}[1]{\sffamily Niveau \arabic{numeroexo}}%%
+           }}}}%
+     \hspace*{\lgex}\hspace*{3pt}%%
+ }{%
+   \vspace{.5\baselineskip}
+
+ }
+%
+%% titres de polys
+\newsavebox{\gradruledg}
+\newsavebox{\gradrulegd}
+\newsavebox{\gradrulegdg}
+\newlength{\@largeurtitre}
+\newlength{\@profondtitre}
+\newlength{\@restanttitre}
+\newlength{\@hauteurtitre}
+\newcommand{\titrepoly}[1]{%%
+  \providecommand{\@titre}[1]{\LARGE\sffamily\bfseries##1}%%
+  \settowidth{\@largeurtitre}{\@titre #1}%%
+  \settodepth{\@profondtitre}{\@titre #1}%%
+  \settoheight{\@hauteurtitre}{@titre #1}%
+  \setlength{\@restanttitre}{(\linewidth - 5mm - \@largeurtitre)/2 }
+  \savebox{\gradruledg}{%%
+    \begin{pspicture}%%
+      \psframe[gradmidpoint=1,linestyle=none,fillstyle=gradient,gradbegin=white,gradend=lightgray,gradangle=90](0,0)(\@restanttitre,-\@hauteurtitre)%%
+    \end{pspicture}%%
+  }
+  \savebox{\gradrulegd}{%%
+    \begin{pspicture}%%
+      \psframe[gradmidpoint=1,linestyle=none,fillstyle=gradient,gradend=white,gradbegin=lightgray,gradangle=90](0,0)(\@restanttitre,-\@hauteurtitre)%%
+    \end{pspicture}%%
+  }
+  \savebox{\gradrulegdg}{%%
+    \begin{pspicture}%%
+      \psframe[gradmidpoint=.5,linestyle=none,fillstyle=gradient,gradbegin=white,gradend=lightgray,gradangle=90](0,0)(\linewidth,-\@hauteurtitre)%%
+    \end{pspicture}%%
+  }
+ %
+  \begin{center}
+    \usebox\gradruledg%%
+    \hfill\parbox[b]{\@largeurtitre}{\@titre #1}\hfill\rule{0pt}{0pt}%%
+    \usebox{\gradrulegd}%%
+  \end{center}
+}
+
+\endinput

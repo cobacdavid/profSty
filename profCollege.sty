@@ -1,0 +1,99 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{profCollege}[2014/05/19]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                style college 2000                          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\encadrepointilles}[1]{%
+  \psframebox[linestyle=dashed,linewidth=.2pt]{#1}%
+}
+%
+\newcommand{\matiere}{\large\sffamily\slshape Mathématiques}
+\newlength{\millesime}
+\settowidth{\millesime}{\sffamily\upshape\tiny\RRoman{\number\year}}
+\addtolength{\millesime}{-1ex}
+\newcommand{\Auteur}{\large\sffamily\slshape%%
+        \RRoman{\number\year} ---~%
+      Collège F. Rabelais/Cobac%%
+}
+\newlength{\longauteur}
+\settowidth{\longauteur}{\Auteur}
+\newcommand{\auteur}[1]{
+  \renewcommand{\Auteur}{#1}
+  \settowidth{\longauteur}{\Auteur}
+  \setlength{\decalageBasGauche}{\longauteur}
+}
+\newlength{\decalageBasGauche}
+\setlength{\decalageBasGauche}{\longauteur}
+%% lalatex, fancyhdr et pstricks ne sont pas les meilleures amies
+%% du monde -> hack demandé sur fr.comp.text.tex
+\newsavebox\PSTBox 
+\savebox\PSTBox{% 
+  \begin{postscript} 
+          \psframebox[linestyle=dashed,fillstyle=solid,fillcolor=darkgray]{%
+            \large \bfseries\sffamily \slshape  \white \matiere\/} 
+  \end{postscript}} 
+%
+%% personnalisation du module fancyhdr
+\pagestyle{fancy}
+%
+\renewcommand{\footrulewidth}{0.12mm}
+\renewcommand{\headrulewidth}{0mm}
+%
+\lhead{}
+\chead{}
+\rhead{\hbox to0pt{\hspace*{6ex}\vbox to0pt{\vspace*{3mm}\rotatebox{-90}{%%
+        \usebox\PSTBox%%
+      }\vss}\hss}}
+\rfoot{\hbox to0pt{\hspace*{6ex}\vbox to0pt{\vspace*{-\decalageBasGauche}%
+      \rotatebox{90}{\Auteur}
+    }}}
+\lfoot{\scalebox{-1}[1]{\tiny\sffamily Composé avec Lua\LaTeX{} sous linux}}
+\cfoot{\thepage/\pageref{LastPage}}
+%
+%% environnements exo et pb
+%% encadrements en pointillés
+\newcounter{numeroexo}
+\newlength{\htex}
+\newlength{\lgex}
+\settowidth{\htex}{\encadrepointilles{%
+    \scalebox{1.5}[1]{\sffamily Exercice \arabic{numeroexo}}%%
+  }}
+\addtolength{\htex}{-\baselineskip}
+\settoheight{\lgex}{\encadrepointilles{%%
+    \scalebox{1.5}[1]{\sffamily Exercice \arabic{numeroexo}}%%
+  }}
+\addtolength{\lgex}{10pt}
+\newenvironment{exercice}{%%
+  \ifthenelse{\equal{\value{numeroexo}}{0}}{}{%%
+    %% la séparation des exercices
+    \par\noindent\hrule%%
+  }%%
+  \par\noindent\stepcounter{numeroexo}\linebreak\hspace*{-\lgex}%
+   \smash{\raisebox{-\htex}{%
+       \rotatebox{90}{\encadrepointilles{%
+             \scalebox{1.5}[1]{\sffamily Exercice \arabic{numeroexo}}%%
+           }}}}%
+     \hspace*{\lgex}\hspace*{3pt}%%
+ }{%
+   \vspace{.5\baselineskip}
+ }
+%
+%% titres de polys
+\newlength{\@largeurtitre}
+\newlength{\@profondtitre}
+\newlength{\@restanttitre}
+\newcommand{\titrepoly}[1]{%%
+  \providecommand{\@titre}[1]{\LARGE\sffamily\bfseries##1}%%
+  \settowidth{\@largeurtitre}{\@titre #1}%%
+  \settodepth{\@profondtitre}{\@titre #1}%%
+  \begin{center}\mathversion{bold}
+    \rightarrowfill${\bigl<\!\!\Bigl<
+      \parbox[c]{\@largeurtitre}{%%
+        \makebox[0mm][l]{\@titre #1}%%
+      }\Bigr>\!\!\bigr>}$\leftarrowfill
+  \end{center}
+}
+\endinput
