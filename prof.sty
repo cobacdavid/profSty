@@ -61,20 +61,33 @@
   \RequirePackage{fixltx2e}
   \RequirePackage{luamplib}
   \RequirePackage{luacolor}
+  %%\RequirePackage[math-style=ISO,bold-style=ISO]{unicode-math}
   \RequirePackage{unicode-math}
   \RequirePackage[unicode=true]{hyperref}
   \RequirePackage{luatexperso}
-  \setmainfont{Asana Math}
-  \setmathfont{Asana Math}
+  %\setmathfont{[Asana-Math]}
+  %\setmathfont[range=\mathbfit,FakeBold=2.0]{[Asana-Math]}
+  %%\setmainfont{Asana Math}
+  %%\setmathfont{Asana Math}
+  \setmainfont[BoldFont= texgyrepagella-bold.otf ,
+  ItalicFont= texgyrepagella-italic.otf ,
+  BoldItalicFont = texgyrepagella-bolditalic.otf ]
+  {texgyrepagella-regular.otf}
+  % xits-math permet d'avoir un mathscr correct !
+  \setmathfont{xits-math.otf}
 \else
   \RequirePackage{hyperref}
   \RequirePackage{color}
-  \RequirePackage{pst-all}
   \RequirePackage[utf8]{inputenc}
   \RequirePackage{aeguill}
   \RequirePackage{fourier}
+  \RequirePackage{pst-all}
+  %% package de la fonte mathscr
+  \RequirePackage{mathrsfs}
 \fi
 \RequirePackage{auto-pst-pdf}
+%% symbole de degres
+\RequirePackage{textcomp}
 %% tests
 \RequirePackage{ifthen}
 %% permet des calculs aisés avec les notations habituelles
@@ -99,8 +112,14 @@
 \setlength{\shadowsize}{2pt}
 %% package numérotation des pages 1/n 2/n etc
 \RequirePackage{lastpage}
-%% package de la fonte mathscr
-\RequirePackage{mathrsfs}
+%% pour l'env. boxedverbatim
+\RequirePackage{moreverb}
+%% pour des hline biens faites
+\RequirePackage{hhline}
+%% logo metapost
+\RequirePackage{mflogo}
+%% package de théorèmes
+\RequirePackage{ntheorem}
 %% package de francisation
 \ifluatex
 \RequirePackage{polyglossia}
@@ -112,14 +131,14 @@
 \ifluatex
 \newcommand{\nombre}{\numprint}
 \newcommand{\dfrac}{\displaystyle\frac}
-\newcommand{\degres}{\°}
+\newcommand{\degres}{\textdegree}
 \newcommand{\text}{\textrm}
 \newcommand{\og}{«~}
 \newcommand{\fg}{~»}
 \newcommand{\ieme}{$^\textrm{e}\,$}
 \fi
 %%
-\RequirePackage{profNumeDevoir}
+\RequirePackage{profNumDevoir}
 \RequirePackage{profCitation}
 \RequirePackage{profDivers}%%
 \if@college
@@ -130,7 +149,4 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
 \endinput

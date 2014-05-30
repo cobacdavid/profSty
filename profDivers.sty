@@ -49,14 +49,14 @@
 }
 \newlength{\@largeurfilet}
 \newcounter{nbfois}
-%% arg1=<motif à utiliser> arg2=<dimension finale>
+%% arg1=<dimension finale> arg2=<motif à utiliser>
 \newcommand{\remplir}[2]{
-  \setcounter{nbfois}{0}
-  \setlength{\@largeurfilet}{\widthof{\repete{\thenbfois}{#2}}}
-  \whiledo{\lengthtest{\@largeurfilet<#1}}{
-    \stepcounter{nbfois}
-    \setlength{\@largeurfilet}{\widthof{\repete{\thenbfois}{#2}}}}
-    \hfill\repete{\thenbfois}{#2}\hfill\par
+  \setcounter{nbfois}{0}%
+  \setlength{\@largeurfilet}{\widthof{\repete{\thenbfois}{#2}}}%
+  \whiledo{\lengthtest{\@largeurfilet<#1}}{%
+    \stepcounter{nbfois}%
+    \setlength{\@largeurfilet}{\widthof{\repete{\thenbfois}{#2}}}}%
+    \par\noindent\centerline{\repete{\thenbfois}{#2}}\par
 }
 %%----------------------------------------------------------%%
 %%------------------ unité utiliisée------------------------%%
@@ -81,18 +81,9 @@
   \end{center}
   \setlength{\reste}{\linewidth - \@largeurtitre}
   %%\setrannum{\randnb}{1}{\reste}%
-  \rule{\reste}{2pt}
+  %%\rule{\reste}{2pt}
 }
 
-%% environnements de biblio/neto graphie
-\newcommand{\bng}[2][.3\linewidth]{%
-  \psframebox[linestyle=dashed,linewidth=.2pt]{%
-  \parbox[t]{#1}{%
-    \scriptsize%
-    \textsl{S'informer}\par
-    #2
-  }}%
-}
 %%
 \newcommand{\impression}{
   \begin{flushright}
@@ -167,25 +158,25 @@
   {\scriptsize \sffamily\numdevoir{#1}}%
   \hfill\null\par\bigskip
 }
-\newcommand{\cmental}[3]{%%
-  \titrepoly{Question Calcul Mental}
-  {\sffamily {NOM Prénom :}\makebox[5cm]{\dotfill}%
-    \hfill#1\hfill{\itshape #2\hspace*{0ex}}%
-  }\par
-  \noindent${\overleftrightarrow{\hspace*{\linewidth}}}$\par
-  \vspace*{-.5\baselineskip}\noindent\hfill%
-  \hfill\null\par\bigskip
-}
-\newcommand{\pie}[1]{%%
-  \titrepoly{Interrogations Écrites}
-  {\sffamily {NOM :}\makebox[5cm]{\dotfill}%
-    \hfill{\itshape #1\hspace*{0ex}}%
-  }\par
-  \noindent${\overleftrightarrow{\hspace*{\linewidth}}}$\par
-  \vspace*{-.5\baselineskip}\noindent\hfill%
-  %%{\scriptsize \sffamily\numdevoir{#1}}%
-  \hfill\null\par\bigskip
-}
+% \newcommand{\cmental}[3]{%%
+%   \titrepoly{Question Calcul Mental}
+%   {\sffamily {NOM Prénom :}\makebox[5cm]{\dotfill}%
+%     \hfill#1\hfill{\itshape #2\hspace*{0ex}}%
+%   }\par
+%   \noindent${\overleftrightarrow{\hspace*{\linewidth}}}$\par
+%   \vspace*{-.5\baselineskip}\noindent\hfill%
+%   \hfill\null\par\bigskip
+% }
+% \newcommand{\pie}[1]{%%
+%   \titrepoly{Interrogations Écrites}
+%   {\sffamily {NOM :}\makebox[5cm]{\dotfill}%
+%     \hfill{\itshape #1\hspace*{0ex}}%
+%   }\par
+%   \noindent${\overleftrightarrow{\hspace*{\linewidth}}}$\par
+%   \vspace*{-.5\baselineskip}\noindent\hfill%
+%   %%{\scriptsize \sffamily\numdevoir{#1}}%
+%   \hfill\null\par\bigskip
+% }
 \newcommand{\dm}[3]{%%
   \titrepoly{Devoir Maison \no#1}
   {\sffamily#2\hfill{\itshape pour le #3\hspace*{2ex}}}\par
@@ -196,8 +187,8 @@
 }
 %%
 %% quelques commandes maths
-\newcommand{\R}{\hbox{\sffamily\bfseries R}\xspace}
-\newcommand{\N}{\hbox{\sffamily\bfseries N}\xspace}
+\newcommand{\R}{\textrm{\sffamily\bfseries R}}
+\newcommand{\N}{\textrm{\sffamily\bfseries N}}
 \newcommand{\vi}[1]{\ensuremath{\!\backslash\!\left\{#1\right\}}}
 \newcommand{\VI}{\vi}
 %% des beaux vecteurs sans modif de l'interligne
@@ -208,11 +199,11 @@
 %% des arcs
 \newlength{\@longarc}
 \newcommand{\arc}[1]{\settowidth{\@longarc}{$#1$}%
-  \addtolength{\@longarc}{-0.5em}%
+  % \addtolength{\@longarc}{-0.5em}%
   \unitlength \@longarc%
   \ensuremath{%
     \stackrel{\begin{picture}(1,0.2)
-        \qbezier(0,0)(0.5,0.3)(1,0)
+        \qbezier(0.1,-0.1)(0.6,0.2)(1.1,-0.1)
       \end{picture}}
     {#1}
   }}
@@ -232,34 +223,34 @@
 
 %% Boîtes PsTricks %%
 
-\newpsstyle{importantstyle}{framearc=0.2,fillstyle=solid,fillcolor=gray,framesep=4mm}
-\newsavebox\PBox
-\def\BoiteImportant#1#2#3{ %
-  \sbox\PBox{\psframebox[style=importantstyle]{%%
-      \parbox{#1}{#3}}} %%
-  \begin{pspicture}(0,-\ht\PBox)(\wd\PBox,1.2\ht\PBox) %%
-    %%\psgrid
-    \rput[l](0,0){\usebox\PBox}
-    \rput[l](5\fboxsep,\ht\PBox){%%
-      \colorbox{red}{#2\hspace{\fboxsep}}
-    }%%
-  \end{pspicture} %
-}
+% \newpsstyle{importantstyle}{framearc=0.2,fillstyle=solid,fillcolor=gray,framesep=4mm}
+% \newsavebox\PBox
+% \def\BoiteImportant#1#2#3{ %
+%   \sbox\PBox{\psframebox[style=importantstyle]{%%
+%       \parbox{#1}{#3}}} %%
+%   \begin{pspicture}(0,-\ht\PBox)(\wd\PBox,1.2\ht\PBox) %%
+%     %%\psgrid
+%     \rput[l](0,0){\usebox\PBox}
+%     \rput[l](5\fboxsep,\ht\PBox){%%
+%       \colorbox{red}{#2\hspace{\fboxsep}}
+%     }%%
+%   \end{pspicture} %
+% }
 
-%% #1 : dimension #2 : titre #3 : texte
-\newpsstyle{propstyle}{framearc=0.2,fillstyle=solid,fillcolor=white,framesep=4mm}
-\newsavebox\QBox
-\def\BoiteProp#1#2#3{ %
-  \sbox\QBox{\psframebox[style=propstyle]{%%
-      \parbox{#1}{#3}}} %%
-  \begin{pspicture}(0,-\ht\QBox)(\wd\QBox,1.2\ht\QBox) %%
-    %%\psgrid
-    \rput[l](0,0){\usebox\QBox}
-    \rput[l](5\fboxsep,\ht\QBox){%%
-      \colorbox{black}{\textcolor{white}{\bfseries #2~:}\hspace{\fboxsep}}
-    }%%
-  \end{pspicture} %
-}
+% %% #1 : dimension #2 : titre #3 : texte
+% \newpsstyle{propstyle}{framearc=0.2,fillstyle=solid,fillcolor=white,framesep=4mm}
+% \newsavebox\QBox
+% \def\BoiteProp#1#2#3{ %
+%   \sbox\QBox{\psframebox[style=propstyle]{%%
+%       \parbox{#1}{#3}}} %%
+%   \begin{pspicture}(0,-\ht\QBox)(\wd\QBox,1.2\ht\QBox) %%
+%     %%\psgrid
+%     \rput[l](0,0){\usebox\QBox}
+%     \rput[l](5\fboxsep,\ht\QBox){%%
+%       \colorbox{black}{\textcolor{white}{\bfseries #2~:}\hspace{\fboxsep}}
+%     }%%
+%   \end{pspicture} %
+% }
 %%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\lv}{\mbox{}\par}
@@ -274,11 +265,13 @@
 }
 %%
 \newcommand{\operation}[3]{%
-  \pstree[treemode=U,treesep=1cm,nodesep=3pt,levelsep=.8cm]%%
-  {\TR{$#1$}}{%%
-    #2%%
-    #3%%
-  }%%
+  \expandafter\begin{postscript}
+    \pstree[treemode=U,treesep=1cm,nodesep=3pt,levelsep=.8cm]%%
+    {\TR{$#1$}}{%%
+      #2%%
+      #3%%
+    }%%
+  \end{postscript}%
 }
 \newcommand{\arbre}[1]{%
   \psframebox[framearc=.1]{#1}
@@ -293,29 +286,33 @@
 %%%%%%%%%%%%%%%%%%%%%
 
 % pour les exemple geogebra
-\DefineVerbatimEnvironment{verbatimgg}{Verbatim}{%%
-  label={Commande \texttt{GeoGebra}},frame=single,commandchars=\\__}
+% \DefineVerbatimEnvironment{verbatimgg}{Verbatim}{%%
+%   label={Commande \texttt{GeoGebra}},frame=single,commandchars=\\__}
 %%
-\newcommand{\lua}{\texttt{Lua}\xspace}
-\DefineVerbatimEnvironment{verbatimlua}{Verbatim}{%%
-  label={Code \lua},frame=single,commandchars=\\\{\}}
+% \newcommand{\lua}{\texttt{Lua}\xspace}
+% \DefineVerbatimEnvironment{verbatimlua}{Verbatim}{%%
+%   label={Code \lua},frame=single,commandchars=\\\{\}}
 %% anciennes commandes lycée
 \let\dps=\displaystyle
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\D}{\mathbb{D}}
-\newcommand{\Q}{\mathbb{Q}}
-\newtheorem{definition}{Définition }
-\newtheorem{prop}{Propriété }
-\newtheorem{theo}{Théorème }
-\newtheorem{demo}{Démonstration }
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\D}{\ensuremath{\mathbb{D}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
 \newcommand{\intff}[2]{\ensuremath{[#1\!;#2]}}
 \newcommand{\intoo}[2]{\ensuremath{]#1\!;#2[}}
 \newcommand{\intof}[2]{\ensuremath{]#1\!;#2]}}
 \newcommand{\intfo}[2]{\ensuremath{[#1\!;#2[}}
-\newcommand{\rg}[1]{\ensuremath{\mathscr{C}_{#1}}}
-\newcommand{\ora}[1]{\overrightarrow{#1}}
+\newcommand{\rg}[1]{\ensuremath{\mathscr{C}\!\!_{#1}}}
+\newcommand{\ora}[1]{\ensuremath{\overrightarrow{#1}}}
 \newcommand{\calt}[1]{$\mathscr{#1}$}
 \newcommand{\infa}{\ensuremath{\leqslant}}
 %%
+\theorembodyfont{\slshape}
 
+\newtheorem{definition}{Définition }
+\newtheorem{exemple}{Exemple }
+\newtheorem{propriete}{Propriété }
+\newtheorem{theoreme}{Théorème }
+\newtheorem{demonstration}{Démonstration }
+\newtheorem{remarque}{Remarque }
+%
 \endinput
