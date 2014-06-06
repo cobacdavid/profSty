@@ -10,7 +10,7 @@
   \psframebox[linestyle=dashed,linewidth=.2pt]{#1}%
 }
 %
-\newcommand{\matiere}{\large\sffamily\slshape Mathématiques}
+\newcommand{\matiere}{\large\sffamily\slshape\lamatiere}
 \newlength{\millesime}
 \settowidth{\millesime}{\sffamily\upshape\tiny\RRoman{\number\year}}
 \addtolength{\millesime}{-1ex}
@@ -95,5 +95,52 @@
         \makebox[0mm][l]{\@titre #1}%%
       }\Bigr>\!\!\bigr>}$\leftarrowfill
   \end{center}
+}
+%%
+%% titres de devoirs
+\newcommand{\ds}[3]{%%
+  \titrepoly{Devoir Surveillé \no#1}
+  {\sffamily#2\hfill{\itshape #3\hspace*{0ex}}}\par
+  \noindent${\overleftrightarrow{\hspace*{\linewidth}}}$\par
+  \vspace*{-.3\baselineskip}\noindent\hfill\parbox{.7\linewidth}{%
+  \scriptsize\centering \sffamily\numdevoir{#1}}%
+  \hfill\null\par\bigskip%%
+}
+\newcommand{\ie}[3]{%%
+  \titrepoly{Interrogation Écrite \no#1}
+  {\sffamily {NOM :}\makebox[5cm]{\dotfill}%
+    \hfill#2\hfill{\itshape #3\hspace*{0ex}}%
+  }\par
+  \noindent${\overleftrightarrow{\hspace*{\linewidth}}}$\par
+  \vspace*{-.5\baselineskip}\noindent\hfill%
+  {\scriptsize \sffamily\numdevoir{#1}}%
+  \hfill\null\par\bigskip
+}
+% \newcommand{\cmental}[3]{%%
+%   \titrepoly{Question Calcul Mental}
+%   {\sffamily {NOM Prénom :}\makebox[5cm]{\dotfill}%
+%     \hfill#1\hfill{\itshape #2\hspace*{0ex}}%
+%   }\par
+%   \noindent${\overleftrightarrow{\hspace*{\linewidth}}}$\par
+%   \vspace*{-.5\baselineskip}\noindent\hfill%
+%   \hfill\null\par\bigskip
+% }
+% \newcommand{\pie}[1]{%%
+%   \titrepoly{Interrogations Écrites}
+%   {\sffamily {NOM :}\makebox[5cm]{\dotfill}%
+%     \hfill{\itshape #1\hspace*{0ex}}%
+%   }\par
+%   \noindent${\overleftrightarrow{\hspace*{\linewidth}}}$\par
+%   \vspace*{-.5\baselineskip}\noindent\hfill%
+%   %%{\scriptsize \sffamily\numdevoir{#1}}%
+%   \hfill\null\par\bigskip
+% }
+\newcommand{\dm}[3]{%%
+  \titrepoly{Devoir Maison \no#1}
+  {\sffamily#2\hfill{\itshape pour le #3\hspace*{2ex}}}\par
+  \noindent${\overleftrightarrow{\hspace*{\linewidth}}}$\par
+  \vspace*{-.3\baselineskip}\noindent\hfill\parbox{.7\linewidth}{%
+  \scriptsize\centering \sffamily\numdevoir{#1}}%
+  \hfill\null\par\bigskip
 }
 \endinput

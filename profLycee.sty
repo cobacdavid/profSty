@@ -8,21 +8,31 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% personnalisation du module fancyhdr
 \pagestyle{fancy}
-\renewcommand{\footrulewidth}{0.25mm}
-\renewcommand{\footrule}{{\color{lightgray}%
+\renewcommand{\footrulewidth}{1mm}
+\renewcommand{\footrule}{{\macouleur%
 \vskip-\footruleskip\vskip-\footrulewidth
 \hrule width\headwidth height\footrulewidth\vskip\footruleskip}}
 \renewcommand{\headrulewidth}{0mm}
-%
-\newcommand{\rheadTexte}{\large\sffamily\slshape\white Mathématiques\/}
-\newcommand{\lfootTexte}{\color{lightgray}\tiny\sffamily\bfseries%
+% 
+\newcommand{\rheadTexte}{\large\sffamily\slshape\white\lamatiere}
+\newcommand{\lfootTexte}{\macouleur\tiny\sffamily\bfseries% 
   Composé avec Lua\LaTeX{} sous linux à~%
   \directlua{tex.print(os.time())}%
 }
-\newcommand{\cfootTexte}{\color{lightgray}\thepage/\pageref{LastPage}}
-\newcommand{\rfootTexte}{\color{lightgray}\large\sffamily\slshape\RRoman{\number\year}~---~%
-      Collège F. Rabelais/Cobac}
-\newcommand{\rheadCitation}{\color{lightgray}\citationSci{}}
+\newcommand{\cfootTexte}{\macouleur\thepage/\pageref{LastPage}}
+\newcommand{\rfootTexte}{\macouleur\large\sffamily\slshape\RRoman{\number\year}~---~%
+  Collège F. Rabelais / Cobac}
+% 
+  % \begin{tikzpicture}
+  %   \begin{scope}
+  %     \clip (0,\profCitation) rectangle (\longCitation,\hautCitation+\profCitation);
+  %     \node[inner sep=0pt,anchor=south west,red] at (0,0) {\citationformatee};
+  %   \end{scope}
+  %   \clip (0,0) rectangle (\longCitation,\profCitation);
+  %   \node[inner sep=0pt,anchor=south west,blue] at (0,0) {\citationformatee};
+  % \end{tikzpicture}
+%%
+\newcommand{\rheadCitation}{\usebox{\textecitation}}
 %
 \newlength{\longauteur}
 \settowidth{\longauteur}{\rfootTexte}
@@ -36,9 +46,11 @@
 \newlength{\rheadXOff}
 \setlength{\rheadXOff}{3.7ex - \hautmatiere + 4ex} %% 3.7 correspond au bandeau sans matiere
 \newlength{\epaisTrait}
-\setlength{\epaisTrait}{3mm}
-\newlength{\citationOff}
-\setlength{\citationOff}{\longmatiere + 3pt + 1ex} % 3pt es la distance framesep d'une framebox
+\setlength{\epaisTrait}{1.7mm}
+\newlength{\citationXOff}
+\setlength{\citationXOff}{\longmatiere + 6pt + 1ex} % 3pt est la distance framesep d'une framebox
+\newlength{\citationYOff}
+\setlength{\citationYOff}{\epaisTrait-\profCitation}
 \newlength{\hautcitation}
 \setlength{\hautcitation}{1.5mm + 1ex}
 %
@@ -48,31 +60,32 @@
 \newsavebox\PSTBoxDroite
 \savebox\PSTBoxDroite{% 
   \begin{postscript}
+    \psset{unit=1cm}
     \setlength{\etirement}{\textheight - \longauteur + \rfootYOff}
-    \rput[tl](0,0){\psframe[linestyle=none,fillstyle=solid,fillcolor=lightgray](0,0)(\etirement,\epaisTrait)}%
-    \rput[bl](0,0){\psframebox[linestyle=none,fillstyle=solid,fillcolor=lightgray]{\rheadTexte}}%
-    \rput[bl](\citationOff,2ex){\psframebox[linestyle=none,fillstyle=none]{\rheadCitation}}%
-    %%\rput[bl](\citationOff,\hautCitation){\psframebox[linestyle=none,fillstyle=none]{\rheadCitation}}%
-  \end{postscript}%
+%
+    \rput[bl](0,0){\psframe[linewidth=0pt,linestyle=none,fillstyle=solid,fillcolor=\maPScouleur](0,0)(\etirement,\epaisTrait)}%
+    \rput[bl](0,0){\psframebox[linewidth=0pt,linestyle=none,fillstyle=solid,fillcolor=\maPScouleur]{\rheadTexte}}%
+    \rput[bl](\citationXOff,\citationYOff){\rheadCitation}%%
+  \end{postscript}% 
 } 
 %
-\lhead{}
-\chead{}
-\rhead{\hbox to0pt{\hspace*{\rheadXOff}\vbox to0pt{\vspace*{3mm}\rotatebox{-90}{%%
-        \usebox\PSTBoxDroite%%
-      }\vss}\hss}}
 \rfoot{\hbox to0pt{\hspace*{\rfootYOff}\vbox to0pt{\vspace*{-\longauteur}%
       \rotatebox{90}{\rfootTexte}
     }}}
 \lfoot{\scalebox{-1}[1]{\lfootTexte}}
 \cfoot{\cfootTexte}
+\lhead{}
+\chead{}
+\rhead{\hbox to0pt{\hspace*{\rheadXOff}\vbox to0pt{\vspace*{3mm}\rotatebox{-90}{%%
+        \usebox\PSTBoxDroite%%
+      }\vss}\hss}}
 %
 %% environnements exo et pb
 %% encadrements en pointillés
 %
 \newcommand{\encadrepointilles}[1]{%
   \expandafter\begin{postscript}%
-    \psframebox[linestyle=none,fillcolor=lightgray,fillstyle=solid]{#1}%
+    \psframebox[linestyle=none,fillcolor=\maPScouleur,fillstyle=solid]{#1}%
   \end{postscript}%
 }
 %
@@ -90,7 +103,7 @@
 \newenvironment{exercice}{%%
   \ifthenelse{\equal{\value{numeroexo}}{0}}{}{%%
     %% la séparation des exercices
-    \par\noindent{\color{lightgray}\hrule}%%
+    \par\noindent{\macouleur\hrule}%%
   }%%
   \par\noindent\stepcounter{numeroexo}\linebreak\hspace*{-\lgex}%
    \smash{\raisebox{-\htex}{%
@@ -134,17 +147,17 @@
   \setlength{\@restanttitre}{(\linewidth - 5mm - \@largeurtitre)/2 }
   \savebox{\gradruledg}{%%
     \begin{pspicture}%%
-      \psframe[gradmidpoint=1,linestyle=none,fillstyle=gradient,gradbegin=white,gradend=lightgray,gradangle=90](0,0)(\@restanttitre,-\@hauteurtitre)%%
+      \psframe[gradmidpoint=1,linestyle=none,fillstyle=gradient,gradbegin=white,gradend=\maPScouleur,gradangle=90](0,0)(\@restanttitre,-\@hauteurtitre)%%
     \end{pspicture}%%
   }
   \savebox{\gradrulegd}{%%
     \begin{pspicture}%%
-      \psframe[gradmidpoint=1,linestyle=none,fillstyle=gradient,gradend=white,gradbegin=lightgray,gradangle=90](0,0)(\@restanttitre,-\@hauteurtitre)%%
+      \psframe[gradmidpoint=1,linestyle=none,fillstyle=gradient,gradend=white,gradbegin=\maPScouleur,gradangle=90](0,0)(\@restanttitre,-\@hauteurtitre)%%
     \end{pspicture}%%
   }
   \savebox{\gradrulegdg}{%%
     \begin{pspicture}%%
-      \psframe[gradmidpoint=.5,linestyle=none,fillstyle=gradient,gradbegin=white,gradend=lightgray,gradangle=90](0,0)(\linewidth,-\@hauteurtitre)%%
+      \psframe[gradmidpoint=.5,linestyle=none,fillstyle=gradient,gradbegin=white,gradend=\maPScouleur,gradangle=90](0,0)(\linewidth,-\@hauteurtitre)%%
     \end{pspicture}%%
   }
  %
@@ -154,5 +167,30 @@
     \usebox{\gradrulegd}%%
   \end{center}
 }
+%% titres de devoirs
+\newsavebox{\devoirgradrulegdg}
+\newcommand{\traitDegrade}{%%
+  \savebox\devoirgradrulegdg{%%
+    \begin{pspicture}%%
+      \psframe[gradmidpoint=.5,linestyle=none,fillstyle=gradient,gradbegin=white,gradend=\maPScouleur,gradangle=90](0,0)(\linewidth,1mm)%%
+    \end{pspicture}%%
+  }%
+  \usebox{\devoirgradrulegdg}%
+}
+\newcommand{\ds}[3]{%%
+  \titrepoly{Devoir Surveillé \no#1}
+  {\sffamily#2\hfill{\itshape #3\hspace*{0ex}}}\par
+  \par\noindent\traitDegrade\par%
+}
 
+\newcommand{\ie}[3]{%%
+  \titrepoly{Interrogation Écrite \no#1}%%
+  {\sffamily {NOM :}\makebox[5cm]{\dotfill}\hfill#2\hfill{\itshape #3\hspace*{0ex}}}
+  \par\noindent\traitDegrade\par%
+}
+\newcommand{\dm}[3]{%%
+  \titrepoly{Devoir Maison \no#1}
+  {\sffamily#2\hfill{\itshape pour le #3\hspace*{2ex}}}\par
+  \par\noindent\traitDegrade\par%
+}
 \endinput

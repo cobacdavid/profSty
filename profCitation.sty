@@ -1,15 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{profCitation}[2014/05/19]
 
-\newcount\randCit
-\newcommand{\numcitation}[1]{%
-  \ifcase#1 \or \Cun \or \Cdeux \or \Ctrois \or \Cquatre \or \Ccinq \or \Csix
-  \or \Csept \or \Chuit \or \Cneuf \or \Cdix \fi%
-}
-\newcommand{\formatcitation}[2]{%
-  #1\quad\textsc{#2}%%
-}
-
 \newcommand{\Cdeux}{%
   \formatcitation{Les mathématiques ne sont écrites que pour les mathématiciens}{N. Copernic}%
 }
@@ -26,7 +17,7 @@
   \formatcitation{La vie n'est bonne qu'à étudier et à enseigner les mathématiques.}{B. Pascal}%
 }
 \newcommand{\Cneuf}{%
-  \formatcitation{C'est avec la logique que nous prouvons et avec l'intuition que nous trouvons.}{H. POincaré}%
+  \formatcitation{C'est avec la logique que nous prouvons et avec l'intuition que nous trouvons.}{H. Poincaré}%
 }
 \newcommand{\Ccinq}{%
   \formatcitation{Qui parle sème~; qui écoute récolte.}{Pythagore}%
@@ -40,9 +31,41 @@
 \newcommand{\Cdix}{%
 \formatcitation{Aussi difficile que cela puisse paraître, si vous n'essayez pas, alors vous le ne ferez jamais.}{A. Wiles}%
 }
-\newcommand{\citationSci}{%
-  \setrannum{\randCit}{1}{10}%
-  {\tiny\numcitation{\randCit}}
+\newcount\randCit
+\newsavebox{\textecitation}
+\newlength{\longCitation}
+\newlength{\hautCitation}
+\newlength{\profCitation}
+\newcommand{\numcitation}[1]{%
+  \ifcase#1 \or \Cun \or \Cdeux \or \Ctrois \or \Cquatre \or \Ccinq \or \Csix
+  \or \Csept \or \Chuit \or \Cneuf \or \Cdix \fi%
 }
+\newcommand{\formatcitation}[2]{%
+  #1\quad{\scshape {#2}}%%
+}
+\newcommand{\citationchoisie}{%
+  \setrannum{\randCit}{1}{10}%
+  \def\TEXTE{\numcitation{\randCit}}
+  \def\TEXTEf{\footnotesize\bfseries\slshape\TEXTE}
+  \settowidth{\longCitation}{\TEXTEf}
+  \settoheight{\hautCitation}{\TEXTEf}
+  \settodepth{\profCitation}{\TEXTEf}
+  \savebox{\textecitation}{%
+    \begin{pspicture}(0,-\profCitation)(\longCitation,\hautCitation)%\psset{unit=0.75cm}
+      \def\texteH{%
+        \begin{psclip}{\psframe[linestyle=none,linewidth=0pt](0,0)(\longCitation,\hautCitation)}
+          \rput[Bl](0,0){\psframebox[linestyle=none,framesep=0pt]{\macouleur\TEXTEf}}
+        \end{psclip}
+      }%%
+      \def\texteB{\begin{psclip}{\psframe[linestyle=none,linewidth=0pt](0,0)(\longCitation,-\profCitation)}
+          \rput[Bl](0,0){\psframebox[linestyle=none,framesep=0pt]{\white\TEXTEf}}
+        \end{psclip}
+      }%%
+      \rput(0,0){\texteB}
+      \rput(0,0){\texteH}
+    \end{pspicture}
+  }%
+}
+\citationchoisie
 
 \endinput

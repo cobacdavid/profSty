@@ -1,9 +1,9 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{prof}[2014/05/17]
 %%
+\newcommand{\lamatiere}{Math\'ematiques\/}
 %% les options supportées par mon package
 %% les dimensions
-
 \DeclareOption{a3}{%
   \PassOptionsToPackage{a3paper,body={39cm,27.7cm}}{geometry}%
 }
@@ -12,7 +12,7 @@
 }
 %%
 \DeclareOption{a4}{%
-  \PassOptionsToPackage{a4paper,body={18cm,27cm}}{geometry}%
+  \PassOptionsToPackage{a4paper,body={18cm,27.5cm}}{geometry}%
 }
 %%
 \DeclareOption{a5}{%
@@ -25,6 +25,9 @@
 %%
 \DeclareOption{a5paysage}{%
   \PassOptionsToPackage{a5paper,landscape,body={18cm,13cm}}{geometry}%
+}
+\DeclareOption{info}{%
+  \renewcommand{\lamatiere}{Informatique\/}
 }
 %% enlèvement du numéro de page
 \DeclareOption{unepage}{\AtEndOfPackage{\cfoot{}}}
@@ -77,14 +80,16 @@
   \setmathfont{xits-math.otf}
 \else
   \RequirePackage{hyperref}
-  \RequirePackage{color}
+  \RequirePackage[usenames,dvipsnames]{xcolor}
   \RequirePackage[utf8]{inputenc}
   \RequirePackage{aeguill}
   \RequirePackage{fourier}
   \RequirePackage{pst-all}
   %% package de la fonte mathscr
   \RequirePackage{mathrsfs}
+  \RequirePackage{tikz}
 \fi
+\RequirePackage{tikz}
 \RequirePackage{auto-pst-pdf}
 %% symbole de degres
 \RequirePackage{textcomp}
@@ -136,8 +141,12 @@
 \newcommand{\og}{«~}
 \newcommand{\fg}{~»}
 \newcommand{\ieme}{$^\textrm{e}\,$}
+\newcommand{\no}{n\textsuperscript{o}}
 \fi
 %%
+\def\maPScouleur{gray}
+\newcommand{\macouleur}{\color{\maPScouleur}}
+%
 \RequirePackage{profNumDevoir}
 \RequirePackage{profCitation}
 \RequirePackage{profDivers}%%
