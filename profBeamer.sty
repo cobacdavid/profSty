@@ -1,0 +1,173 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{profBeamer}[2014/07/18]
+%%
+%%% si option inconnue
+\DeclareOption*{}
+\ProcessOptions
+%
+\usetheme{Goettingen}
+\usefonttheme{professionalfonts}
+\setbeamertemplate{navigation symbols}{}
+%%\RequirePackage{ifluatex}
+\ifluatex
+  \RequirePackage[no-math]{fontspec}
+  \RequirePackage{luatexbase}
+  \RequireLuaModule{lualibs}
+  \RequirePackage{metalogo}
+  \RequirePackage{luacode}
+  \RequirePackage{fixltx2e}
+  \RequirePackage{luamplib}
+  %\RequirePackage{luacolor}
+  %%\RequirePackage[math-style=ISO,bold-style=ISO]{unicode-math}
+  \RequirePackage{unicode-math}
+  %\RequirePackage[unicode=true]{hyperref}
+  \RequirePackage{luatexperso}
+  %\setmathfont{[Asana-Math]}
+  %\setmathfont[range=\mathbfit,FakeBold=2.0]{[Asana-Math]}
+  %%\setmainfont{Asana Math}
+  %%\setmathfont{Asana Math}
+  \setmainfont[BoldFont= texgyrepagella-bold.otf ,
+  ItalicFont= texgyrepagella-italic.otf ,
+  BoldItalicFont = texgyrepagella-bolditalic.otf ]
+  {texgyrepagella-regular.otf}
+  % xits-math permet d'avoir un mathscr correct !
+  % \setmathfont{xits-math.otf}
+\else
+  \RequirePackage{hyperref}
+  \RequirePackage[utf8]{inputenc}
+  \RequirePackage{aeguill}
+  \RequirePackage{fourier}
+  \RequirePackage{pst-all}
+  \RequirePackage{pst-barcode}
+  %% package de la fonte mathscr
+  \RequirePackage{mathrsfs}
+  %%\RequirePackage[usenames,dvipsnames]{xcolor}
+  %%\RequirePackage{tikz}
+\fi
+\RequirePackage{tikz}
+%% \RequirePackage{auto-pst-pdf}
+%% symbole de degres
+\RequirePackage{textcomp}
+%% tests
+\RequirePackage{ifthen}
+%% permet des calculs aisés avec les notations habituelles
+\RequirePackage{calc}
+%% package de soulignement
+\RequirePackage{ulem}
+%% package de mise en forme de tableaux
+\RequirePackage{array}
+%% packages de multi-colonnes
+\RequirePackage{multicol}
+%% packages AMS-TEX
+%%\RequirePackage{amsmath}
+%%\RequirePackage{amssymb}
+%% package de symboles (notammant l'euro)
+\RequirePackage{eurosym}
+%% gestion des espaces après macros
+\RequirePackage{xspace}
+%% packages fancy 
+\RequirePackage{fancyhdr}
+\RequirePackage{fancyvrb}
+\RequirePackage{fancybox}
+\setlength{\shadowsize}{2pt}
+%% package numérotation des pages 1/n 2/n etc
+\RequirePackage{lastpage}
+%% pour l'env. boxedverbatim
+\RequirePackage{moreverb}
+%% pour des hline biens faites
+\RequirePackage{hhline}
+%% logo metapost
+\RequirePackage{mflogo}
+%% package de théorèmes
+%\RequirePackage{ntheorem}
+%% package de francisation
+%%
+\RequirePackage[french,onelanguage]{algorithm2e}
+\RequirePackage{minted}%%
+\RequirePackage{etoolbox}%%
+\RequirePackage[tikz]{mdframed}
+%% \RequirePackage{profPython}
+\ifluatex
+\RequirePackage{polyglossia}
+\setmainlanguage{french}
+\setotherlanguage{english}
+\else
+\RequirePackage[frenchb]{babel}
+\fi
+\RequirePackage[autolanguage]{numprint}
+\ifluatex
+% \newcommand{\nombre}{\numprint}
+% \newcommand{\dfrac}{\displaystyle\frac}
+% \newcommand{\degres}{\textdegree}
+% \newcommand{\text}{\textrm}
+\newcommand{\og}{«~}
+\newcommand{\fg}{»}
+\renewcommand{\ieme}{$^\textrm{e}\,$}
+\renewcommand{\ier}{\textsuperscript{er}}
+\renewcommand{\no}{n\textsuperscript{o}}
+\fi
+%%
+\def\maPScouleur{gray}
+\newcommand{\macouleur}{\color{\maPScouleur}}
+%
+%% on empêche la numérotation dans la toc 
+\setbeamertemplate{sections/subsections in toc}[ball unnumbered]
+%%
+\newcommand{\blanc}{\textcolor{white}}
+\newcommand{\noir}{\textcolor{black}}
+\newcommand{\rouge}{\textcolor{red}}
+%%
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\alph{subsection}}
+%% on redéfinit les (sub)sections pour avoir une numérotation
+\newcommand{\CurrentPart}{}
+\newcommand{\CurrentSection}{}
+\newcommand{\CurrentTitle}{}
+\newcommand{\CurrentSubTitle}{}
+\newcommand*{\Section}[1]{%
+  \renewcommand*{\CurrentSection}{\thesection. #1}%
+  \renewcommand*{\CurrentTitle}{\CurrentSection}%
+  \renewcommand*{\CurrentSubTitle}{\hfill\CurrentPart}%
+  \section{\CurrentSection}%
+}
+\newcommand*{\SectionEtoile}[1]{%
+  \renewcommand*{\CurrentSection}{#1}%
+  \renewcommand*{\CurrentTitle}{\CurrentSection}%
+  \renewcommand*{\CurrentSubTitle}{\hfill\CurrentPart}%
+  \section*{\CurrentSection}%
+}
+\newcommand*{\Subsection}[1]{%
+  \renewcommand*{\CurrentTitle}{\thesubsection. #1}%
+  \renewcommand*{\CurrentSubTitle}{\hfill\CurrentPart\qquad\CurrentSection}%
+  \subsection{\thesubsection. #1}%
+}
+\newcommand{\frametitrecomplet}{%%
+  \frametitle{\CurrentTitle}%%
+  \framesubtitle{\CurrentSubTitle}%%
+}
+%%
+%% redéfintion des parties avec insertion de la toc
+\newcommand{\partie}[1]{%%
+  \part{#1}%%
+  \renewcommand*{\CurrentPart}{{\bfseries \Roman{part} #1}}
+  \setcounter{section}{0}%%
+  \begin{otherlanguage}{english}%%
+    \renewcommand{\partname}{Partie}%%
+    \frame{\partpage}%%
+  \end{otherlanguage}%%
+  \frame[t]{\frametitle{\hfil\CurrentPart\hfil}\tableofcontents[pausesections]}
+}
+%%
+%%\opset{decimalsepsymbol={,}}
+%%
+\newtheorem{madef}[theorem]{Définition}
+\newtheorem{remar}[theorem]{Remarque}
+\newtheorem{remars}[theorem]{Remarques}
+\newtheorem{cmConsignes}[theorem]{Consignes}
+\newtheorem{cmQuestion}[theorem]{Question de Calcul Mental}
+\newtheorem{rtQuestion}[theorem]{Question}
+\newtheorem{rtQuestions}[theorem]{Questions}
+\newcommand{\otablo}{\hfill\rule{20pt}{12.5pt}}
+%%
+
+\endinput

@@ -1,0 +1,20 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{profAlgo}[2018/04/06]
+
+%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\geogebra}{\texttt{Geogebra}\xspace}
+\DefineVerbatimEnvironment{verbatimgg}{Verbatim}{%%
+  label={Commande \texttt{GeoGebra}},frame=single,commandchars=\\__}
+%
+\newcommand{\lua}{\texttt{Lua}\xspace}
+\DefineVerbatimEnvironment{verbatimlua}{Verbatim}{%%
+  label={Code \lua},frame=single,commandchars=\\\{\}}
+%
+% 
+\newcommand{\titrealgo}[1]{%%
+  \noindent\begingroup
+    \color{DarkGreen}%
+    \noindent\makebox[.05\linewidth]{\rightarrowfill}#1\leftarrowfill%
+  \endgroup%%
+\par%
+}

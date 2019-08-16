@@ -1,0 +1,122 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{profMOTD}[2014/06/06]
+%%
+\newcommand{\janvier}{%%
+  \setrannum{\randMOTD}{1}{3}%
+  \ifcase\randMOTD\or%
+  Gabriel Cramer (31 juillet 1704 -- 4 janvier 1752)
+  \or%
+  Adrien-Marie Legendre (18 septembre 1852 -- 9 janvier 1833)
+  \or%
+  David Hilbert (23 janvier 1862 -- 14 février 1943)
+  \fi%
+}
+\newcommand{\fevrier}{%%
+  \setrannum{\randMOTD}{1}{2}%
+  \ifcase\randMOTD\or%
+  David Hilbert (23 janvier 1862 -- 14 février 1943)
+  \or
+  René Descartes (31 mars 1596 -- 11 février 1650)
+  \fi
+}
+\newcommand{\mars}{
+  \setrannum{\randMOTD}{1}{2}%
+  \ifcase\randMOTD\or%
+  Emmy Noether (23 mars 1882 -- 14 avril 1935)
+  \or%
+  René Descartes (31 mars 1596 -- 11 février 1650)
+  \fi%
+}
+\newcommand{\avril}{
+  \setrannum{\randMOTD}{1}{3}%
+  \ifcase\randMOTD\or%
+  Sophie Germain (1\ier avril 1776 -- 27 juin 1831)
+  \or
+  Andrew Wiles (11 avril 1953)
+  \or
+  Emmy Noether (23 mars 1882 -- 14 avril 1935)
+  \fi
+}
+\newcommand{\mai}{
+  André Weil (6 mai 1906 -- 6 août 1998)
+}
+\newcommand{\juin}{
+  \setrannum{\randMOTD}{1}{3}%
+  \ifcase\randMOTD\or%
+  Grigori Perelman (13 juin 1966)
+  \or
+  Andrei Markov (14 juin 1856 -- 20 juillet 1922)
+  \or
+  Sophie Germain (1\ier avril 1776 -- 27 juin 1831)
+  \fi
+}
+\newcommand{\juillet}{
+  \setrannum{\randMOTD}{1}{2}%
+  \ifcase\randMOTD\or%
+  Andrei Markov (14 juin 1856 -- 20 juillet 1922)
+  \or
+  Gabriel Cramer (31 juillet 1704 -- 4 janvier 1752)
+  \fi
+}
+\newcommand{\aout}{
+  André Weil (6 mai 1906 -- 6 août 1998)
+}
+\newcommand{\septembre}{
+  Adrien-Marie Legendre (18 septembre 1852 -- 9 janvier 1833)
+}
+\newcommand{\octobre}{
+  \setrannum{\randMOTD}{1}{3}%
+  \ifcase\randMOTD\or%
+  Cédric Villani (5 octobre 1973)
+  \or
+  Tycho Brahe (14 décembre 1546 -- 24 octobre 1601)
+  \or
+  Évariste Galois (25 octobre 1811 -- 31 mai 1832)
+  \fi
+}
+\newcommand{\novembre}{
+  Laurent Lafforgue (6 novembre 1966)
+}
+\newcommand{\decembre}{
+  Tycho Brahe (14 décembre 1546 -- 24 octobre 1601)
+}
+%%
+\newcount\randMOTD
+% \newsavebox{\MOTD}
+% \newlength{\longMOTD}
+% \newlength{\hautMOTD}
+% \newlength{\profMOTD}
+\newcommand{\numMOTD}[1]{%
+  \ifcase #1 \or \janvier \or \fevrier \or \mars \or \avril \or \mai \or \juin
+  \or \juillet \or \aout \or \septembre \or \octobre \or \novembre \or \decembre \fi%
+}
+% \newcommand{\formatMOTD}[2]{%
+%   #1\quad{\scshape {#2}}%%
+% }
+\newcommand{\MOTDchoisi}{%
+  %%\setrannum{\randMOTD}{1}{12}%
+  %%\def\texteMOTD{\numMOTD{\randMOTD}}
+  \def\texteMOTD{\numMOTD{\expandafter\month}}
+  % \def\texteMOTDf{\footnotesize\bfseries\slshape\texteMOTD}
+  % \settowidth{\longMOTD}{\texteMOTDf}
+  % \settoheight{\hautMOTD}{\texteMOTDf}
+  % \settodepth{\profMOTD}{\texteMOTDf}
+  % \savebox{\MOTD}{%
+  %   \begin{pspicture}(0,-\profMOTD)(\longMOTD,\hautMOTD)%\psset{unit=0.75cm}
+  %     \def\texteH{%
+  %       \begin{psclip}{\psframe[linestyle=none,linewidth=0pt](0,0)(\longMOTD,\hautMOTD)}
+  %         \rput[Bl](0,0){\psframebox[linestyle=none,framesep=0pt]{\macouleur\texteMOTDf}}
+  %       \end{psclip}
+  %     }%%
+  %     \def\texteB{\begin{psclip}{\psframe[linestyle=none,linewidth=0pt](0,0)(\longMOTD,-\profMOTD)}
+  %         \rput[Bl](0,0){\psframebox[linestyle=none,framesep=0pt]{\white\texteMOTDf}}
+  %       \end{psclip}
+  %     }%%
+  %     \rput(0,0){\texteB}
+  %     \rput(0,0){\texteH}
+  %   \end{pspicture}
+  % }%
+}
+\MOTDchoisi
+
+\endinput

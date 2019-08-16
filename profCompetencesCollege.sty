@@ -1,0 +1,340 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{profCompetencesCollege}[2017/11/26]
+
+%% chercher
+\newcommand{\chercherdeuxun}{S’engager dans une démarche}
+\newcommand{\chercherdeuxdeux}{Tester, essayer}
+
+\newcommand{\chercherquatreun}{Extraire l’information, reformuler,
+  organiser, ...}
+\newcommand{\chercherquatredeux}{S’engager dans une démarche}
+\newcommand{\chercherquatretrois}{Tester, essayer}
+\newcommand{\chercherquatrequatre}{Décomposer en sous-problèmes}
+
+%% modéliser
+\newcommand{\modeliserunun}{Passer d’un langage courant à un langage
+  mathématique puis/ou à un langage informatique}
+
+\newcommand{\modeliserquatreun}{Modéliser}
+\newcommand{\modeliserquatredeux}{Mettre en œuvre la proportionnalité}
+\newcommand{\modeliserquatretrois}{Décrire des phénomènes}
+\newcommand{\modeliserquatrequatre}{Lier cause(s) et effet(s)}
+\newcommand{\modeliserquatrecinq}{Concevoir un déplacement}
+
+%% représenter
+\newcommand{\representerunun}{Compléter et lire un tableau}
+\newcommand{\representerundeux}{Choisir et mettre en relation des cadres
+  (numérique, algébrique, géométrique, algorithmique, ...)}
+
+\newcommand{\representerquatreun}{Interpréter des résultats statistiques
+  et les représenter graphiquement}
+
+\newcommand{\representercinqun}{Côtoyer le hasard}
+\newcommand{\representercinqdeux}{Imaginer, concevoir et réaliser des
+  productions de natures diverses}
+
+%% raisonner
+\newcommand{\raisonnerdeuxun}{Justifier ses affirmations}
+\newcommand{\raisonnerdeuxdeux}{Rechercher la validité des informations}
+\newcommand{\raisonnerdeuxtrois}{ Résoudre des problèmes nécessitant
+  l’organisation de données multiples}
+\newcommand{\raisonnerdeuxquatre}{Progresser collectivement}
+
+\newcommand{\raisonnertroisun}{Progresser collectivement}
+\newcommand{\raisonnertroisdeux}{Justifier ses affirmations}
+\newcommand{\raisonnertroistrois}{Rechercher la validité des
+  affirmations}
+
+\newcommand{\raisonnerquatreun}{Passer de la perception au contrôle par
+  les instruments, y compris numériques}
+\newcommand{\raisonnerquatredeux}{Mener une démarche d’investigation}
+
+%% calculer
+\newcommand{\calculerunun}{Utiliser le langage algébrique}
+
+\newcommand{\calculerquatreun}{Calculer en utilisant un langage
+  algébrique}
+\newcommand{\calculerquatredeux}{Mettre en œuvre des calculs avec un
+  logiciel}
+\newcommand{\calculerquatretrois}{Contrôler la vraisemblance d’un
+  résultat obtenu}
+
+%% communiquer
+\newcommand{\communiquerunun}{Faire le lien entre le langage naturel et
+  le langage algébrique ou algorithmique}
+\newcommand{\communiquerundeux}{Distinguer les spécificités des
+  différents langages}
+\newcommand{\communiqueruntrois}{Expliquer à l’écrit ou à l’oral une
+  démarche, un raisonnement, un calcul}
+
+\newcommand{\communiquertroisun}{Distinguer ce qui est objectif de
+  ce qui est subjectif}
+\newcommand{\communiquertroisdeux}{Lire, interpréter, produire}
+
+\newcommand{\communiquerquatreun}{Rendre compte de sa démarche en
+  utilisant le langage scientifique à bon escient}
+
+%%
+\newcommand{\tableauComp}[3]{%%
+  \begin{tabularx}{.95\textwidth}{|m{\linewidth/3}|X||c|c|c|c||}
+    \hline
+    #1 (Domaine #2)&#3&1&2&3&4\\
+    \hline
+  \end{tabularx}
+}
+
+\newcommand{\chercher}[2]{
+  \ifcase#1\relax
+  % 0
+  \or
+  % 1
+  \or
+  % 2
+    \ifcase#2\relax
+    % 0
+    \or
+    % 1
+    \let\textecompetence\chercherdeuxun
+    \or
+    % 2
+    \let\textecompetence\chercherdeuxdeux
+    \fi
+  \or
+  % 3
+  \or
+  % 4
+    \ifcase#2\relax
+    % 0
+    \or
+    % 1
+    \let\textecompetence\chercherquatreun
+    \or
+    % 2
+    \let\textecompetence\chercherquatredeux
+    \or
+    % 3
+    \let\textecompetence\chercherquatretrois
+    \or
+    % 4
+    \let\textecompetence\chercherquatrequatre
+    \fi
+  \fi
+
+  \tableauComp{Chercher}{#1}{\textecompetence}
+}
+
+\newcommand{\modeliser}[2]{
+  \ifcase#1\relax
+  % 0
+  \or
+  % 1
+    \ifcase#2\relax
+    % 0
+    \or
+    % 1
+    \let\textecompetence\modeliserunun
+    \fi
+  \or
+  % 2  
+  \or
+  % 3
+  \or
+  % 4
+    \ifcase#2\relax
+    % 0
+    \or
+    % 1
+    \let\textecompetence\modeliserquatreun
+    \or
+    % 2
+    \let\textecompetence\modeliserquatredeux
+    \or
+    % 3
+    \let\textecompetence\modeliserquatretrois
+    \or
+    % 4
+    \let\textecompetence\modeliserquatrequatre
+    \or
+    % 5
+    \let\textecompetence\modeliserquatrecinq
+    \fi
+  \fi
+
+  \tableauComp{Modeliser}{#1}{\textecompetence}
+}
+
+\newcommand{\representer}[2]{
+  \ifcase#1\relax
+  % 0
+  \or
+  % 1
+    \ifcase#2\relax
+    % 0
+    \or
+    % 1
+    \let\textecompetence\representerunun
+    \or
+    % 2
+    \let\textecompetence\representerundeux
+    \fi
+  \or
+  % 2  
+  \or
+  % 3
+  \or
+  % 4
+    \ifcase#2\relax
+    % 0
+    \or
+    % 1
+    \let\textecompetence\representerquatreun
+    \fi
+  \or
+  % 5
+   \ifcase#2\relax
+    % 0
+    \or
+    % 1
+    \let\textecompetence\representercinqun
+    \or
+    % 2
+    \let\textecompetence\representercinqdeux
+    \fi
+  \fi
+
+  \tableauComp{Representer}{#1}{\textecompetence}
+}
+
+\newcommand{\raisonner}[2]{
+  \ifcase#1\relax
+  % 0
+  \or
+  % 1
+  \or
+  % 2
+    \ifcase#2\relax
+    % 0
+    \or
+    % 1
+    \let\textecompetence\raisonnerdeuxun
+    \or
+    % 2
+    \let\textecompetence\raisonnerdeuxdeux
+    \or
+    % 3
+    \let\textecompetence\raisonnerdeuxtrois
+    \or
+    % 4
+    \let\textecompetence\raisonnerdeuxquatre
+    \fi
+  \or
+  % 3
+  \ifcase#2\relax
+    % 0
+    \or
+    % 1
+    \let\textecompetence\raisonnertroisun
+    \or
+    % 2
+    \let\textecompetence\raisonnertroisdeux
+    \or
+    % 3
+    \let\textecompetence\raisonnertroistrois
+    \fi
+  \or
+  % 4
+    \ifcase#2\relax
+    % 0
+    \or
+    % 1
+    \let\textecompetence\raisonnerquatreun
+    \or
+    % 2
+    \let\textecompetence\raisonnerquatredeux
+    \fi
+  \fi
+
+  \tableauComp{Raisonner}{#1}{\textecompetence}
+}
+
+\newcommand{\calculer}[2]{
+  \ifcase#1\relax
+  % 0
+  \or
+  % 1
+    \ifcase#2\relax
+    % 0
+    \or
+    % 1
+    \let\textecompetence\calculerunun
+    \fi
+  \or
+  % 2  
+  \or
+  % 3
+  \or
+  % 4
+    \ifcase#2\relax
+    % 0
+    \or
+    % 1
+    \let\textecompetence\calculerquatreun
+    \or
+    % 2
+    \let\textecompetence\calculerquatredeux
+    \or
+    % 3
+    \let\textecompetence\calculerquatretrois
+    \fi
+  \fi
+
+  \tableauComp{Calculer}{#1}{\textecompetence}
+}
+
+\newcommand{\communiquer}[2]{
+  \ifcase#1\relax
+  % 0
+  \or
+  % 1
+    \ifcase#2\relax
+    % 0
+    \or
+    % 1
+    \let\textecompetence\communiquerunun
+    \or
+    % 2
+    \let\textecompetence\communiquerundeux
+    \or
+    % 3
+    \let\textecompetence\communiqueruntrois
+    \or
+    % 4
+    \let\textecompetence\communiquerunquatre
+    \fi
+  \or
+  % 2
+  \or
+  % 3
+  \ifcase#2\relax
+    % 0
+    \or
+    % 1
+    \let\textecompetence\communiquertroisun
+    \or
+    % 2
+    \let\textecompetence\communiquertroisdeux
+    \fi
+  \or
+  % 4
+    \ifcase#2\relax
+    % 0
+    \or
+    % 1
+    \let\textecompetence\communiquerquatreun
+    \fi
+  \fi
+
+  \tableauComp{Communiquer}{#1}{\textecompetence}
+}
+
+\endinput

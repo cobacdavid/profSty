@@ -10,7 +10,7 @@
 %%
 \renewcommand{\section}{%%
   \@startsection{section}{1}{0mm}{\baselineskip}{\baselineskip}%%
-  {\sffamily\bfseries\Large}%%
+  {\sffamily\bfseries\Large\macouleur}%%
 }
 %%
 \renewcommand{\subsection}{%%
@@ -102,25 +102,21 @@
 }
 \newcommand{\pointiles}{%
   \par\vspace{8pt}\noindent\dotfill
-  \par\vspace{8pt}
 }
 \newcommand{\pointilles}{%
   \par\vspace{8pt}\noindent\dotfill
   \par\vspace{8pt}\noindent\dotfill
-  \par\vspace{8pt}
 }
 \newcommand{\pointillles}{%
   \par\vspace{8pt}\noindent\dotfill
   \par\vspace{8pt}\noindent\dotfill
   \par\vspace{8pt}\noindent\dotfill
-  \par\vspace{8pt}%
 }
 \newcommand{\pointilllles}{%
   \par\vspace{8pt}\noindent\dotfill
   \par\vspace{8pt}\noindent\dotfill
   \par\vspace{8pt}\noindent\dotfill
   \par\vspace{8pt}\noindent\dotfill
-  \par\vspace{8pt}%
 }
 \newcommand{\pointillllles}{%
   \par\vspace{8pt}\noindent\dotfill
@@ -128,7 +124,6 @@
   \par\vspace{8pt}\noindent\dotfill
   \par\vspace{8pt}\noindent\dotfill
   \par\vspace{8pt}\noindent\dotfill
-  \par\vspace{8pt}%
 }
 \newcommand{\pointilllllles}{%
   \par\vspace{8pt}\noindent\dotfill
@@ -137,43 +132,8 @@
   \par\vspace{8pt}\noindent\dotfill
   \par\vspace{8pt}\noindent\dotfill
   \par\vspace{8pt}\noindent\dotfill
-  \par\vspace{8pt}%
 }
 
-%%
-%% quelques commandes maths
-\newcommand{\R}{\textrm{\sffamily\bfseries R}}
-\newcommand{\N}{\textrm{\sffamily\bfseries N}}
-\newcommand{\vi}[1]{\ensuremath{\!\backslash\!\left\{#1\right\}}}
-\newcommand{\VI}{\vi}
-%% des beaux vecteurs sans modif de l'interligne
-\newcommand{\vect}[1]{%
-  \smash{\overrightarrow{%
-    \kern-2pt\mathstrut #1\kern2pt}}
-}
-%% des arcs
-\newlength{\@longarc}
-\newcommand{\arc}[1]{\settowidth{\@longarc}{$#1$}%
-  % \addtolength{\@longarc}{-0.5em}%
-  \unitlength \@longarc%
-  \ensuremath{%
-    \stackrel{\begin{picture}(1,0.2)
-        \qbezier(0.1,-0.1)(0.6,0.2)(1.1,-0.1)
-      \end{picture}}
-    {#1}
-  }}
-%%
-\newcommand{\arcoriente}[1]{\settowidth{\@longarc}{$#1$}%
-  \addtolength{\@longarc}{-0.5em}%
-  \ensuremath{%
-    \unitlength \@longarc%
-    \stackrel{\begin{picture}(1,0.2)
-        \psset{unit=\@longarc}
-        \pscurve{->}(0,0)(0.5,0.3)(1,0)
-      \end{picture}}
-    {#1}
-  }}
-%%
 %%
 
 %% Boîtes PsTricks %%
@@ -208,66 +168,17 @@
 % }
 %%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\lv}{\mbox{}\par}
-\newcommand{\lec}{\hfill\mbox{}}
-\newcommand{\ecrancalc}[1]{%%
-  \psframebox{%%
-    %%\setlength{\tempdimc}{13*\widthof{9}}%%
-      \parbox[b]{3cm}{%%
-        \raggedleft #1%%
-      }%
-  }%
-}
-%%
-\newcommand{\operation}[3]{%
-  \expandafter\begin{postscript}
-    \pstree[treemode=U,treesep=1cm,nodesep=3pt,levelsep=.8cm]%%
-    {\TR{$#1$}}{%%
-      #2%%
-      #3%%
-    }%%
-  \end{postscript}%
-}
-\newcommand{\arbre}[1]{%
-  \psframebox[framearc=.1]{#1}
-}
-\newcommand{\calcularbre}[2]{%
-  \begin{tabular}[t]{c}
-    #1\\
-    \arbre{#2}
-  \end{tabular}
-}
-
-%%%%%%%%%%%%%%%%%%%%%
-
-% pour les exemple geogebra
-% \DefineVerbatimEnvironment{verbatimgg}{Verbatim}{%%
-%   label={Commande \texttt{GeoGebra}},frame=single,commandchars=\\__}
-%%
-% \newcommand{\lua}{\texttt{Lua}\xspace}
-% \DefineVerbatimEnvironment{verbatimlua}{Verbatim}{%%
-%   label={Code \lua},frame=single,commandchars=\\\{\}}
-%% anciennes commandes lycée
-\let\dps=\displaystyle
-\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
-\newcommand{\D}{\ensuremath{\mathbb{D}}}
-\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
-\newcommand{\intff}[2]{\ensuremath{[#1\!;#2]}}
-\newcommand{\intoo}[2]{\ensuremath{]#1\!;#2[}}
-\newcommand{\intof}[2]{\ensuremath{]#1\!;#2]}}
-\newcommand{\intfo}[2]{\ensuremath{[#1\!;#2[}}
-\newcommand{\rg}[1]{\ensuremath{\mathscr{C}\!\!_{#1}}}
-\newcommand{\ora}[1]{\ensuremath{\overrightarrow{#1}}}
-\newcommand{\calt}[1]{$\mathscr{#1}$}
-\newcommand{\infa}{\ensuremath{\leqslant}}
-%%
-\theorembodyfont{\slshape}
-
-\newtheorem{definition}{Définition }
-\newtheorem{exemple}{Exemple }
-\newtheorem{propriete}{Propriété }
-\newtheorem{theoreme}{Théorème }
-\newtheorem{demonstration}{Démonstration }
-\newtheorem{remarque}{Remarque }
+%
+\newenvironment{monbloc}[2][\linewidth]{%
+  \noindent\begin{minipage}[t]{#1}%
+    \begin{description}%%
+    \item[\bfseries\large #2]\qquad\\
+    }{\end{description}\end{minipage}\par}
+\newenvironment{monblocencadre}[2][\linewidth]{%
+  \noindent\fbox{%%
+    \begin{minipage}[t]{#1}%
+    \begin{description}%%
+    \item[\bfseries\large #2]\qquad\\
+  }{\end{description}\end{minipage}}\par}
 %
 \endinput

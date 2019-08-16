@@ -41,7 +41,7 @@
   \or \Csept \or \Chuit \or \Cneuf \or \Cdix \fi%
 }
 \newcommand{\formatcitation}[2]{%
-  #1\quad{\scshape {#2}}%%
+  #1 $\longrightarrow$ {\scshape \normalfont #2}%%
 }
 \newcommand{\citationchoisie}{%
   \setrannum{\randCit}{1}{10}%
@@ -68,4 +68,7 @@
 }
 \citationchoisie
 
+\if@nocit
+\savebox{\textecitation}{}
+\fi
 \endinput

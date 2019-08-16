@@ -1,0 +1,33 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{profCompetencesSNT}[2019/06/12]
+
+\newcommand{\sntTheme}[2]{
+ \begin{mdframed}[%%
+      linecolor=blue!20,
+      linewidth=2pt,
+      frametitlebackgroundcolor=blue!30,
+      frametitlerule=true,
+      backgroundcolor=white,
+      roundcorner=10pt,
+      frametitle={\sffamily Thème~:
+        {\color{yellow}{#1}}
+        \hfill
+        {\large\texttt{S.N.T.}}
+      }]%
+      #2%%
+    \end{mdframed}%%
+}
+
+\newcommand{\sntSavoir}[1]{%%
+  Savoir~: \texttt{#1}\hfill {\small%%
+    niveaux d'acquisition%%
+  }\\%
+}
+
+
+\newcommand{\sntSavoirFaire}[1]{%%
+  \noindent\hspace*{1cm}{\sffamily #1}\hfill{\scriptsize$\square$}\qquad{$\square$}\qquad{\large$\square$}\qquad{\Large$\square$}\\
+}
+
+
+\endinput

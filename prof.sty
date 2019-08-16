@@ -12,25 +12,60 @@
 }
 %%
 \DeclareOption{a4}{%
-  \PassOptionsToPackage{a4paper,body={18cm,27.5cm}}{geometry}%
+  \PassOptionsToPackage{a4paper,body={18cm,27cm}}{geometry}%
 }
 %%
 \DeclareOption{a5}{%
   \PassOptionsToPackage{a5paper,body={12cm,19cm}}{geometry}%
 }
+\DeclareOption{a6}{%
+  \PassOptionsToPackage{a6paper,body={9cm,13cm}}{geometry}%
+}
 %%
 \DeclareOption{a4paysage}{%
-  \PassOptionsToPackage{a4paper,landscape,body={26.5cm,18.5cm}}{geometry}%
+  \PassOptionsToPackage{a4paper,landscape,body={27cm,18.5cm}}{geometry}%
 }
 %%
 \DeclareOption{a5paysage}{%
   \PassOptionsToPackage{a5paper,landscape,body={18cm,13cm}}{geometry}%
 }
-\DeclareOption{info}{%
-  \renewcommand{\lamatiere}{Informatique\/}
+%
+\DeclareOption{ecran}{%
+  \PassOptionsToPackage{paperwidth=17cm,paperheight=12cm,body={16cm,11cm}}{geometry}%
+}
+%
+% \newif\if@mono
+% \DeclareOption{mono}{%
+%   @mono
+% }
+\newif\if@algo
+\@algofalse
+\DeclareOption{algo}{%
+  \renewcommand{\lamatiere}{Algorithmique\/}
+  \@algotrue
+}
+\DeclareOption{fonctions}{%
+  \renewcommand{\lamatiere}{Math\'ematiques -- Fonctions\/}
+}
+\DeclareOption{geometrie}{%
+  \renewcommand{\lamatiere}{Math\'ematiques -- G\'eom\'etrie\/}
+}
+\DeclareOption{stats}{%
+  \renewcommand{\lamatiere}{Math\'ematiques -- Stats et probas\/}
+}
+\newif\if@nocit
+\@nocitfalse
+\DeclareOption{nocit}{%
+  \@nocittrue
 }
 %% enlèvement du numéro de page
 \DeclareOption{unepage}{\AtEndOfPackage{\cfoot{}}}
+%% mode poster (fond coloré)
+\newif\if@poster
+\@posterfalse
+\DeclareOption{poster}{
+  \@postertrue
+  }
 %% style collège
 \newif\if@college
 \@collegefalse
@@ -52,18 +87,22 @@
 \input random
 %%
 \RequirePackage{graphicx}
-%%
+%% packages AMS-TEX
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+%% 
 %% on charge lualatex
 \RequirePackage{ifluatex}
 \ifluatex
+  \RequirePackage[rgb,dvipsnames,svgnames,luatex]{xcolor}
   \RequirePackage[no-math]{fontspec}
   \RequirePackage{luatexbase}
   \RequireLuaModule{lualibs}
   \RequirePackage{metalogo}
   \RequirePackage{luacode}
-  \RequirePackage{fixltx2e}
+  %%\RequirePackage{fixltx2e} %% plante avec des versions > 2015
   \RequirePackage{luamplib}
-  \RequirePackage{luacolor}
+  %%\RequirePackage{luacolor} %% semble faire planter la compilation !
   %%\RequirePackage[math-style=ISO,bold-style=ISO]{unicode-math}
   \RequirePackage{unicode-math}
   \RequirePackage[unicode=true]{hyperref}
@@ -72,23 +111,39 @@
   %\setmathfont[range=\mathbfit,FakeBold=2.0]{[Asana-Math]}
   %%\setmainfont{Asana Math}
   %%\setmathfont{Asana Math}
+  %%
+  %% choix avant passage unicode
   \setmainfont[BoldFont= texgyrepagella-bold.otf ,
   ItalicFont= texgyrepagella-italic.otf ,
   BoldItalicFont = texgyrepagella-bolditalic.otf ]
   {texgyrepagella-regular.otf}
+  %%
+  % \setmainfont[UprightFont={* Light},
+  % BoldFont={* Bold},
+  % ItalicFont={* Italic},
+  % BoldItalicFont={* Semibold Italic}]{Source Sans Pro} 
+  % \setmainfont[BoldFont= OpenDyslexic-Bold.otf,
+  % ItalicFont= OpenDyslexic-Italic.otf ,
+  % BoldItalicFont = OpenDyslexic-BoldItalic.otf ]
+  % {OpenDyslexic-Regular.otf}
   % xits-math permet d'avoir un mathscr correct !
-  \setmathfont{xits-math.otf}
+  \setmathfont{XITSMath}
+  %% \setmathfont{LatinModernMath-Regular}
+  %%\usepackage[italic]{mathastext}
 \else
   \RequirePackage{hyperref}
-  \RequirePackage[usenames,dvipsnames]{xcolor}
+  %% \RequirePackage[dvipsnames,svgnames,rgb]{xcolor}
   \RequirePackage[utf8]{inputenc}
   \RequirePackage{aeguill}
   \RequirePackage{fourier}
   \RequirePackage{pst-all}
+  \RequirePackage{pst-barcode}
+  \RequirePackage{bclogo}
   %% package de la fonte mathscr
   \RequirePackage{mathrsfs}
-  \RequirePackage{tikz}
+  %%\RequirePackage{tikz}
 \fi
+\RequirePackage[dvipsnames,svgnames,rgb]{xcolor}
 \RequirePackage{tikz}
 \RequirePackage{auto-pst-pdf}
 %% symbole de degres
@@ -101,11 +156,9 @@
 \RequirePackage{ulem}
 %% package de mise en forme de tableaux
 \RequirePackage{array}
+\RequirePackage{tabularx}
 %% packages de multi-colonnes
 \RequirePackage{multicol}
-%% packages AMS-TEX
-%%\RequirePackage{amsmath}
-%%\RequirePackage{amssymb}
 %% package de symboles (notammant l'euro)
 \RequirePackage{eurosym}
 %% gestion des espaces après macros
@@ -113,8 +166,8 @@
 %% packages fancy 
 \RequirePackage{fancyhdr}
 \RequirePackage{fancyvrb}
-\RequirePackage{fancybox}
-\setlength{\shadowsize}{2pt}
+% \RequirePackage{fancybox}
+% \setlength{\shadowsize}{2pt}
 %% package numérotation des pages 1/n 2/n etc
 \RequirePackage{lastpage}
 %% pour l'env. boxedverbatim
@@ -125,36 +178,84 @@
 \RequirePackage{mflogo}
 %% package de théorèmes
 \RequirePackage{ntheorem}
+%% package calcul
+\RequirePackage{xlop}
+%% package tableaux automatiques
+%% \RequirePackage[xcas]{tablor}
+\RequirePackage{tabvar}
+% package pour transformer la racine carrée
+% à voir dans profLycee
+% ne semble pas indispensable...
+\RequirePackage{letltxmacro}
+%% pour les listes
+\RequirePackage{enumitem}
+%% pour le pseudo-code
+%% \RequirePackage[french]{algorithme}
+\RequirePackage[french,onelanguage]{algorithm2e}
+\RequirePackage{minted}%%
+\RequirePackage{etoolbox}%%
+\RequirePackage[tikz]{mdframed}
+%\BeforeBeginEnvironment{minted}{}%%
+%\AfterEndEnvironment{minted}{}%%
+%%
+\RequirePackage{pythontex}
 %% package de francisation
 \ifluatex
 \RequirePackage{polyglossia}
-\setmainlanguage{french}
+\setdefaultlanguage{french}
+\setotherlanguage{english}
 \else
-\RequirePackage[frenchb]{babel}
+\RequirePackage[frenchb,english]{babel}
+\selectlanguage{frenchb}
 \fi
 \RequirePackage[autolanguage]{numprint}
+%% package pour le fond de page
+\if@poster
+%%\RequirePackage[pagecolor={blue!10}]{pagecolor}
+\pagecolor{blue!10}
+\def\maPScouleurGradBegin{blue!10}
+\else
+\def\maPScouleurGradBegin{white}
+\fi
 \ifluatex
-\newcommand{\nombre}{\numprint}
-\newcommand{\dfrac}{\displaystyle\frac}
-\newcommand{\degres}{\textdegree}
-\newcommand{\text}{\textrm}
-\newcommand{\og}{«~}
-\newcommand{\fg}{~»}
-\newcommand{\ieme}{$^\textrm{e}\,$}
-\newcommand{\no}{n\textsuperscript{o}}
+\newcommand{\nombre}[1]{\ensuremath{\numprint{#1}}}
+\newcommand{\np}{\numprint}
+\npthousandsep{\hspace{0.3em}}
+\providecommand{\dfrac}{\displaystyle\frac}
+\providecommand{\degres}{\textdegree}
+\providecommand{\text}{\textrm}
+\providecommand{\og}{«~}
+\providecommand{\fg}{»}
+\providecommand{\ieme}{$^\textrm{e}\,$}
+\providecommand{\ier}{\textsuperscript{er}}
+\providecommand{\iere}{\textsuperscript{ère}}
+\providecommand{\no}{n\textsuperscript{o}}
 \fi
 %%
-\def\maPScouleur{gray}
-\newcommand{\macouleur}{\color{\maPScouleur}}
+%% \def\maPScouleur{gray}
+\def\maPScouleur{blue!50}
+\def\pythonBleu{blue!20}
+\def\pythonJaune{yellow!15}
+\providecommand{\pybleu}{\color{\pythonBleu}}
+\providecommand{\pyjaune}{\color{\pythonJaune}}
+\providecommand{\macouleur}{\color{\maPScouleur}}
+\providecommand{\gris}{\color{gray}}
 %
+%% \RequirePackage{profCompetencesCollege}%%
+%% \RequirePackage{profCompetencesSNT}%%
 \RequirePackage{profNumDevoir}
 \RequirePackage{profCitation}
+\RequirePackage{profMOTD}
+\RequirePackage{profMaths}%%
 \RequirePackage{profDivers}%%
+\RequirePackage{profAlgo}%%
+\RequirePackage{profPython}%%
 \if@college
 \RequirePackage{profCollege}
 \else
 \RequirePackage{profLycee}
 \fi
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
