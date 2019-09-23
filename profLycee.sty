@@ -117,15 +117,33 @@
     \par\noindent{\macouleur\hrule}%%
   }%%
   \par\noindent\stepcounter{numeroexo}\linebreak\hspace*{-\lgex}%
-   \smash{\raisebox{-\htex}{%
-       \rotatebox{90}{\encadrepointilles{%
-             \scalebox{1.5}[1]{\white \bfseries \sffamily Exercice \arabic{numeroexo}}%%
-       }}%
-       }}%
-   \hspace*{\lgex}\hspace*{3pt}%%
- }{%
-   \vspace{.5\baselineskip}\par
- }
+  \smash{\raisebox{-\htex}{%
+      \rotatebox{90}{\encadrepointilles{%
+          \scalebox{1.5}[1]{\white \bfseries \sffamily Exercice \arabic{numeroexo}}%%
+        }}%
+    }}%
+  \hspace*{\lgex}\hspace*{3pt}%%
+}{%
+  \vspace{.5\baselineskip}\par
+}
+%% suite plantage
+\renewenvironment{exercice}{
+  \par\noindent\stepcounter{numeroexo}\linebreak\hspace*{-\lgex}%
+  \begin{mdframed}[linecolor=blue!10,
+    roundcorner=3pt,
+    innerleftmargin=0pt,
+    innerrightmargin=0pt,
+    innertopmargin=0pt,
+    innerbottommargin=0pt,
+    linewidth=2bp,
+    backgroundcolor=blue!5
+    ]%%
+    {\large \bfseries \sffamily Exercice \arabic{numeroexo}}%
+  \end{mdframed}
+}{%
+  \vspace{.5\baselineskip}\par%
+}
+ 
 \newenvironment{exerciceh}{%%
   \ifthenelse{\equal{\value{numeroexo}}{0}}{}{%%
     %% la séparation des exercices
@@ -216,13 +234,13 @@
   \usebox{\devoirgradrulegdg}%
 }
 \newcommand{\ds}[3]{%%
-  \titrepoly{Devoir Surveillé n\no#1}
+  \titrepoly{Devoir Surveillé \no#1}
   {\sffamily#2\hfill{\itshape #3\hspace*{0ex}}}\par
   \par\noindent\traitDegrade\par%
 }
 
 \newcommand{\ie}[3]{%%
-  \titrepoly{Interrogation Écrite n\no#1}%%
+  \titrepoly{Interrogation Écrite \no#1}%%
   {\sffamily {NOM :}\makebox[5cm]{\dotfill}\hfill#2\hfill{\itshape #3\hspace*{0ex}}}
   \par\noindent\traitDegrade\par%
 }

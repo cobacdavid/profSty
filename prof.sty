@@ -44,6 +44,10 @@
   \renewcommand{\lamatiere}{Algorithmique\/}
   \@algotrue
 }
+\DeclareOption{nsi}{%
+  \renewcommand{\lamatiere}{Numérique et Sciences Informatiques\/}
+  \@algotrue
+}
 \DeclareOption{fonctions}{%
   \renewcommand{\lamatiere}{Math\'ematiques -- Fonctions\/}
 }
@@ -57,6 +61,12 @@
 \@nocitfalse
 \DeclareOption{nocit}{%
   \@nocittrue
+}
+%% sans pstricks dans le style
+\newif\if@pststyle
+\@pststylefalse
+\DeclareOption{pststyle}{%
+  \@pststyletrue
 }
 %% enlèvement du numéro de page
 \DeclareOption{unepage}{\AtEndOfPackage{\cfoot{}}}
@@ -105,7 +115,6 @@
   %%\RequirePackage{luacolor} %% semble faire planter la compilation !
   %%\RequirePackage[math-style=ISO,bold-style=ISO]{unicode-math}
   \RequirePackage{unicode-math}
-  \RequirePackage[unicode=true]{hyperref}
   \RequirePackage{luatexperso}
   %\setmathfont{[Asana-Math]}
   %\setmathfont[range=\mathbfit,FakeBold=2.0]{[Asana-Math]}
@@ -129,9 +138,9 @@
   % xits-math permet d'avoir un mathscr correct !
   \setmathfont{XITSMath}
   %% \setmathfont{LatinModernMath-Regular}
-  %%\usepackage[italic]{mathastext}
+  %% \usepackage[italic]{mathastext}
+  %%\RequirePackage[unicode=true]{hyperref}
 \else
-  \RequirePackage{hyperref}
   %% \RequirePackage[dvipsnames,svgnames,rgb]{xcolor}
   \RequirePackage[utf8]{inputenc}
   \RequirePackage{aeguill}
@@ -141,11 +150,11 @@
   \RequirePackage{bclogo}
   %% package de la fonte mathscr
   \RequirePackage{mathrsfs}
-  %%\RequirePackage{tikz}
+  %% \RequirePackage{tikz}
+  %% \RequirePackage{hyperref}
 \fi
 \RequirePackage[dvipsnames,svgnames,rgb]{xcolor}
 \RequirePackage{tikz}
-\RequirePackage{auto-pst-pdf}
 %% symbole de degres
 \RequirePackage{textcomp}
 %% tests
@@ -188,7 +197,7 @@
 % ne semble pas indispensable...
 \RequirePackage{letltxmacro}
 %% pour les listes
-\RequirePackage{enumitem}
+%% \RequirePackage{enumitem}
 %% pour le pseudo-code
 %% \RequirePackage[french]{algorithme}
 \RequirePackage[french,onelanguage]{algorithm2e}
@@ -199,10 +208,12 @@
 %\AfterEndEnvironment{minted}{}%%
 %%
 \RequirePackage{pythontex}
+\RequirePackage[unicode=true]{hyperref}
+\RequirePackage{auto-pst-pdf-lua}
 %% package de francisation
 \ifluatex
 \RequirePackage{polyglossia}
-\setdefaultlanguage{french}
+\setdefaultlanguage{francais}
 \setotherlanguage{english}
 \else
 \RequirePackage[frenchb,english]{babel}
@@ -238,7 +249,8 @@
 \def\pythonJaune{yellow!15}
 \providecommand{\pybleu}{\color{\pythonBleu}}
 \providecommand{\pyjaune}{\color{\pythonJaune}}
-\providecommand{\macouleur}{\color{\maPScouleur}}
+%%\providecommand{\macouleur}{\color{\maPScouleur}}
+\providecommand{\macouleur}{\color{blue!100}}
 \providecommand{\gris}{\color{gray}}
 %
 %% \RequirePackage{profCompetencesCollege}%%
@@ -250,11 +262,16 @@
 \RequirePackage{profDivers}%%
 \RequirePackage{profAlgo}%%
 \RequirePackage{profPython}%%
-\if@college
-\RequirePackage{profCollege}
+\RequirePackage{profNSI}%%
+%%\if@college
+%%\RequirePackage{profCollege}
+%%\else
+\if@pststyle
+\RequirePackage{profStylePST}
 \else
-\RequirePackage{profLycee}
+\RequirePackage{profStyleSansPST}
 \fi
+%%\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
