@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{profStylePST}[2019/09/16]
+\ProvidesPackage{profStyleSansPST}[2019/09/16]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -87,9 +87,12 @@
 \cfoot{\cfootTexte}
 \lhead{}
 \chead{}
-\rhead{\hbox to0pt{\hspace*{\rheadXOff}\vbox to0pt{\vspace*{3mm}\rotatebox{-90}{%%
-        \usebox\PSTBoxDroite%%
-      }\vss}\hss}}
+\rhead{%%
+  \hbox to0pt{\hspace*{\rheadXOff}\vbox to0pt{\vspace*{3mm}%%
+      \rotatebox{-90}{\colorbox{blue!80}{%%
+          \color{white}\large\sffamily\slshape\lamatiere%%
+        }}\vss}\hss}}
+%% 
 %
 %% environnements exo et pb
 %% encadrements en pointillés
@@ -207,8 +210,24 @@
 % }
 
 \newcommand{\titrepoly}[1]{%%
+  \providecommand{\@titre}[1]{%%
+    \LARGE\sffamily\bfseries%%
+    \color{red}%%
+     \macouleur%%
+     ##1%%
+   }%%
+  \settowidth{\@largeurtitre}{\@titre #1}%%
+  \settodepth{\@profondtitre}{\@titre #1}%%
+  \settoheight{\@hauteurtitre}{\@titre #1}%
+  \setlength{\@restanttitre}{(\linewidth - 5mm - \@largeurtitre)/2 }
   \begin{center}
-    \hfill{\LARGE\sffamily\bfseries\macouleur #1}\hfill\mbox{}%%
+    \begin{tikzpicture}
+      \shade[left color=white,right color=blue!75] (0,0) rectangle (\@restanttitre,\@hauteurtitre);
+    \end{tikzpicture}%%
+    {\LARGE\sffamily\bfseries\macouleur\@titre #1}%%
+    \begin{tikzpicture}
+      \shade[left color=blue!75,right color=white] (0,0) rectangle (\@restanttitre,\@hauteurtitre);
+    \end{tikzpicture}
   \end{center}
 }
 
