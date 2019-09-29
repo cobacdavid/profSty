@@ -39,6 +39,7 @@
 \setlength{\pythonLogoSize}{\f@size pt}
 %% \multiply\pythonLogoSize by 1.05
 \newmintedfile[vpy]{python}{%
+  fontfamily=tt,
   linenos,
   mathescape,
   breaklines,
@@ -57,9 +58,8 @@
       frametitlerule=true,
       backgroundcolor=yellow!15,
       roundcorner=10pt,
-      frametitle={\sffamily Code
-        \texttt{\color{blue}{Python}}
-        \hfill
+      frametitle={\sffamily\texttt{\color{blue!80} Code Python}%%
+        \hfill%
         \includegraphics[height=\pythonLogoSize]{python.png}%%
       }]%
       \vpy{#1}%%

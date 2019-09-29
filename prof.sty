@@ -139,7 +139,8 @@
   \setmathfont{XITSMath}
   %% \setmathfont{LatinModernMath-Regular}
   %% \usepackage[italic]{mathastext}
-  %%\RequirePackage[unicode=true]{hyperref}
+  %% \RequirePackage[unicode=true]{hyperref}
+  \setmonofont{Inconsolata}
 \else
   %% \RequirePackage[dvipsnames,svgnames,rgb]{xcolor}
   \RequirePackage[utf8]{inputenc}
@@ -155,6 +156,10 @@
 \fi
 \RequirePackage[dvipsnames,svgnames,rgb]{xcolor}
 \RequirePackage{tikz}
+\usetikzlibrary{decorations.fractals}
+\usetikzlibrary{shapes.misc}
+\usetikzlibrary{shapes.geometric}
+\RequirePackage{pdfrender}
 %% symbole de degres
 \RequirePackage{textcomp}
 %% tests
@@ -250,7 +255,7 @@
 \providecommand{\pybleu}{\color{\pythonBleu}}
 \providecommand{\pyjaune}{\color{\pythonJaune}}
 %%\providecommand{\macouleur}{\color{\maPScouleur}}
-\providecommand{\macouleur}{\color{blue!100}}
+\providecommand{\macouleur}{\color{blue!50}}
 \providecommand{\gris}{\color{gray}}
 %
 %% \RequirePackage{profCompetencesCollege}%%
