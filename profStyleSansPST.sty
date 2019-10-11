@@ -88,8 +88,8 @@
 \rfoot{\hbox to0pt{\hspace*{\rfootYOff}\vbox to0pt{\vspace*{-\longauteur}%
       \rotatebox{90}{\rfootTexte}
     }}}
-\lfoot{\scalebox{-1}[1]{\lfootTexte}}
-\cfoot{\cfootTexte}
+\lfoot{\vspace*{-5mm}\scalebox{-1}[1]{\lfootTexte}}
+\cfoot{\vspace*{-3mm}\cfootTexte}
 \lhead{}
 \chead{}
 \rhead{%%
@@ -120,7 +120,7 @@
   }}
 \addtolength{\lgex}{10pt}
 \newenvironment{exercice}{
-  \par\noindent\stepcounter{numeroexo}\linebreak\hspace*{-\lgex}%
+  \par\noindent\stepcounter{numeroexo}%%\linebreak\hspace*{-\lgex}%
   \begin{mdframed}[linecolor=blue!10,
     roundcorner=3pt,
     innerleftmargin=0pt,
@@ -223,7 +223,8 @@
   \setlength{\@restanttitre}{(\linewidth - \@largeurtitre)/2 }%%
   %%
   \noindent%
-  \smash{
+  %%\mbox{}\par\bigskip%%
+  {
     \begin{tikzpicture}[decoration=Koch snowflake]
       %% rectangle 1/3 de fond avant la boite
       \shade[%%
@@ -301,25 +302,39 @@
 %% titres de devoirs
 \newcommand{\nom}{{\scshape Nom~:}\makebox[.5\linewidth]{\dotfill}}
 
+\newcommand{\devoir}[4]{%%
+  \begin{mdframed}[linewidth=2bp,
+    linecolor=blue!10,
+    backgroundcolor=blue!5,
+    roundcorner=5pt]%
+    \titrepoly{Devoir #1 \no#2}{devoirs}
+    \noindent{\macouleur\sffamily#3\hfill{\itshape #4\hspace*{0ex}}}
+  \end{mdframed}%
+}
 
 \newcommand{\ds}[3]{%%
   \begin{mdframed}[linewidth=2bp,
     linecolor=blue!10,
     backgroundcolor=blue!5,
     roundcorner=5pt]%
-    \titrepoly{Devoir Surveillé \no#1}
+    \titrepoly{Devoir Surveillé \no#1}{devoirs}
+    \noindent{\macouleur\sffamily#2\hfill{\itshape #3\hspace*{0ex}}}
+  \end{mdframed}%
+}
+
+\newcommand{\dm}[3]{%%  \
+  begin{mdframed}[linewidth=2bp,
+    linecolor=blue!10,
+    backgroundcolor=blue!5,
+    roundcorner=5pt]%
+    \titrepoly{Devoir Maison \no#1}{devoirs}
     \noindent{\macouleur\sffamily#2\hfill{\itshape #3\hspace*{0ex}}}
   \end{mdframed}%
 }
 
 \newcommand{\ie}[3]{%%
-  \titrepoly{Interrogation Écrite \no#1}%%
+  \titrepoly{Interrogation Écrite \no#1}{devoirs}%%
   {\sffamily {NOM :}\makebox[5cm]{\dotfill}\hfill#2\hfill{\itshape #3\hspace*{0ex}}}
-  \par\noindent\traitDegrade\par%
-}
-\newcommand{\dm}[3]{%%
-  \titrepoly{Devoir Maison n\no#1}
-  {\sffamily#2\hfill{\itshape pour le #3\hspace*{2ex}}}\par
   \par\noindent\traitDegrade\par%
 }
 
