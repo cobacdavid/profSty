@@ -1,6 +1,34 @@
 import random
 import math
 
+##########################################################
+# This is a SO code at this adress:
+# https://stackoverflow.com/questions/24852345/hsv-to-rgb-color-conversion
+def hsv_to_rgb(h, s, v):
+    if s == 0.0:
+        v *= 255
+        return (v, v, v)
+    i = int(h * 6.) # XXX assume int() truncates!
+    f = (h * 6.) - i
+    p, q, t = int(255*(v*(1.-s))),\
+        int(255*(v*(1.-s*f))),\
+        int(255*(v*(1.-s*(1-f))))
+    v *= 255
+    i %= 6
+    if i == 0: return (v, t, p)
+    if i == 1: return (q, v, p)
+    if i == 2: return (p, v, t)
+    if i == 3: return (p, q, v)
+    if i == 4: return (t, p, v)
+    if i == 5: return (v, p, q)
+    # if i == 0: return tuple2rgb(v, t, p)
+    # if i == 1: return tuple2rgb(q, v, p)
+    # if i == 2: return tuple2rgb(p, v, t)
+    # if i == 3: return tuple2rgb(p, q, v)
+    # if i == 4: return tuple2rgb(t, p, v)
+    # if i == 5: return tuple2rgb(v, p, q)
+############################################################
+
 
 def prof_deb_env(nomEnv, options=None):
     if options is None:
@@ -98,15 +126,30 @@ def prof_tab_ind(i0, iend, xlabel, ylabel, zlabel):
     Z = Z[:-1] + passageLigne
     return s + "\n" + X + Y + Z + prof_fin_env("tabular")
 
+##################
+###### TRIS ######
+##################
 
-def prof_rep_tri_ligne(T, num_ligne, hauteur=1):
+
+def prof_rep_tri_ligne(T, num_ligne, hauteur=1, couleur=False, nombre=True):
     T = T.copy()
-    # code_tikz = r"""\foreach \i in {0,...,""" + str(len(T)-1) + "}\n" + \
-    #     r"""\filldraw[fill=white, draw=black] (\i,-""" + str(num_ligne*hauteur) + \
-    #     r""") rectangle (\i+1,""" + str(-num_ligne*hauteur+hauteur) + """);"""
+    #
+    if not couleur:
+        couleurs = [(1, 1, 1)] * len(T)
+    else:
+        couleurs = []
+        for i in range(len(T)):
+            r, g, b = hsv_to_rgb(i/len(T), 1.0, 1.0)
+            nuance = [round(c/255, 2) for c in [r, g, b]]
+            couleurs.append(nuance)
+    #
     code_tikz = ""
     for i in range(len(T)):
-        code_tikz += r"""\filldraw[fill=white, draw=black] (""" + \
+        r, g, b = couleurs[T[i]]
+        code_tikz += r"\definecolor{macouleur}{rgb}{" + \
+            str(r) + "," + str(g) + "," + str(b) + r"}"
+        code_tikz += r"""\filldraw[fill=macouleur""" + \
+            r""", draw=black] (""" + \
             str(i) + \
             r""",-""" + \
             str(num_ligne*hauteur) + \
@@ -115,29 +158,38 @@ def prof_rep_tri_ligne(T, num_ligne, hauteur=1):
             r""",""" + \
             str(-num_ligne*hauteur+hauteur) + \
             """);"""
-        code_tikz += r"\node at (" + \
-            str(i+.5) + \
-            "," + \
-            str(-num_ligne*hauteur+hauteur/2) + \
-            ") {" + \
-            str(T[i]) + \
-            "};"
+        if nombre:
+            code_tikz += r"\node at (" + \
+                str(i+.5) + \
+                "," + \
+                str(-num_ligne*hauteur+hauteur/2) + \
+                ") {" + \
+                str(T[i]) + \
+                "};"
     return code_tikz
 
 
-def prof_tri_bulle(T):
+def prof_tri_bulle(T, avec_couleur=False, avec_nombre=True):
     T = T.copy()
     n = len(T)
     etape = 0
     code = prof_deb_env("tikzpicture", options=["x=.5cm"])
-    code += prof_rep_tri_ligne(T, etape, hauteur=.5)
+    code += prof_rep_tri_ligne(T,
+                               etape,
+                               hauteur=.5,
+                               couleur=avec_couleur,
+                               nombre=avec_nombre)
     for i in range(n-1):
         travail = False
         for j in range((n-1) - i):
             if T[j] > T[j+1]:
                 T[j], T[j+1] = T[j+1], T[j]
                 etape += 1
-                code += prof_rep_tri_ligne(T, etape, hauteur=.5)
+                code += prof_rep_tri_ligne(T,
+                                           etape,
+                                           hauteur=.5,
+                                           couleur=avec_couleur,
+                                           nombre=avec_nombre)
                 travail = True
         if not travail:
             break
@@ -147,12 +199,16 @@ def prof_tri_bulle(T):
     return code
 
 
-def prof_tri_insertion(T):
+def prof_tri_insertion(T, avec_couleur=False, avec_nombre=True):
     T = T.copy()
     n = len(T)
     etape = 0
     code = prof_deb_env("tikzpicture", options=["x=.5cm"])
-    code += prof_rep_tri_ligne(T, etape)
+    code += prof_rep_tri_ligne(T,
+                               etape,
+                               hauteur=.5,
+                               couleur=avec_couleur,
+                               nombre=avec_nombre)
     for i in range(1, n):
         nombre = T[i]
         position = i
@@ -162,17 +218,25 @@ def prof_tri_insertion(T):
             # code += prof_rep_tableau(T)
         T[position] = nombre
         etape += 1
-        code += prof_rep_tri_ligne(T, etape)
+        code += prof_rep_tri_ligne(T,
+                                   etape,
+                                   hauteur=.5,
+                                   couleur=avec_couleur,
+                                   nombre=avec_nombre)
     code += prof_fin_env("tikzpicture") + r"\\"
     return code
 
 
-def prof_tri_selection(T):
+def prof_tri_selection(T, avec_couleur=False, avec_nombre=True):
     T = T.copy()
     n = len(T)
     etape = 0
     code = prof_deb_env("tikzpicture", options=["x=.5cm"])
-    code += prof_rep_tri_ligne(T, etape)
+    code += prof_rep_tri_ligne(T,
+                               etape,
+                               hauteur=.5,
+                               couleur=avec_couleur,
+                               nombre=avec_nombre)
     for i in range(n-1):
         position = i
         for j in range(i+1, n):
@@ -180,7 +244,11 @@ def prof_tri_selection(T):
                 position = j
         T[position], T[i] = T[i], T[position]
         etape += 1
-        code += prof_rep_tri_ligne(T, etape)
+        code += prof_rep_tri_ligne(T,
+                                   etape,
+                                   hauteur=.5,
+                                   couleur=avec_couleur,
+                                   nombre=avec_nombre)
     code += prof_fin_env("tikzpicture") + r"\\"
     return code
 

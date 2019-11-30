@@ -2,7 +2,7 @@
  "prof"
  (lambda ()
    (TeX-add-to-alist 'LaTeX-provided-package-options
-                     '(("fontspec" "no-math") ("hyperref" "unicode=true") ("inputenc" "utf8") ("xcolor" "rgb" "dvipsnames" "svgnames" "luatex") ("algorithm2e" "french" "onelanguage") ("mdframed" "tikz") ("babel" "frenchb" "english") ("numprint" "autolanguage")))
+                     '(("fontspec" "no-math") ("inputenc" "utf8") ("xcolor" "rgb" "dvipsnames" "svgnames" "luatex") ("algorithm2e" "french" "onelanguage") ("mdframed" "tikz") ("hyperref" "unicode=true") ("babel" "frenchb" "english") ("numprint" "autolanguage")))
    (TeX-run-style-hooks
     "random"
     "geometry"
@@ -17,7 +17,6 @@
     "luacode"
     "luamplib"
     "unicode-math"
-    "hyperref"
     "luatexperso"
     "inputenc"
     "aeguill"
@@ -27,7 +26,7 @@
     "bclogo"
     "mathrsfs"
     "tikz"
-    "auto-pst-pdf"
+    "pdfrender"
     "textcomp"
     "ifthen"
     "calc"
@@ -47,12 +46,13 @@
     "xlop"
     "tabvar"
     "letltxmacro"
-    "enumitem"
     "algorithm2e"
     "minted"
     "etoolbox"
     "mdframed"
     "pythontex"
+    "hyperref"
+    "auto-pst-pdf"
     "polyglossia"
     "babel"
     "numprint"
@@ -63,8 +63,9 @@
     "profDivers"
     "profAlgo"
     "profPython"
-    "profCollege"
-    "profLycee")
+    "profNSI"
+    "profStylePST"
+    "profStyleSansPST")
    (TeX-add-symbols
     '("nombre" 1)
     "lamatiere"

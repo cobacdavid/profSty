@@ -1,0 +1,289 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{profLycee}[2014/05/19]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                 style lycée 2014                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% personnalisation du module fancyhdr
+\pagestyle{fancy}
+\addtolength{\footskip}{-\baselineskip}
+\renewcommand{\footrulewidth}{1mm}
+\renewcommand{\footrule}{{%%
+    %%\color{gray}%%
+    %% \color{\maPScouleur}%%
+    \macouleur%
+\vskip\footruleskip\vskip-\footrulewidth
+\hrule width\headwidth height\footrulewidth\vskip\footruleskip}}
+\renewcommand{\headrulewidth}{0mm}
+% 
+\newcommand{\rheadTexte}{\large\sffamily\slshape%%
+  \white%%
+  \lamatiere}
+\newcommand{\lfootTexte}{%%
+  \macouleur%%
+  \tiny\sffamily\bfseries% 
+  Composé avec Lua\LaTeX{} sous linux à~%
+  \directlua{tex.print(os.time())}%
+}
+\newcommand{\cfootTexte}{\macouleur\thepage/\pageref{LastPage}}
+\newcommand{\rfootTexte}{\macouleur\large\sffamily\slshape\RRoman{\number\year}~---~%
+  Lycée Jean Moulin / Cobac}
+% 
+  % \begin{tikzpicture}
+  %   \begin{scope}
+  %     \clip (0,\profCitation) rectangle (\longCitation,\hautCitation+\profCitation);
+  %     \node[inner sep=0pt,anchor=south west,red] at (0,0) {\citationformatee};
+  %   \end{scope}
+  %   \clip (0,0) rectangle (\longCitation,\profCitation);
+  %   \node[inner sep=0pt,anchor=south west,blue] at (0,0) {\citationformatee};
+  % \end{tikzpicture}
+%%
+\newcommand{\rheadCitation}{\usebox{\textecitation}}
+%
+\newlength{\longauteur}
+\settowidth{\longauteur}{\rfootTexte}
+\newlength{\hautmatiere}
+\settoheight{\hautmatiere}{\rheadTexte}
+\newlength{\longmatiere}
+\settowidth{\longmatiere}{\rheadTexte}
+%
+\newlength{\rfootYOff}
+\setlength{\rfootYOff}{4.3ex}
+\newlength{\rheadXOff}
+\setlength{\rheadXOff}{3.7ex - \hautmatiere + 4ex} %% 3.7 correspond au bandeau sans matiere
+\newlength{\epaisTrait}
+\setlength{\epaisTrait}{1.7mm}
+\newlength{\citationXOff}
+\setlength{\citationXOff}{\longmatiere + 6pt + 1ex} % 3pt est la distance framesep d'une framebox
+\newlength{\citationYOff}
+\setlength{\citationYOff}{\epaisTrait-\profCitation}
+\newlength{\hautcitation}
+\setlength{\hautcitation}{1.5mm + 1ex}
+%
+%% lalatex, fancyhdr et pstricks ne sont pas les meilleures amies
+%% du monde -> hack demandé sur fr.comp.text.tex
+\newlength{\etirement}
+\newsavebox\PSTBoxDroite
+\savebox\PSTBoxDroite{% 
+  \begin{postscript}
+    \psset{unit=1cm}
+    \setlength{\etirement}{\textheight - \longauteur + \rfootYOff}
+%
+    \rput[bl](0,0){\psframe[linewidth=0pt,linestyle=none,fillstyle=solid,fillcolor=\maPScouleur](0,0)(\etirement,\epaisTrait)}%
+    \rput[bl](0,0){\psframebox[linewidth=0pt,linestyle=none,fillstyle=solid,fillcolor=\maPScouleur]{\rheadTexte}}%
+    \if@algo 
+    \else
+    \rput[bl](\citationXOff,\citationYOff){\rheadCitation}%%
+    \fi
+  \end{postscript}% 
+} 
+%
+\rfoot{\hbox to0pt{\hspace*{\rfootYOff}\vbox to0pt{\vspace*{-\longauteur}%
+      \rotatebox{90}{\rfootTexte}
+    }}}
+\lfoot{\scalebox{-1}[1]{\lfootTexte}}
+\cfoot{\cfootTexte}
+\lhead{}
+\chead{}
+\rhead{\hbox to0pt{\hspace*{\rheadXOff}\vbox to0pt{\vspace*{3mm}\rotatebox{-90}{%%
+        \usebox\PSTBoxDroite%%
+      }\vss}\hss}}
+%
+%% environnements exo et pb
+%% encadrements en pointillés
+%
+\newcommand{\encadrepointilles}[1]{%
+  \expandafter\begin{postscript}%
+    \psframebox[linestyle=none,fillcolor=\maPScouleur,fillstyle=solid]{#1}%
+  \end{postscript}%
+}
+%
+\newcounter{numeroexo}
+\newlength{\htex}
+\newlength{\lgex}
+\settowidth{\htex}{\encadrepointilles{%
+    \scalebox{1.5}[1]{\sffamily Exercice \arabic{numeroexo}}%%
+  }}
+\addtolength{\htex}{-\baselineskip}
+\settoheight{\lgex}{\encadrepointilles{%%
+    \scalebox{1.5}[1]{\sffamily Exercice \arabic{numeroexo}}%%
+  }}
+\addtolength{\lgex}{10pt}
+\newenvironment{exercice}{%%
+  \ifthenelse{\equal{\value{numeroexo}}{0}}{}{%%
+    %% la séparation des exercices
+    \par\noindent{\macouleur\hrule}%%
+  }%%
+  \par\noindent\stepcounter{numeroexo}\linebreak\hspace*{-\lgex}%
+  \smash{\raisebox{-\htex}{%
+      \rotatebox{90}{\encadrepointilles{%
+          \scalebox{1.5}[1]{\white \bfseries \sffamily Exercice \arabic{numeroexo}}%%
+        }}%
+    }}%
+  \hspace*{\lgex}\hspace*{3pt}%%
+}{%
+  \vspace{.5\baselineskip}\par
+}
+%% suite plantage
+\renewenvironment{exercice}{
+  \par\noindent\stepcounter{numeroexo}\linebreak\hspace*{-\lgex}%
+  \begin{mdframed}[linecolor=blue!10,
+    roundcorner=3pt,
+    innerleftmargin=0pt,
+    innerrightmargin=0pt,
+    innertopmargin=0pt,
+    innerbottommargin=0pt,
+    linewidth=2bp,
+    backgroundcolor=blue!5
+    ]%%
+    {\large \bfseries \sffamily Exercice \arabic{numeroexo}}%
+  \end{mdframed}
+}{%
+  \vspace{.5\baselineskip}\par%
+}
+ 
+\newenvironment{exerciceh}{%%
+  \ifthenelse{\equal{\value{numeroexo}}{0}}{}{%%
+    %% la séparation des exercices
+    \par\noindent{\macouleur\hrule}%%
+  }%%
+  \par\noindent\stepcounter{numeroexo}\linebreak\hspace*{-\lgex}%
+   \smash{%\raisebox{-\htex}{%
+       %%\rotatebox{90}{%
+       \encadrepointilles{%
+         \scalebox{.7}[1]{\white \bfseries \sffamily Exercice \arabic{numeroexo}}%%
+       }%
+       % }%
+       % }%
+   }%
+   %%\hspace*{\lgex}\hspace*{3pt}%%
+ }{%
+   \vspace{.5\baselineskip}\par
+ }
+\newenvironment{nival}{%%
+  \ifthenelse{\equal{\value{numeroexo}}{0}}{}{%%
+    %% la séparation des exercices
+    \par\noindent\hrule%%
+  }%%
+  \par\noindent\stepcounter{numeroexo}\linebreak\hspace*{-\lgex}%
+   \smash{\raisebox{-\htex}{%
+       \rotatebox{90}{\encadrepointilles{%
+             \scalebox{1.5}[1]{\sffamily Niveau \arabic{numeroexo}}%%
+           }}}}%
+     \hspace*{\lgex}\hspace*{3pt}%%
+ }{%
+   \vspace{.5\baselineskip}
+
+ }
+%
+%% titres de polys
+\newsavebox{\gradruledg}
+\newsavebox{\gradrulegd}
+\newsavebox{\gradrulegdg}
+\newlength{\@largeurtitre}
+\newlength{\@profondtitre}
+\newlength{\@restanttitre}
+\newlength{\@hauteurtitre}
+\newcommand{\titrepoly}[1]{%%
+  \providecommand{\@titre}[1]{%%
+    \LARGE\sffamily\bfseries%%
+    %% \color{red}%%
+    \macouleur%%
+    ##1%%
+  }%%
+  \settowidth{\@largeurtitre}{\@titre #1}%%
+  \settodepth{\@profondtitre}{\@titre #1}%%
+  \settoheight{\@hauteurtitre}{\@titre #1}%
+  \setlength{\@restanttitre}{(\linewidth - 1mm - \@largeurtitre)/2 }
+  \savebox{\gradruledg}{%%
+    \begin{pspicture}%%
+      %% gradbegin=\maPScouleurGradBegin%%
+      %% gradend=\maPScouleur%%
+      \psframe[gradmidpoint=1,linestyle=none,fillstyle=gradient,gradbegin=white,gradend=\maPScouleur,gradangle=90](0,0)(\@restanttitre,-\@hauteurtitre)%%
+    \end{pspicture}%%
+  }
+  \savebox{\gradrulegd}{%%
+    \begin{pspicture}%%
+      \psframe[gradmidpoint=1,linestyle=none,fillstyle=gradient,gradend=white,gradbegin=\maPScouleur,gradangle=90](0,0)(\@restanttitre,-\@hauteurtitre)%%
+    \end{pspicture}%%
+  }
+  \savebox{\gradrulegdg}{%%
+    \begin{pspicture}%%
+      \psframe[gradmidpoint=.5,linestyle=none,fillstyle=gradient,gradbegin=\maPScouleurGradBegin,gradend=\maPScouleur,gradangle=90](0,0)(\linewidth,-\@hauteurtitre)%%
+    \end{pspicture}%%
+  }
+ %
+  \begin{center}
+    \usebox\gradruledg%%
+    \hfill\parbox[b]{\@largeurtitre}{\@titre #1}\hfill\rule{0pt}{0pt}%%
+    \usebox{\gradrulegd}%%
+  \end{center}
+}
+%% titres de devoirs
+\newcommand{\nom}{{\scshape Nom~:}\makebox[.5\linewidth]{\dotfill}}
+
+\newsavebox{\devoirgradrulegdg}
+\newcommand{\traitDegrade}{%%
+  \savebox\devoirgradrulegdg{%%
+    \begin{pspicture}%%
+      \psframe[gradmidpoint=.5,linestyle=none,fillstyle=gradient,gradbegin=white,gradend=\maPScouleur,gradangle=90](0,0)(\linewidth,1mm)%%
+    \end{pspicture}%%
+  }%
+  \usebox{\devoirgradrulegdg}%
+}
+\newcommand{\ds}[3]{%%
+  \titrepoly{Devoir Surveillé \no#1}
+  {\sffamily#2\hfill{\itshape #3\hspace*{0ex}}}\par
+  \par\noindent\traitDegrade\par%
+}
+
+\newcommand{\ie}[3]{%%
+  \titrepoly{Interrogation Écrite \no#1}%%
+  {\sffamily {NOM :}\makebox[5cm]{\dotfill}\hfill#2\hfill{\itshape #3\hspace*{0ex}}}
+  \par\noindent\traitDegrade\par%
+}
+\newcommand{\dm}[3]{%%
+  \titrepoly{Devoir Maison n\no#1}
+  {\sffamily#2\hfill{\itshape pour le #3\hspace*{2ex}}}\par
+  \par\noindent\traitDegrade\par%
+}
+
+%%%%%%%%%%%%%%%
+%% Dans les tableaux de signes et de variations
+\newlength{\@vardelongueur}
+\settowidth{\@vardelongueur}{Var. de}
+\newcommand{\varde}[1]{%%
+  \TVcenter{%
+    \parbox{\@vardelongueur}{\centering%
+      Var. de\\$#1$%
+    }
+  }
+}
+
+\newlength{\@signedelongueur}
+\settowidth{\@signedelongueur}{Signe de}
+\newcommand{\sgnde}[1]{%%
+  \TVcenter{%
+    \parbox{\@signedelongueur}{\centering%
+      Signe de\\$#1$%
+    }
+  }
+}
+\newcommand{\sgnduq}{%%
+  \TVcenter{%
+    \parbox{\@signedelongueur}{\centering%
+      \scriptsize Signe du\\quotient%
+    }
+  }
+}
+\newcommand{\sgndup}{%%
+  \TVcenter{%
+    \parbox{\@signedelongueur}{\centering%
+      \scriptsize Signe du\\produit%
+    }
+  }
+}
+
+\endinput
