@@ -76,19 +76,25 @@
       frametitlerule=true,
       backgroundcolor=yellow!15,
       roundcorner=10pt,
-      frametitle={\sffamily Code
-        \texttt{\color{blue}{Python}}
-        \hfill
+      frametitle={\sffamily\texttt{\color{blue!80} Code Python}
+        \hfill%
         \includegraphics[height=\pythonLogoSize]{python.png}%%
       }]%
-      \begin{minted}[linenos,%
-        mathescape,%
-        breaklines,%
-        autogobble,%
-        framerule=1pt,%
-        rulecolor=red,%
-        python3,%
-        numbersep=3pt]{python}#1\end{minted}
+      %[%
+        % fontfamily=tt,
+        % linenos,
+        % mathescape,
+        % breaklines,
+        % autogobble,
+        % framerule=1pt,
+        % rulecolor=red,
+        % python3,
+        % numbersep=3pt%
+        % %% mathescape,%
+        % ]
+      \begin{minted}{python}
+        #1
+      \end{minted}
     \end{mdframed}%%
   \end{english}%%
 }
