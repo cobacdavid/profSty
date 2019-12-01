@@ -1,5 +1,8 @@
 import random
 import math
+import requests
+import imgkit
+import shutil
 
 ##########################################################
 # This is a SO code at this adress:
@@ -21,12 +24,6 @@ def hsv_to_rgb(h, s, v):
     if i == 3: return (p, q, v)
     if i == 4: return (t, p, v)
     if i == 5: return (v, p, q)
-    # if i == 0: return tuple2rgb(v, t, p)
-    # if i == 1: return tuple2rgb(q, v, p)
-    # if i == 2: return tuple2rgb(p, v, t)
-    # if i == 3: return tuple2rgb(p, q, v)
-    # if i == 4: return tuple2rgb(t, p, v)
-    # if i == 5: return tuple2rgb(v, p, q)
 ############################################################
 
 
@@ -56,6 +53,12 @@ def prof_dec_let(mot):
     return s
 
 
+def prof_mel_let(mot):
+    l = list(mot)
+    random.shuffle(l)
+    return "".join(l)
+
+
 def prof_mel_phr(phrase):
     mots = phrase.split()
     phraseReponse = prof_mel_let(mots[0]).capitalize() + " "
@@ -64,17 +67,12 @@ def prof_mel_phr(phrase):
     return phraseReponse[:-1]
 
 
-def prof_mel_let(mot):
-    l = list(mot)
-    random.shuffle(l)
-    return "".join(l)
-
-
 def prof_est_ent(n, precision=1e-5):
     return abs(n - round(n)) < precision
 
 
 def prof_Tab_Val(fonction, debut, fin, pas, precision=2):
+    # fonction interne à ne pas appeler
     nb = int(1 + (fin - debut) / pas)
     x = debut
     liste = []
@@ -125,6 +123,46 @@ def prof_tab_ind(i0, iend, xlabel, ylabel, zlabel):
     Y = Y[:-1] + passageLigne
     Z = Z[:-1] + passageLigne
     return s + "\n" + X + Y + Z + prof_fin_env("tabular")
+
+
+##################
+###### OEIS ######
+##################
+
+def prof_oeis_A(n, nb_termes=10):
+    url = "https://oeis.org/search?q=A" + \
+        "{:06d}".format(n) + \
+        "&fmt=json"
+    reponse = requests.get(url)
+    resultat = reponse.json()['results'][0]['data']
+    resultat = resultat.split(',')[:nb_termes]
+    r = ", ".join(resultat[:nb_termes-1])
+    r += " et " + resultat[nb_termes-1]
+    return r
+
+
+def prof_oeis_web_A(n, angle=90, dimension="10cm"):
+    suite = "A{:06d}".format(n)
+    image = suite + '.jpg'
+    url = "https://oeis.org/" + suite
+    options = {'quiet': ''}
+    imgkit.from_url(url, image, options=options)
+    code = prof_deb_env("mdframed",
+                        options=["roundcorner=10pt",
+                                 "linewidth=1bp",
+                                 r"frametitle=\textbf{Vue du site }\url{"+url+r"}",
+                                 "frametitlebackgroundcolor=gray!30",
+                                 "frametitlerule=true"])
+    code += prof_deb_env("center")
+    code += r"\includegraphics[angle=" + \
+        str(angle) + \
+        ",width=" + \
+        dimension + \
+        "]{" + image + "}"
+    code += prof_fin_env("center")
+    code += prof_fin_env("mdframed")
+    return code
+
 
 ##################
 ###### TRIS ######
@@ -195,7 +233,7 @@ def prof_tri_bulle(T, avec_couleur=False, avec_nombre=True):
             break
         # etape += 1
         # code += prof_rep_tri_ligne(T, etape)
-    code += prof_fin_env("tikzpicture") + r"\\"
+    code += prof_fin_env("tikzpicture")
     return code
 
 
@@ -223,7 +261,7 @@ def prof_tri_insertion(T, avec_couleur=False, avec_nombre=True):
                                    hauteur=.5,
                                    couleur=avec_couleur,
                                    nombre=avec_nombre)
-    code += prof_fin_env("tikzpicture") + r"\\"
+    code += prof_fin_env("tikzpicture")
     return code
 
 
@@ -249,8 +287,38 @@ def prof_tri_selection(T, avec_couleur=False, avec_nombre=True):
                                    hauteur=.5,
                                    couleur=avec_couleur,
                                    nombre=avec_nombre)
-    code += prof_fin_env("tikzpicture") + r"\\"
+    code += prof_fin_env("tikzpicture")
     return code
 
+#####
+def prof_image_site(url, image, texte="", dimension="10cm"):
+    options = {'quiet': ''}
+    imgkit.from_url(url, image, options=options)
+    code = prof_deb_env("mdframed",
+                        options=["roundcorner=10pt",
+                                 "linewidth=1bp",
+                                 r"frametitle=\textbf{Vue du site }"+texte,
+                                 "frametitlebackgroundcolor=gray!30",
+                                 "frametitlerule=true"])
+    code += prof_deb_env("center")
+    code += r"\includegraphics[width=" + \
+        dimension + \
+        "]{" + image + "}"
+    code += prof_fin_env("center")
+    code += prof_fin_env("mdframed")
+    return code
 
-# print(tableau_indice(0, 11, "Indice positif", "Chaîne", "Indice négatif"))
+# https://stackoverflow.com/questions/13137817/how-to-download-image-using-requests#13137873
+# https://stackoverflow.com/questions/34311747/whats-the-url-to-download-map-tiles-from-google-maps#37269293
+# def prof_charge_tile(zoom, lon_deg, lat_deg):
+#     sec = lambda x:1/math.cos(x)
+#     lat_rad = math.radians(lat_deg)
+#     n = 2 ** zoom
+#     xtile = n * ((lon_deg + 180) // 360)
+#     ytile = n * (1 - (math.log(math.tan(lat_rad)
+#                                + sec(lat_rad)) / math.pi)) / 2
+#     # return xtile, ytile, zoom
+#     reponse = requests.get("http://mt1.google.com/vt/lyrs=y&x=" + str(round(xtile)) + "&y=" + str(round(ytile)) + "&z=" + str(zoom), stream=True)
+#     with open('img.jpg', 'wb') as out_file:
+#         shutil.copyfileobj(reponse.raw, out_file)
+#     return reponse
