@@ -2,7 +2,7 @@ import random
 import math
 import requests
 import imgkit
-
+import shutil
 
 ##########################################################
 # This is a SO code at this adress:
@@ -307,3 +307,144 @@ def prof_image_site(url, image, texte="", dimension="10cm"):
     code += prof_fin_env("center")
     code += prof_fin_env("mdframed")
     return code
+
+# https://stackoverflow.com/questions/13137817/how-to-download-image-using-requests#13137873
+# https://stackoverflow.com/questions/34311747/whats-the-url-to-download-map-tiles-from-google-maps#37269293
+# def prof_charge_tile(zoom, lon_deg, lat_deg):
+#     sec = lambda x:1/math.cos(x)
+#     lat_rad = math.radians(lat_deg)
+#     n = 2 ** zoom
+#     xtile = n * ((lon_deg + 180) // 360)
+#     ytile = n * (1 - (math.log(math.tan(lat_rad)
+#                                + sec(lat_rad)) / math.pi)) / 2
+#     # return xtile, ytile, zoom
+#     reponse = requests.get("http://mt1.google.com/vt/lyrs=y&x=" + str(round(xtile)) + "&y=" + str(round(ytile)) + "&z=" + str(zoom), stream=True)
+#     with open('img.jpg', 'wb') as out_file:
+#         shutil.copyfileobj(reponse.raw, out_file)
+#     return reponse
+
+
+## recherche textuelle
+def prof_tableau_texte_ligne(texte,
+                             hauteur=0.5,
+                             match=None,
+                             mismatch=None,
+                             num_ligne=0):
+    #
+    couleurs = [(1, 1, 1)] * len(texte)
+    couleurs_texte = [(0, 0, 0)] * len(texte)
+    if match is not None:
+        for i in match:
+            couleurs[i] = (.5, 1, .5)
+            couleurs_texte[i] = (1, 1, 1)
+    if mismatch is not None:
+        for i in mismatch:
+            couleurs[i] = (1, .5, .5)
+    #
+    nb_vide = 0
+    while texte[nb_vide] == " ":
+        nb_vide += 1
+    #
+    # grand rectangle gauche : le pousseur
+    code_tikz = r"""\draw[color=black] (0,-""" + \
+        str(num_ligne*hauteur) + """)""" + \
+        r""" rectangle (""" + \
+        str(nb_vide) + \
+        r""",""" + \
+        str(-num_ligne*hauteur+hauteur) + \
+        """);"""
+    #
+    # les cases remplies
+    for i in range(nb_vide, len(texte)):
+        r, g, b = couleurs[i]
+        code_tikz += r"\definecolor{macouleurfond}{rgb}{" + \
+            str(r) + "," + str(g) + "," + str(b) + r"}"
+        code_tikz += r"""\filldraw[fill=macouleurfond""" + \
+            r""", draw=black] (""" + \
+            str(i) + \
+            r""",-""" + \
+            str(num_ligne*hauteur) + \
+            r""") rectangle (""" + \
+            str(i+1) + \
+            r""",""" + \
+            str(-num_ligne*hauteur+hauteur) + \
+            """);"""
+        r, g, b = couleurs_texte[i]
+        code_tikz += r"\definecolor{macouleurtexte}{rgb}{" + \
+            str(r) + "," + str(g) + "," + str(b) + r"}"
+        code_tikz += r"\node[color=macouleurtexte] at (" + \
+            str(i+.5) + \
+            "," + \
+            str(-num_ligne*hauteur+hauteur/2) + \
+            ") {" + \
+            str(texte[i]) + \
+            "};"
+    return code_tikz
+
+
+# mauvais caractère 
+def __prof_tableau_MC(M):
+    # analyse du motif
+    # tableau de décalage
+    # mauvais caractère
+    m = len(M)
+    mc = {}
+    # mc[M[m-1]] = 1
+    for i in range(1, m):
+        car_motif = M[m-i-1]
+        if car_motif not in mc:
+            mc[car_motif] = i
+    return mc
+
+
+def prof_BM_mc(T, M):
+    mc = __prof_tableau_MC(M)
+    m = len(M)
+    #
+    nb_match = 0
+    position = m - 1
+    code_sortie = "\\noindent"
+    while position < len(T):
+        # print(T)
+        # print(" " * (position-m+1) + M)
+        i = 0
+        while m-i-1 >= 0 and T[position-i] == M[m-i-1]:
+            i += 1
+        #
+        if i == m:
+            # print("** match **")
+            nb_match += 1
+            decalage = mc[T[position]]
+            match = range(position-m+1, position+1)
+            matchm = []
+            mismatch = []
+        else:
+            # le decalage n'est pas forcément la longueur du motif
+            # ou le nombre lu dans le tableau MC car on peut avoir
+            # matché une partie de l'expression
+            match = range(position, position-i, -1)
+            matchm = []
+            mismatch = [position-i]
+            if T[position-i] in mc:
+                decalage = mc[T[position-i]] - i
+                matchm += [position-decalage]
+            else:
+                decalage = m - i
+        position += decalage
+        #
+        code_sortie += prof_deb_env("tikzpicture", options=["x=.5cm"])
+        code_sortie += prof_tableau_texte_ligne(T,
+                                                num_ligne=0,
+                                                match=match,
+                                                mismatch=mismatch) + "\n"
+        code_sortie += prof_tableau_texte_ligne(
+            " " * (position - decalage - m + 1) + M,
+            num_ligne=1,
+            match=list(match) + matchm,
+            mismatch=mismatch) + "\n"
+        code_sortie += prof_fin_env("tikzpicture") + "\\\\"
+        #
+
+    #
+    # return str(nb_match) + " correspondance(s) exacte(s)"
+    return code_sortie
