@@ -50,6 +50,7 @@
     "minted"
     "etoolbox"
     "mdframed"
+    "forest"
     "pythontex"
     "hyperref"
     "auto-pst-pdf"

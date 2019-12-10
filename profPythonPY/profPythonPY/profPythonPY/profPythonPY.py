@@ -432,8 +432,6 @@ def prof_BM_mc(T, M):
             if T[position-i] in mc:
                 decalage = mc[T[position-i]] - i
                 matchm += [position-decalage]
-            # cas où le caractère du texte n'est
-            # pas dans la motif
             else:
                 decalage = m - i
         position += decalage
@@ -454,3 +452,182 @@ def prof_BM_mc(T, M):
     #
     # return str(nb_match) + " correspondance(s) exacte(s)"
     return code_sortie
+
+
+# construction arbre binaire
+
+
+# def prof_arbre_binaire(arbre, cercle=True, flechage=False, code_supp=""):
+#     code_forest = r"""\tikzset{
+#     arete/.style={draw,
+#     very thick,
+#     color=black!80
+#     }
+#     }
+#     """
+#     code_forest += r"""\forestset{%
+#         default preamble={%
+#         for tree={"""
+#     code_forest += r"font=\bfseries,edge={arete}"
+#     if cercle:
+#         code_forest += ",circle, draw, very thick, rotate=1"
+#     if flechage:
+#         code_forest += ",edge=->"
+#     code_forest += r"}}}"
+#     code_forest += prof_deb_env("forest")
+#     structure = " ".join(str(arbre).split(', '))
+#     structure = structure.replace("[]", "[,phantom]")
+#     structure = structure.replace('"', "")
+#     structure = structure.replace("'", "")
+
+#     code_forest += structure
+#     code_forest += code_supp
+#     code_forest += prof_fin_env("forest")
+#     return code_forest
+
+
+# # construction arbre binaire
+# def prof_arbre_bin(arbre, cercle=True, flechage=False, code_supp=""):
+#     code_forest = r"""\tikzset{
+#     arete/.style={draw,
+#     very thick,
+#     color=black!80
+#     }
+#     }
+#     """
+#     structure = " ".join(str(arbre).split(', '))
+#     structure = structure.replace("[]", "[,phantom]")
+#     structure = structure.replace('"', "")
+#     structure = structure.replace("'", "")
+
+#     code_forest += structure
+#     code_forest += code_supp
+#     code_forest += prof_fin_env("forest")
+#     return code_forest
+
+class noeud:
+    def __init__(self, etiq, gauche=None, droit=None):
+        self.etiquette = etiq
+        self.gauche = gauche
+        self.droit = droit
+
+    def get_gauche(self):
+        return self.gauche
+
+    def get_droite(self):
+        return self.droit
+
+    def get_etiquette(self):
+        return self.etiquette
+
+    def est_feuille(self):
+        return self.gauche is None and self.droit is None
+
+    def get_hauteur(self):
+        g = 0 if self.gauche is None else self.gauche.get_hauteur()
+        d = 0 if self.droit is None else self.droit.get_hauteur()
+        return 1 + max(g, d)
+
+    # def to_list_forest(self):
+    #     if self.est_feuille():
+    #         return list([self.etiquette])
+    #     else:
+    #         if self.gauche is not None \
+    #            and self.droit is not None:
+    #             g = [self.gauche] if isinstance(self.gauche, int) \
+    #                 else self.gauche.to_list()
+    #             d = [self.droit] if isinstance(self.droit, int) \
+    #                 else self.droit.to_list()
+    #             return [self.etiquette, g, d]
+    #         elif self.gauche is not None:
+    #             g = [self.gauche] if isinstance(self.gauche, int) \
+    #                 else self.gauche.to_list()
+    #             d = list([',phantom'])
+    #             return [self.etiquette, g, d]
+    #         elif self.droit is not None:
+    #             g = list([',phantom'])
+    #             d = [self.droit] if isinstance(self.droit, int) \
+    #                 else self.droit.to_list()
+    #             return [self.etiquette, g, d]
+    #         else:
+    #             return [self.etiquette, [], []]
+
+    def _feuille(valeur):
+        return "node{" + str(valeur) + "}"
+
+    def _parent(valeur, gauche, droite, nb):
+        if gauche != "[missing]":
+            delmg_g = "child{"
+            delmg_d = "} "
+        else:
+            delmg_g = "child "
+            delmg_d = " "
+        #
+        if droite != "[missing]":
+            delmd_g = "child{"
+            delmd_d = "} "
+        else:
+            delmd_g = "child "
+            delmd_d = " "
+        #
+        return "node{" + str(valeur) + "} " + \
+            delmg_g + gauche + delmg_d + \
+            "child [missing]" * (nb-1) + \
+            delmd_g + droite + delmd_d
+
+    def to_tikz(self, h):
+        #
+        manquant = "[missing]"
+        #
+        if self.est_feuille():
+            return noeud._feuille(self.etiquette)
+        else:
+            if self.gauche is not None \
+               and self.droit is not None:
+                g = noeud._feuille(self.gauche) \
+                    if isinstance(self.gauche, int) \
+                    else self.gauche.to_tikz(h//2)
+                d = noeud._feuille(self.droit) \
+                    if isinstance(self.droit, int) \
+                    else self.droit.to_tikz(h//2)
+                return noeud._parent((self.etiquette), g, d, h)
+            elif self.gauche is not None:
+                g = noeud._feuille(self.gauche) \
+                    if isinstance(self.gauche, int) \
+                    else self.gauche.to_tikz(h//2)
+                return noeud._parent(self.etiquette, g, manquant, h)
+            elif self.droit is not None:
+                d = noeud._feuille(self.droit) \
+                    if isinstance(self.droit, int) \
+                    else self.droit.to_tikz(h//2)
+                return noeud._parent(self.etiquette, manquant, d, h)
+            else:
+                return noeud._parent(self.etiquette, manquant, manquant, h)
+
+    def __repr__(self):
+        h = self.get_hauteur()
+        return "\\" + str(self.to_tikz(2**(h-2))) + ";"
+
+
+def prof_arbre_binaire(arbre, *opt):
+    o = ""
+    for s in opt:
+        o += ',' + str(s)
+    code_tikz = prof_deb_env("tikzpicture",
+                             options=["nodes={draw, circle, thick}" + o])
+    code_tikz += arbre.__repr__()
+    code_tikz += prof_fin_env("tikzpicture")
+    return code_tikz
+
+
+def _arbre_binaire_complet(hauteur, etiquette):
+    if hauteur == 0:
+        return "None"
+    return f"noeud({etiquette}," + \
+        _arbre_binaire_complet(hauteur-1, 2*etiquette) + "," + \
+        _arbre_binaire_complet(hauteur-1, 2*etiquette+1) + ")"
+
+
+def prof_arbre_binaire_complet(hauteur, *options):
+    arbre = eval(_arbre_binaire_complet(hauteur+1, 1))
+    return prof_arbre_binaire(arbre, *options)
