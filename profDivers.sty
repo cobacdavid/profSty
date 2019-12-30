@@ -174,11 +174,17 @@
     \begin{description}%%
     \item[\bfseries\large #2]\qquad\\
     }{\end{description}\end{minipage}\par}
-\newenvironment{monblocencadre}[2][\linewidth]{%
-  \noindent\fbox{%%
-    \begin{minipage}[t]{#1}%
-    \begin{description}%%
-    \item[\bfseries\large #2]\qquad\\
-  }{\end{description}\end{minipage}}\par}
+\newenvironment{commentaire}[2][\linewidth]{%%
+  \noindent%%
+  \begin{minipage}[t]{#1}%
+    \begin{mdframed}[%
+      roundcorner=5pt,
+      linewidth=2bp,
+      frametitlebackgroundcolor=gray!30,
+      frametitle={\large\bfseries Commentaires},
+      frametitlerule=true,
+      ]
+      #2%
+}{\end{mdframed}\end{minipage}}
 %
 \endinput

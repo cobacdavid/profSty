@@ -1,43 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{profPython}[2019/01/29]
 
-
-\newcommand{\python}{\texttt{Python}\xspace}
-%%\DefineVerbatimEnvironment{verbatimpython}{Verbatim}{%%
-%%  label={Code \python},frame=single,commandchars=\\\{\}}
-\DefineVerbatimEnvironment{verbatimpython}{Verbatim}{%%
-  label={Code \python},frame=single}
-%
-%
-% \newenvironment{vpython}{%%
-%   \VerbatimEnvironment
-%   \begin{figure}[H]
-%     \centering
-%     \begin{english}\begin{mdframed}[linecolor=blue!20,
-%   linewidth=5pt,
-%   frametitlebackgroundcolor=yellow!30,
-%   frametitlerule=true,
-%   backgroundcolor=yellow!15,
-%   roundcorner=10pt,
-%   frametitle={\sffamily Code \texttt{\color{blue}{Python}}\hfill\includegraphics[height=10pt]{/home/david/travail/david/production/info/config/texmf/tex/latex/prof/python.png}}]
-%   \begin{minted}[%%frame=lines, 
-%     linenos,
-%     mathescape,
-%     breaklines,
-%     autogobble,
-%     framerule=1pt,
-%     rulecolor=red,
-%     python3,
-%     numbersep=3pt
-%     ]{python}}
-%     {\end{minted}\end{mdframed}\end{english}\end{figure}}
-
-\graphicspath{{/home/david/travail/david/production/info/config/texmf/tex/latex/prof/}}
-
-\newlength{\pythonLogoSize}
-
-\setlength{\pythonLogoSize}{\f@size pt}
-%% \multiply\pythonLogoSize by 1.05
+%% styles minted
 \newmintedfile[vpy]{python}{%
   fontfamily=tt,
   linenos,
@@ -49,6 +13,39 @@
   python3,
   numbersep=3pt%
 }%%
+\newmintedfile[vhtm]{html}{%
+  fontfamily=tt,
+  linenos,
+  mathescape,
+  breaklines,
+  autogobble,
+  framerule=1pt,
+  rulecolor=red,
+  numbersep=3pt%
+}%%
+\newmintedfile[vcs]{css}{%
+  fontfamily=tt,
+  linenos,
+  mathescape,
+  breaklines,
+  autogobble,
+  framerule=1pt,
+  rulecolor=blue,
+  numbersep=3pt%
+}%%
+
+
+%%% Python
+\newcommand{\python}{\texttt{Python}\xspace}
+%%\DefineVerbatimEnvironment{verbatimpython}{Verbatim}{%%
+%%  label={Code \python},frame=single,commandchars=\\\{\}}
+\DefineVerbatimEnvironment{verbatimpython}{Verbatim}{%%
+  label={Code \python},frame=single}
+
+\graphicspath{{/home/david/travail/david/production/info/config/texmf/tex/latex/prof/}}
+\newlength{\pythonLogoSize}
+\setlength{\pythonLogoSize}{\f@size pt}
+%% \multiply\pythonLogoSize by 1.05
 \newcommand{\vpython}[1]{%
   \begin{english}%%
     \begin{mdframed}[%%
@@ -67,7 +64,8 @@
   \end{english}%%
 }
 
-\newcommand{\vpythondirect}[1]{%
+\newenvironment{pythondirect}{
+  \VerbatimEnvironment
   \begin{english}%%
     \begin{mdframed}[%%
       linecolor=blue!20,
@@ -76,29 +74,25 @@
       frametitlerule=true,
       backgroundcolor=yellow!15,
       roundcorner=10pt,
-      frametitle={\sffamily\texttt{\color{blue!80} Code Python}
+      frametitle={\sffamily\texttt{\color{blue!80} Code Python}%%
         \hfill%
         \includegraphics[height=\pythonLogoSize]{python.png}%%
       }]%
-      %[%
-        % fontfamily=tt,
-        % linenos,
-        % mathescape,
-        % breaklines,
-        % autogobble,
-        % framerule=1pt,
-        % rulecolor=red,
-        % python3,
-        % numbersep=3pt%
-        % %% mathescape,%
-        % ]
-      \begin{minted}{python}
-        #1
+      \begin{minted}[%
+        fontfamily=tt,
+        linenos,
+        mathescape,
+        breaklines,
+        autogobble,
+        framerule=1pt,
+        rulecolor=red,
+        python3,
+        numbersep=3pt%
+        ]{python}}{%
       \end{minted}
-    \end{mdframed}%%
-  \end{english}%%
+    \end{mdframed}
+  \end{english}
 }
-
 
 \begin{pycode}[dft]
 from profPythonPY import *
@@ -107,6 +101,63 @@ from profPythonPY import *
 \begin{pycode}[dvt]
 from dvtDecimal import *
 \end{pycode}
+
+%% html
+\newlength{\htmlLogoSize}
+\setlength{\htmlLogoSize}{\f@size pt}
+%% \multiply\htmlLogoSize by 1.05
+\setlength{\htmlLogoSize}{1.1\htmlLogoSize}
+\newcommand{\vhtml}[1]{%
+  \begin{english}%%
+    \begin{mdframed}[%%
+      linecolor=red,
+      linewidth=5pt,
+      frametitlebackgroundcolor=red!30,
+      frametitlerule=true,
+      backgroundcolor=red!5,
+      roundcorner=10pt,
+      frametitle={\bfseries\sffamily\texttt{\color{white} Code HTML}%%
+        \hfill%
+        \includegraphics[height=\htmlLogoSize]{html.png}%%
+      }]%
+      \vhtm{#1}%%
+    \end{mdframed}%%
+  \end{english}%%
+}
+\newcommand{\vueSite}[1]{%%
+  \begin{mdframed}[
+    roundcorner=10pt,
+    linewidth=1bp,
+    frametitle=\textbf{Rendu du navigateur},
+    frametitlebackgroundcolor=gray!30]
+    \begin{center}
+      \includegraphics[width=\linewidth]{#1}
+    \end{center}
+  \end{mdframed}%%
+  }
+
+%% css
+\newlength{\cssLogoSize}
+\setlength{\cssLogoSize}{\f@size pt}
+%% \multiply\htmlLogoSize by 1.05
+\setlength{\cssLogoSize}{1.1\cssLogoSize}
+\newcommand{\vcss}[1]{%
+  \begin{english}%%
+    \begin{mdframed}[%%
+      linecolor=blue,
+      linewidth=5pt,
+      frametitlebackgroundcolor=blue!30,
+      frametitlerule=true,
+      backgroundcolor=blue!5,
+      roundcorner=10pt,
+      frametitle={\bfseries\sffamily\texttt{\color{white} Code CSS}%%
+        \hfill%
+        \includegraphics[height=\htmlLogoSize]{css.png}%%
+      }]%
+      \vcs{#1}%%
+    \end{mdframed}%%
+  \end{english}%%
+}
 
 \endinput
 %%% Local Variables:

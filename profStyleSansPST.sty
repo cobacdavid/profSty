@@ -317,26 +317,36 @@
     linecolor=blue!10,
     backgroundcolor=blue!5,
     roundcorner=5pt]%
-    \titrepoly{Devoir Surveillé \no#1}{devoirs}
-    \noindent{\macouleur\sffamily#2\hfill{\itshape #3\hspace*{0ex}}}
+    \titrepoly{Devoir Surveillé n\no#1}{devoirs}
+    \noindent
+    \macouleur\sffamily#2\hfill\itshape #3\hspace*{0ex}
   \end{mdframed}%
 }
 
-\newcommand{\dm}[3]{%%  \
-  begin{mdframed}[linewidth=2bp,
+\newcommand{\dm}[3]{%%
+  \begin{mdframed}[%
+    linewidth=2bp,
     linecolor=blue!10,
     backgroundcolor=blue!5,
     roundcorner=5pt]%
-    \titrepoly{Devoir Maison \no#1}{devoirs}
-    \noindent{\macouleur\sffamily#2\hfill{\itshape #3\hspace*{0ex}}}
-  \end{mdframed}%
+    \titrepoly{Devoir Maison n\no#1}{devoirs}
+    \macouleur\sffamily#2\hfill\itshape#3
+  \end{mdframed}
 }
 
-\newcommand{\ie}[3]{%%
-  \titrepoly{Interrogation Écrite \no#1}{devoirs}%%
-  {\sffamily {NOM :}\makebox[5cm]{\dotfill}\hfill#2\hfill{\itshape #3\hspace*{0ex}}}
-  \par\noindent\traitDegrade\par%
+\newcommand{\ie}[1]{%%
+  \begin{mdframed}[%
+    linewidth=2bp,
+    linecolor=blue!10,
+    backgroundcolor=blue!5,
+    roundcorner=5pt]%
+    \titrepoly{Interrogation Écrite n\no#1}{devoirs}
+    \macouleur\Large NOM~:\dotfill
+  \end{mdframed}
 }
+
+\newcommand{\montest}{Mon test}
+
 
 %%%%%%%%%%%%%%%
 %% Dans les tableaux de signes et de variations

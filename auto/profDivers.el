@@ -17,7 +17,8 @@
     "RRoman")
    (LaTeX-add-environments
     '("monblocencadre" LaTeX-env-args ["argument"] 1)
-    '("monbloc" LaTeX-env-args ["argument"] 1))
+    '("monbloc" LaTeX-env-args ["argument"] 1)
+    '("commentaire" LaTeX-env-args ["argument"] 1))
    (LaTeX-add-counters
     "nbrep"
     "nbfois")
