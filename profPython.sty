@@ -124,6 +124,36 @@ from dvtDecimal import *
     \end{mdframed}%%
   \end{english}%%
 }
+
+\newenvironment{htmldirect}{
+  \VerbatimEnvironment
+  \begin{english}%%
+    \begin{mdframed}[%%
+      linecolor=blue!20,
+      linewidth=5pt,
+      frametitlebackgroundcolor=yellow!30,
+      frametitlerule=true,
+      backgroundcolor=yellow!15,
+      roundcorner=10pt,
+      frametitle={\bfseries\sffamily\texttt{\color{white} Code HTML}%%
+        \hfill%
+        \includegraphics[height=\htmlLogoSize]{html.png}%%
+      }]%
+      \begin{minted}[%
+        fontfamily=tt,
+        linenos,
+        mathescape,
+        breaklines,
+        autogobble,
+        framerule=1pt,
+        rulecolor=red,
+        numbersep=3pt%
+        ]{html}}{%
+      \end{minted}
+    \end{mdframed}
+  \end{english}
+}
+
 \newcommand{\vueSite}[1]{%%
   \begin{mdframed}[
     roundcorner=10pt,
