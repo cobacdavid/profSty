@@ -4,7 +4,7 @@
    (TeX-add-symbols
     '("sgnde" 1)
     '("varde" 1)
-    '("ie" 3)
+    '("ie" 1)
     '("dm" 3)
     '("ds" 3)
     '("devoir" 4)
@@ -16,6 +16,7 @@
     "rfootTexte"
     "rheadCitation"
     "nom"
+    "montest"
     "sgnduq"
     "sgndup")
    (LaTeX-add-environments

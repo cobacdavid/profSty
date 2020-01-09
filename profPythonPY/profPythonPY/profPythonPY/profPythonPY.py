@@ -631,3 +631,4 @@ def _arbre_binaire_complet(hauteur, etiquette):
 def prof_arbre_binaire_complet(hauteur, *options):
     arbre = eval(_arbre_binaire_complet(hauteur+1, 1))
     return prof_arbre_binaire(arbre, *options)
+

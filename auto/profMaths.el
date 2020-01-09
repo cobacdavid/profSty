@@ -2,6 +2,7 @@
  "profMaths"
  (lambda ()
    (TeX-add-symbols
+    '("histo" 3)
     '("dinv" 1)
     '("calt" 1)
     '("ora" 1)
@@ -19,6 +20,7 @@
     '("cvect" 2)
     '("norme" 1)
     '("vect" 1)
+    '("fonc" 4)
     '("vi" 1)
     "R"
     "N"
