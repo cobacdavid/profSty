@@ -15,8 +15,7 @@
     %% \color{\maPScouleur}%%
     \macouleur%
 \vskip\footruleskip\vskip-\footrulewidth
-\hrule width\headwidth height\footrulewidth\vskip\footruleskip
-}}
+\hrule width\headwidth height\footrulewidth\vskip\footruleskip}}
 \renewcommand{\headrulewidth}{0mm}
 % 
 \newcommand{\rheadTexte}{\large\sffamily\slshape%%

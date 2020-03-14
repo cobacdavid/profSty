@@ -24,7 +24,7 @@
 \newcommand{\lfootTexte}{%%
   \pybleu%%
   \tiny\sffamily\bfseries% 
-  Composé avec Lua\LaTeX{} sous linux à~%
+  composé avec Lua\LaTeX{} sous linux debian à~%
   \directlua{tex.print(os.time())}%
 }
 \newcommand{\cfootTexte}{\pybleu\thepage/\pageref{LastPage}}
@@ -88,7 +88,7 @@
 \rfoot{\hbox to0pt{\hspace*{\rfootYOff}\vbox to0pt{\vspace*{-\longauteur}%
       \rotatebox{90}{\rfootTexte}
     }}}
-\lfoot{\vspace*{-5mm}\scalebox{-1}[1]{\lfootTexte}}
+\lfoot{\vspace*{-.4cm}\scalebox{-1}[1]{\lfootTexte}}
 \cfoot{\vspace*{-3mm}\cfootTexte}
 \lhead{}
 \chead{}

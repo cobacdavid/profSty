@@ -5,10 +5,7 @@
 %% les options supportées par mon package
 %% les dimensions
 \DeclareOption{a3}{%
-  \PassOptionsToPackage{a3paper,body={39cm,27.7cm}}{geometry}%
-}
-\DeclareOption{a3paysage}{%
-  \PassOptionsToPackage{a3paper,body={27.7cm,39cm}}{geometry}%
+  \PassOptionsToPackage{a3paper,body={26.5cm,39.5cm}}{geometry}%
 }
 %%
 \DeclareOption{a4}{%
@@ -22,8 +19,12 @@
   \PassOptionsToPackage{a6paper,body={9cm,13cm}}{geometry}%
 }
 %%
+\DeclareOption{a3paysage}{%
+  \PassOptionsToPackage{a3paper,landscape,body={39cm,27cm}}{geometry}%
+}
+%%
 \DeclareOption{a4paysage}{%
-  \PassOptionsToPackage{a4paper,landscape,body={27cm,18.5cm}}{geometry}%
+  \PassOptionsToPackage{a4paper,landscape,body={26.5cm,18.5cm}}{geometry}%
 }
 %%
 \DeclareOption{a5paysage}{%
@@ -161,9 +162,6 @@
 \usetikzlibrary{decorations.fractals}
 \usetikzlibrary{shapes.misc}
 \usetikzlibrary{shapes.geometric}
-\RequirePackage{filecontents}
-\RequirePackage{pgfplots, pgfplotstable}
-\usepgfplotslibrary{statistics}
 \RequirePackage{pdfrender}
 %% symbole de degres
 \RequirePackage{textcomp}
@@ -214,8 +212,9 @@
 \RequirePackage{minted}%%
 \RequirePackage{etoolbox}%%
 \RequirePackage[tikz]{mdframed}
-%\BeforeBeginEnvironment{minted}{}%%
-%\AfterEndEnvironment{minted}{}%%
+\RequirePackage[many]{tcolorbox}
+% \BeforeBeginEnvironment{minted}{}%%
+% \AfterEndEnvironment{minted}{}%%
 %%
 %% pour les arbres
 \RequirePackage{forest}
@@ -236,7 +235,7 @@
 %% package pour le fond de page
 \if@poster
 %%\RequirePackage[pagecolor={blue!10}]{pagecolor}
-\pagecolor{blue!10}
+\pagecolor{blue!5!white}
 \def\maPScouleurGradBegin{blue!10}
 \else
 \def\maPScouleurGradBegin{white}
@@ -274,7 +273,7 @@
 \RequirePackage{profMaths}%%
 \RequirePackage{profDivers}%%
 \RequirePackage{profAlgo}%%
-\RequirePackage{profPython}%%
+\RequirePackage{profPython_tcb}%%
 \RequirePackage{profNSI}%%
 %%\if@college
 %%\RequirePackage{profCollege}
