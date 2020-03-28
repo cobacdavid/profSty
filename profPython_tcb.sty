@@ -34,6 +34,17 @@
   numbersep=3pt%
 }%%
 
+\newmintedfile[vjs]{js}{%
+  fontfamily=tt,
+  linenos,
+  mathescape,
+  breaklines,
+  autogobble,
+  framerule=1pt,
+  rulecolor=yellow,
+  numbersep=3pt%
+}%%
+
 
 %%% Python
 \newcommand{\python}{\texttt{Python}\xspace}
@@ -130,9 +141,8 @@
         autogobble,
         framerule=1pt,
         rulecolor=red,
-        python3,
         numbersep=3pt%
-        ]{python}}{%
+        ]{python3}}{%
       \end{minted}
     \end{mdframed}
   \end{english}
@@ -231,6 +241,57 @@ from dvtDecimal import *
       \vcs{#1}%%
     \end{mdframed}%%
   \end{english}%%
+}
+
+%% JS
+\newlength{\javascriptLogoSize}
+\setlength{\javascriptLogoSize}{\f@size pt}
+%% \multiply\pythonLogoSize by 1.05
+\newcommand{\vjscript}[1]{%
+  \begin{english}%%
+    \begin{mdframed}[%%
+      linecolor=yellow!20,
+      linewidth=5pt,
+      frametitlebackgroundcolor=yellow!30,
+      frametitlerule=true,
+      backgroundcolor=yellow!15,
+      roundcorner=10pt,
+      frametitle={\sffamily\texttt{\color{green!80} Code Javascript}%%
+        \hfill%
+        \includegraphics[height=\javascriptLogoSize]{js.png}%%
+      }]%
+      \vjs{#1}%%
+    \end{mdframed}%%
+  \end{english}%%
+}
+
+\newenvironment{jscriptdirect}{
+  \VerbatimEnvironment
+  \begin{english}%%
+    \begin{mdframed}[%%
+      linecolor=yellow!20,
+      linewidth=5pt,
+      frametitlebackgroundcolor=yellow!30,
+      frametitlerule=true,
+      backgroundcolor=yellow!15,
+      roundcorner=10pt,
+      frametitle={\sffamily\texttt{\color{green!30!black} Code Javascript}%%
+        \hfill%
+        \includegraphics[height=\javascriptLogoSize]{js.png}%%
+      }]%
+      \begin{minted}[%
+        fontfamily=tt,
+        linenos,
+        mathescape,
+        breaklines,
+        autogobble,
+        framerule=1pt,
+        rulecolor=yellow,
+        numbersep=3pt%
+        ]{js}}{%
+      \end{minted}
+    \end{mdframed}
+  \end{english}
 }
 
 \endinput
