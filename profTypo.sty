@@ -184,6 +184,109 @@
   }
 }
 
+% #1: tcolorbox options
+% #2: box title
+\newtcolorbox{tmonbloc}[3][]
+{%%
+  enhanced,
+  breakable,
+  colback=#2!5,
+  colframe=#2!80,
+  colbacktitle=#2!10,
+  title={\bfseries\texttt{\color{#2} #3}},
+  %% title style={left color=yellow!30, right color=blue!20},
+  boxrule=2pt,
+  titlerule=.5pt,
+  bottomtitle=-2pt,
+  toptitle=-2pt,
+  arc=4pt,
+  % watermark graphics=python.png,
+  % watermark zoom=1.00,
+  % watermark opacity=.1,
+  drop fuzzy shadow=#2!30!black
+}
+
+\newtcolorbox{tmonblocb}[2][]
+{%%
+  enhanced,
+  breakable,
+  colback=white,
+  colframe=black,
+  colbacktitle=white,
+  title={\color{\noir}#2},
+  %% title style={left color=yellow!30, right color=blue!20},
+  boxrule=2pt,
+  titlerule=.5pt,
+  bottomtitle=-2pt,
+  toptitle=-2pt,
+  arc=4pt,
+  % watermark graphics=python.png,
+  % watermark zoom=1.00,
+  % watermark opacity=.1,
+  drop fuzzy shadow=black
+}
+
+
+% #1: tcolorbox options
+% #2: box title
+\newtcolorbox{tmonblocnb}[2][]
+{%%
+  enhanced,
+  breakable,
+  title={\bfseries #2},
+  %% title style={left color=yellow!30, right color=blue!20},
+  boxrule=2pt,
+  titlerule=.5pt,
+  bottomtitle=-2pt,
+  toptitle=-2pt,
+  arc=4pt,
+  % watermark graphics=python.png,
+  % watermark zoom=1.00,
+  % watermark opacity=.1,
+  drop fuzzy shadow=black
+}
+
+
+\newenvironment{monbloc}[4][]{
+  \begin{minipage}[t]{#4}
+    \begin{tmonbloc}[#1]{#2}{#3}%
+}{%
+\end{tmonbloc}
+\end{minipage}%
+}
+
+
+\newenvironment{monblocb}[3][]{
+  \begin{minipage}[t]{#3}
+    \begin{tmonblocb}[#1]{#2}%
+}{%
+\end{tmonblocb}
+\end{minipage}%
+}
+
+
+\newenvironment{monblocnb}[3][]{
+  \begin{minipage}[t]{#3}
+    \begin{tmonblocnb}[#1]{#2}%
+}{%
+\end{tmonblocnb}
+\end{minipage}%
+}
+
+
+\newenvironment{commentaire}[2][\linewidth]{%%
+  \noindent%%
+  \begin{minipage}[t]{#1}%
+    \begin{mdframed}[%
+      roundcorner=5pt,
+      linewidth=2bp,
+      frametitlebackgroundcolor=gray!30,
+      frametitle={\large\bfseries Commentaires},
+      frametitlerule=true,
+      ]
+      #2%
+}{\end{mdframed}\end{minipage}}
+
 
 %%
 % \newcount\randnbtitre
@@ -220,22 +323,4 @@
 %   \medskip
 % }
 
-\newenvironment{monbloc}[2][\linewidth]{%
-  \noindent\begin{minipage}[t]{#1}%
-    \begin{description}%%
-    \item[\bfseries\large #2]\qquad\\
-    }{\end{description}\end{minipage}\par}
-
-\newenvironment{commentaire}[2][\linewidth]{%%
-  \noindent%%
-  \begin{minipage}[t]{#1}%
-    \begin{mdframed}[%
-      roundcorner=5pt,
-      linewidth=2bp,
-      frametitlebackgroundcolor=gray!30,
-      frametitle={\large\bfseries Commentaires},
-      frametitlerule=true,
-      ]
-      #2%
-}{\end{mdframed}\end{minipage}}
 \endinput
