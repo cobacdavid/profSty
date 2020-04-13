@@ -1,0 +1,168 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{profImages}[2020/04/13]
+
+%% En grande partie copié/collé du package bclogo
+
+\graphicspath{%
+  {/home/david/travail/david/production/info/config/texmf/tex/latex/prof/images}%
+  {/usr/share/texlive/texmf-dist/tex/latex/bclogo}}
+\newlength{\logowidth}%
+\setlength{\logowidth}{\f@size pt}%
+\setlength{\logowidth}{1.1\logowidth}%
+% les symboles
+% ==============================================================================
+% la fleur
+\newcommand\fleur{\includegraphics[width=\logowidth]{bc-fleur}}%
+% on robustifie
+\robustify\fleur
+% une note (Thomas Labarussias)
+\newcommand\note{\includegraphics[width=\logowidth]{bc-note}}%
+\robustify\note
+% panneau chantier (Jean-Michel Sarlat)
+\newcommand\chantier{\includegraphics[width=\logowidth]{bc-aux-301}}%
+\robustify\chantier
+% ours
+\newcommand\ours{\includegraphics[width=\logowidth]{bc-ours}}%
+\robustify\ours
+% etoile
+\newcommand\etoile{\includegraphics[width=\logowidth]{bc-etoile}}%
+\robustify\etoile
+% attention
+\newcommand\attention{\includegraphics[width=\logowidth]{bc-attention}}%
+\robustify\attention
+% attention P.Fradin
+\newcommand\takecare{\includegraphics[width=\logowidth]{bc-takecare}}%
+\robustify\takecare
+% lampe P.Fradin
+\newcommand\lampe{\includegraphics[width=\logowidth]{bc-lampe}}%
+\robustify\lampe
+% coeur
+\newcommand\coeur{\includegraphics[width=\logowidth]{bc-coeur}}%
+\robustify\coeur
+% ornement (tire du site http://openclipart.org )
+\newcommand\orne{\includegraphics[width=\logowidth]{bc-orne}}%
+\robustify\orne
+% danger (Francois)
+\newcommand\danger{\includegraphics[width=\logowidth]{bc-danger}}%
+\robustify\danger
+% smiley bonne humeur (Francois)
+\newcommand\smbh{\includegraphics[width=\logowidth]{bc-smiley-bonnehumeur}}%
+\robustify\smbh
+% smiley bonne humeur (Francois)
+\newcommand\smmh{\includegraphics[width=\logowidth]{bc-smiley-mauvaisehumeur}}%
+\robustify\smmh
+% le trefle
+\newcommand\trefle{\includegraphics[width=\logowidth]{bc-trefle}}%
+\robustify\trefle
+% le livre
+\newcommand\livre{\includegraphics[width=\logowidth]{bc-book}}%
+\robustify\livre
+% point d'interrogation
+\newcommand\question{\includegraphics[width=\logowidth]{bc-inter}}%
+\robustify\question
+% crayon anne-sophie philippe
+\newcommand\crayon{\includegraphics[width=\logowidth]{bc-crayon}}%
+\robustify\crayon
+% info (thomas labarrussias)
+\newcommand\info{\includegraphics[width=\logowidth]{bc-info}}%
+\robustify\info
+% plume
+\newcommand\plume{\includegraphics[width=\logowidth]{bc-plume}}%
+\robustify\plume
+% le pic LaTeX
+\newcommand\bcspadesuit{{\centering \huge $\spadesuit$}}%
+\robustify\bcspadesuit
+% logos Alphonse Capriani
+\newcommand\bombe{\includegraphics[width=\logowidth]{bc-bombe}}%
+\robustify\bombe
+\newcommand\cube{\includegraphics[width=\logowidth]{bc-cube}}%
+\robustify\cube
+\newcommand\dallemagne{\includegraphics[width=\logowidth]{bc-dallemagne}}%
+\robustify\dallemagne
+\newcommand\dautriche{\includegraphics[width=\logowidth]{bc-dautriche}}%
+\robustify\dautriche
+\newcommand\dbelgique{\includegraphics[width=\logowidth]{bc-dbelgique}}%
+\robustify\dbelgique
+\newcommand\dbulgarie{\includegraphics[width=\logowidth]{bc-dbulgarie}}%
+\robustify\dbulgarie
+\newcommand\dfrance{\includegraphics[width=\logowidth]{bc-dfrance}}%
+\robustify\dfrance
+\newcommand\ditalie{\includegraphics[width=\logowidth]{bc-ditalie}}%
+\robustify\ditalie
+\newcommand\dluxembourg{\includegraphics[width=\logowidth]{bc-dluxembourg}}%
+\robustify\dluxembourg
+\newcommand\dpaysbas{\includegraphics[width=\logowidth]{bc-dpaysbas}}%
+\robustify\dpaysbas
+\newcommand\dodecaedre{\includegraphics[width=\logowidth]{bc-dodecaedre}}%
+\robustify\dodecaedre
+\newcommand\eclaircie{\includegraphics[width=\logowidth]{bc-eclaircie}}%
+\robustify\eclaircie
+\newcommand\icosaedre{\includegraphics[width=\logowidth]{bc-icosaedre}}%
+\robustify\icosaedre
+\newcommand\interdit{\includegraphics[width=\logowidth]{bc-interdit}}%
+\robustify\interdit
+\newcommand\neige{\includegraphics[width=\logowidth]{bc-neige}}%
+\robustify\neige
+\newcommand\octaedre{\includegraphics[width=\logowidth]{bc-octaedre}}%
+\robustify\octaedre
+\newcommand\pluie{\includegraphics[width=\logowidth]{bc-pluie}}%
+\robustify\pluie
+\newcommand\poisson{\includegraphics[width=\logowidth]{bc-poisson}}%
+\robustify\poisson
+\newcommand\soleil{\includegraphics[width=\logowidth]{bc-soleil}}%
+\robustify\soleil
+\newcommand\bcstop{\includegraphics[width=\logowidth]{bc-stop}}%
+\robustify\bcstop
+\newcommand\tetraedre{\includegraphics[width=\logowidth]{bc-tetraedre}}%
+\robustify\tetraedre
+\newcommand\calendrier{\includegraphics[width=\logowidth]{bc-calendrier}}%
+\robustify\calendrier
+\newcommand\horloge{\includegraphics[width=\logowidth]{bc-horloge}}%
+\robustify\horloge
+\newcommand\yin{\includegraphics[width=\logowidth]{bc-yin}}%
+\robustify\yin
+\newcommand\rosevents{\includegraphics[width=\logowidth]{bc-rosevents}}%
+\robustify\rosevents
+% fin alphonse
+% Vincent Pantaloni route glissante
+\newcommand\glissant{\includegraphics[width=\logowidth]{bc-dz}}%
+\robustify\glissant
+% François Pétiard
+\newcommand\velo{\includegraphics[width=\logowidth]{bc-velo}}%
+\robustify\velo
+\newcommand\oeil{\includegraphics[width=\logowidth]{bc-oeil}}%
+\robustify\oeil
+\newcommand\peaceandlove{\includegraphics[width=\logowidth]{bc-peaceandlove}}%
+\robustify\peaceandlove
+\newcommand\nucleaire{\includegraphics[width=\logowidth]{bc-nucleaire}}%
+\robustify\nucleaire
+\newcommand\femme{\includegraphics[width=\logowidth]{bc-femme}}%
+\robustify\femme
+\newcommand\homme{\includegraphics[width=\logowidth]{bc-homme}}%
+\robustify\homme
+\newcommand\loupe{\includegraphics[width=\logowidth]{bc-loupe}}%
+\robustify\loupe
+\newcommand\recyclage{\includegraphics[width=\logowidth]{bc-recyclage}}%
+\robustify\recyclage
+\newcommand\valetcoeur{\includegraphics[width=\logowidth]{bc-valetcoeur}}%
+\robustify\valetcoeur
+\newcommand\cle{\includegraphics[width=\logowidth]{bc-cle}}%
+\robustify\cle
+\newcommand\clefa{\includegraphics[width=\logowidth]{bc-clefa}}%
+\robustify\clefa
+\newcommand\clesol{\includegraphics[width=\logowidth]{bc-clesol}}%
+\robustify\clesol
+\newcommand\feujaune{\includegraphics[width=\logowidth]{bc-feujaune}}%
+\robustify\feujaune
+\newcommand\feurouge{\includegraphics[width=\logowidth]{bc-feurouge}}%
+\robustify\feurouge
+\newcommand\feutricolore{\includegraphics[width=\logowidth]{bc-feutricolore}}%
+\robustify\feutricolore
+\newcommand\feuvert{\includegraphics[width=\logowidth]{bc-feuvert}}%
+\robustify\feuvert
+\newcommand\outil{\includegraphics[width=\logowidth]{bc-outil}}%
+\robustify\outil
+\newcommand\trombone{\includegraphics[width=\logowidth]{bc-trombone}}%
+\robustify\trombone
+%
+\endinput
