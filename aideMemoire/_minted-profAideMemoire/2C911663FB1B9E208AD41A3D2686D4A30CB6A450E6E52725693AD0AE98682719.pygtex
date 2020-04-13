@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYG{n+nt}{function} \PYG{n+nt}{creationDiv}\PYG{o}{(}\PYG{n+nt}{parent}\PYG{o}{,} \PYG{n+nt}{n}\PYG{o}{)} \PYG{p}{\PYGZob{}}
+    \PYG{err}{let} \PYG{err}{d}\PYG{p}{;}
+    \PYG{err}{for} \PYG{err}{(let} \PYG{err}{i=0}\PYG{p}{;} \PYG{err}{i\PYGZlt{}n}\PYG{p}{;} \PYG{err}{i++)} \PYG{err}{\PYGZob{}}
+        \PYG{err}{d} \PYG{err}{=} \PYG{err}{document.createElement(\PYGZdq{}div\PYGZdq{})}\PYG{p}{;}
+        \PYG{err}{d.appendChild(parent)}\PYG{p}{;}
+    \PYG{p}{\PYGZcb{}}
+\PYG{err}{\PYGZcb{}}
+\end{Verbatim}

@@ -2,8 +2,14 @@
  "profMaths"
  (lambda ()
    (TeX-add-symbols
+    '("sgnde" 1)
+    '("varde" 1)
+    '("devoir" 4)
     '("histo" 3)
-    '("dinv" 1)
+    '("cvect" 2)
+    '("norme" 1)
+    '("vect" 1)
+    '("fonc" 4)
     '("calt" 1)
     '("ora" 1)
     '("rg" 1)
@@ -11,23 +17,14 @@
     '("intof" 2)
     '("intoo" 2)
     '("intff" 2)
-    '("calcularbre" 2)
-    '("arbre" 1)
-    '("operation" 3)
-    '("ecrancalc" 1)
-    '("arcoriente" 1)
-    '("arc" 1)
-    '("cvect" 2)
-    '("norme" 1)
-    '("vect" 1)
-    '("fonc" 4)
     '("vi" 1)
     "R"
     "N"
     "Z"
     "D"
     "Q"
-    "VI"
+    "infa"
+    "supa"
     "vectu"
     "vectv"
     "vecti"
@@ -35,21 +32,27 @@
     "ron"
     "lv"
     "lec"
-    "infa"
-    "supa"
+    "nom"
+    "sgnduq"
+    "sgndup"
+    "dps"
     "Vect"
     "vecu"
     "vecv"
-    "dps"
     "oldsqrt"
     "sqrt"
     "DHLhksqrt")
    (LaTeX-add-environments
+    '("commentaire" LaTeX-env-args ["argument"] 1)
+    '("monbloc" LaTeX-env-args ["argument"] 1)
     "definition"
     "exemple"
     "propriete"
     "theoreme"
-    "demonstration"
-    "remarque"))
+    "demo"
+    "remarque"
+    "exercice")
+   (LaTeX-add-counters
+    "numeroexo"))
  :latex)
 

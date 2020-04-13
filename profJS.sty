@@ -1,0 +1,127 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{profJS}[2019/01/29]
+
+
+\newlength{\javascriptLogoSize}
+\setlength{\javascriptLogoSize}{\f@size pt}
+%% \multiply\pythonLogoSize by 1.05
+
+\newmintedfile[comjavascript]{js}{%
+  fontfamily=tt,
+  linenos,
+  mathescape,
+  breaklines,
+  autogobble,
+  framerule=1pt,
+  rulecolor=yellow,
+  numbersep=3pt%
+}%%
+
+\newminted[envjavascript]{js}{%
+  fontfamily=tt,
+  linenos,
+  mathescape,
+  breaklines,
+  autogobble,
+  framerule=1pt,
+  rulecolor=yellow,
+  numbersep=3pt%
+}%%
+
+%% style tcolorbox
+%% pour encadrer le code
+\newtcolorbox{boitejavascript}{%%
+  enhanced,
+  breakable,
+  colback=yellow!15,
+  colframe=yellow!20,
+  colbacktitle=yellow!30,
+  title={\sffamily\texttt{\color{green!30!black} Code Javascript}%%
+    \hfill%
+    \includegraphics[height=\pythonLogoSize]{js.png}%%
+  },
+  %% title style={left color=yellow!30, right color=blue!20},
+  boxrule=5pt,
+  titlerule=.5pt,
+  bottomtitle=-2pt,
+  toptitle=-2pt,
+  arc=10pt,
+  watermark graphics=js.png,
+  watermark zoom=1.00,
+  watermark opacity=.1,
+  %% drop fuzzy shadow=blue!50!black
+}
+
+%% À UTILISER AVEC UN FICHIER
+\newcommand{\fichierjavascript}[1]{%
+  \begin{english}%%
+    \begin{boitejavascript}
+      \compy{#1}
+    \end{boitejavascript}
+  \end{english}%%
+}
+
+%% À UTILISER DIRECTEMENT
+\newenvironment{codejavascript}{
+  \VerbatimEnvironment
+  \begin{english}%%
+    \begin{boitejavascript}
+      \begin{envjavascript}%
+      }{\end{envjavascript}
+    \end{boitejavascript}
+  \end{english}
+}
+
+
+\newcommand{\vjscript}[1]{%
+  \begin{english}%%
+    \begin{mdframed}[%%
+      linecolor=yellow!20,
+      linewidth=5pt,
+      frametitlebackgroundcolor=yellow!30,
+      frametitlerule=true,
+      backgroundcolor=yellow!15,
+      roundcorner=10pt,
+      frametitle={\sffamily\texttt{\color{green!80} Code Javascript}%%
+        \hfill%
+        \includegraphics[height=\javascriptLogoSize]{images/js.png}%%
+      }]%
+      \vjs{#1}%%
+    \end{mdframed}%%
+  \end{english}%%
+}
+
+\newenvironment{jscriptdirect}{
+  \VerbatimEnvironment
+  \begin{english}%%
+    \begin{mdframed}[%%
+      linecolor=yellow!20,
+      linewidth=5pt,
+      frametitlebackgroundcolor=yellow!30,
+      frametitlerule=true,
+      backgroundcolor=yellow!15,
+      roundcorner=10pt,
+      frametitle={\sffamily\texttt{\color{green!30!black} Code Javascript}%%
+        \hfill%
+        \includegraphics[height=\javascriptLogoSize]{images/js.png}%%
+      }]%
+      \begin{minted}[%
+        fontfamily=tt,
+        linenos,
+        mathescape,
+        breaklines,
+        autogobble,
+        framerule=1pt,
+        rulecolor=yellow,
+        numbersep=3pt%
+        ]{js}}{%
+      \end{minted}
+    \end{mdframed}
+  \end{english}
+}
+
+\endinput
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

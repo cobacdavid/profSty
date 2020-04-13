@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYG{n+nt}{h1} \PYG{p}{\PYGZob{}}
+    \PYG{k}{color}\PYG{p}{:} \PYG{k+kc}{red}\PYG{p}{;}
+    \PYG{n}{backgournd\PYGZhy{}color}\PYG{p}{:} \PYG{k+kc}{white}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n+nt}{h1}\PYG{p}{:}\PYG{n+nd}{hover} \PYG{p}{\PYGZob{}}
+    \PYG{k}{font\PYGZhy{}size}\PYG{p}{:} \PYG{l+m+mi}{30}\PYG{k+kt}{pt}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

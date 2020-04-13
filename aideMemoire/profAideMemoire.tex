@@ -1,0 +1,566 @@
+\documentclass{article}
+
+\usepackage[a4]{prof}
+\pagestyle{empty}
+
+
+\begin{document}
+
+\titrepoly{Aide-mémoire}{mémo}
+
+%% \begin{multicols}{1}
+  \section{\LaTeX}
+  \subsection{Couleurs} 
+
+  \begin{Verbatim}
+    \color{\pybleu}\rule{\linewidth}{12pt}
+    \color{\pyjaune}\rule{\linewidth}{12pt}
+    \color{\macouleur}\rule{\linewidth}{12pt}
+    \color{\gris}\rule{\linewidth}{12pt}
+    \color{\blanc}\rule{\linewidth}{12pt}
+    \color{\noir}\rule{\linewidth}{12pt}
+  \end{Verbatim}
+
+
+  \noindent\color{\pybleu}\rule{\linewidth}{12pt}
+  \color{\pyjaune}\rule{\linewidth}{12pt}
+  \color{\macouleur}\rule{\linewidth}{12pt}
+  \color{\gris}\rule{\linewidth}{12pt}
+  \color{\blanc}\rule{\linewidth}{12pt}
+  \color{\noir}\rule{\linewidth}{12pt}
+
+  \subsection{Titres}
+
+  \begin{Verbatim}
+    \titrepoly{Un titre}{ss-titre}
+  \end{Verbatim}
+  \begin{minipage}{\linewidth}
+    \titrepoly{Un titre}{ss-titre}
+  \end{minipage}
+  
+  \begin{Verbatim}
+    \nsiEntete{Un titre}{ss-titre}
+  \end{Verbatim}
+  \begin{minipage}{\linewidth}
+    \nsiEntete{Un titre}{ss-titre}
+  \end{minipage}
+
+  \subsection{Répétitions/Remplissages}
+
+  \begin{Verbatim}
+    \repete{4}{$\sum$}
+  \end{Verbatim}
+  \begin{minipage}{\linewidth}
+    \repete{4}{$\sum$}
+  \end{minipage}
+  
+  \medskip
+  \begin{Verbatim}
+    \remplir{5cm}{$\sum$}
+  \end{Verbatim}
+  \begin{minipage}{\linewidth}
+    \remplir{5cm}{$\sum$}
+  \end{minipage}
+
+  \subsection{Maths}
+
+  \begin{Verbatim}
+    \R \N \Z \D \Q \vi{2}$\vect{AB}$
+    \intff{-1}8 \intoo{-1}8
+    \intof{-1}8 \intfo{-1}8
+    \rg{f} \ora{\text{n'importe quoi}}
+    \ora{ABCD} \calt{G} \infa \supa
+    \norme{AB} \vectu \vectv \cvect{-3}{2}
+    \ron $\sqrt{100}$ $\oldsqrt[3]{100}$
+  \end{Verbatim}
+  \begin{minipage}{\linewidth}
+    \R \N \Z \D \Q \vi{2}$\vect{AB}$
+    \intff{-1}8 \intoo{-1}8
+    \intof{-1}8 \intfo{-1}8
+    \rg{f} \ora{\text{n'importe quoi}}
+    \ora{ABCD} \calt{G} \infa \supa
+    \norme{AB} \vectu \vectv \cvect{-3}{2}
+    \ron $\sqrt{100}$ $\oldsqrt[3]{100}$
+  \end{minipage}
+  
+  \begin{Verbatim}
+\fonc{f}{\intff{-5}{5}}{t}{\cos\left(t +\right)}
+  \end{Verbatim}
+  \begin{minipage}{1.0\linewidth}
+    \fonc{f}{\intff{-5}{5}}{t}{\cos\left( t \right)}
+  \end{minipage}
+
+  \begin{minipage}{1.0\linewidth}
+    \begin{definition}
+      env. definition
+    \end{definition}
+
+    \begin{exemple}
+      env. exemple
+    \end{exemple}
+
+    \begin{propriete}
+      env propriete
+    \end{propriete}
+
+    \begin{theoreme}
+      env. theoreme
+    \end{theoreme}
+    
+    \begin{demo}
+      env. demo
+    \end{demo}
+
+    \begin{remarque}
+      env. remarque
+    \end{remarque}
+
+    \begin{exercice}
+      env. exercice
+    \end{exercice}
+
+    \begin{Verbatim}
+      \nom
+    \end{Verbatim}
+    \begin{minipage}{1.0\linewidth}
+      \nom
+    \end{minipage}
+
+    \begin{Verbatim}
+      \devoir{Surveillé}{3}{Mai 2020}{Seconde}
+    \end{Verbatim}
+    \begin{minipage}{1.0\linewidth}
+      \devoir{Surveillé}{3}{Mai 2020}{Seconde}
+    \end{minipage}
+  \end{minipage}
+
+  \begin{Verbatim}
+    $\begin{tabvar}{|C|CCCCCCC|}
+      \hline
+      x & -\infty & & -3 & & 4 & & +\infty \\\hline
+      x+3  & & - & \barre{0} & + & \barre{}  & + & \\\hline
+      -x+4 & & + & \barre{}  & + & \barre{0} & - & \\\hline
+      \sgnduq& & - & \barre{0} & + & \dbarre{} & - & \\\hline
+    \end{tabvar}$
+  \end{Verbatim}
+  \begin{minipage}{1.0\linewidth}
+    $\begin{tabvar}{|C|CCCCCCC|}
+      \hline
+      x & -\infty & & -3 & & 4 & & +\infty \\\hline
+      x+3  & & - & \barre{0} & + & \barre{}  & + & \\\hline
+      -x+4 & & + & \barre{}  & + & \barre{0} & - & \\\hline
+      \sgnduq& & - & \barre{0} & + & \dbarre{} & - & \\\hline
+    \end{tabvar}$ 
+  \end{minipage}
+
+
+  \begin{Verbatim}
+    $\begin{tabvar}{|C|CCCCC|} \hline
+      x & -\infty & & \dfrac56 & & +\infty \\\hline
+      f'(x) & & - & \barre{0} & + & \\\hline
+      \niveau{2}{2}
+      \varde{f} & & \decroit & f\left(\dfrac56\right) & \croit &  \\\hline
+    \end{tabvar}$
+  \end{Verbatim}
+  \begin{minipage}{1.0\linewidth}
+    $\begin{tabvar}{|C|CCCCC|} \hline
+      x & -\infty & & \dfrac56 & & +\infty \\\hline
+      f'(x) & & - & \barre{0} & + & \\\hline
+      \niveau{2}{2}
+      \varde{f} & & \decroit & f\left(\dfrac56\right) & \croit &  \\\hline
+    \end{tabvar}$
+  \end{minipage}
+  
+  \subsection{Codes}
+
+  \subsubsection{Général}
+
+  \begin{Verbatim}
+    \geogebra \lua
+    \titrealgo{Tri d'une liste}
+  \end{Verbatim}
+  \begin{minipage}{1.0\linewidth}
+    \geogebra \lua
+    \titrealgo{Tri d'une liste}
+  \end{minipage}
+
+  \begin{Verbatim}
+\begin{verbatimgg}
+  Séquence(Point(0,k), k, 0, 100)
+\end{verbatimgg}
+  \end{Verbatim}
+  \begin{minipage}{1.0\linewidth}
+    \begin{verbatimgg}
+Séquence(Point(0,k), k, 0, 100) 
+    \end{verbatimgg}
+  \end{minipage}
+
+  \begin{Verbatim}
+\begin{verbatimlua}
+  f = function (n1, n2) return n1+n2; end
+\end{verbatimlua}  
+  \end{Verbatim}
+  \begin{minipage}{1.0\linewidth}
+    \begin{verbatimlua}
+      f = function (n1, n2) return n1+n2; end
+    \end{verbatimlua}
+  \end{minipage}
+  \subsection{Divers}
+  
+  \begin{Verbatim}
+    \impression
+  \end{Verbatim}
+  \begin{minipage}{\linewidth}
+    \impression
+  \end{minipage}
+
+  \begin{Verbatim}
+    Une question \pointiles
+  \end{Verbatim}
+  \begin{minipage}{\linewidth}
+    Une question \pointiles
+  \end{minipage}
+  
+  \medskip
+  \begin{Verbatim}
+    Une question \pointilles
+  \end{Verbatim}
+  \begin{minipage}{\linewidth}
+    Une question \pointilles
+  \end{minipage
+}
+\newpage
+  \subsubsection{Langages}
+
+  \begin{minipage}{1.0\linewidth}
+    Environnement \texttt{codepython} ou commande \verb+\fichierpython+
+    \fichierpython{exemple_python.py}
+  \end{minipage}
+
+  \begin{minipage}{1.0\linewidth}
+    Environnement \texttt{codehtml} ou commande \verb+\fichierhtml+
+    \fichierhtml{exemple_html.html}
+  \end{minipage}
+
+  \begin{minipage}{1.0\linewidth}
+    Environnement \texttt{codecss} ou commande \verb+\fichiercss+
+    \fichiercss{exemple_css.css}
+  \end{minipage}
+
+  \begin{minipage}{1.0\linewidth}
+    Environnement \texttt{codejavascript} ou commande \verb+\fichierjavascript+
+    \fichierjavascript{exemple_javascript.js}
+  \end{minipage}
+  
+\section{pythontex}
+
+  \subsection{emacs}
+  \texttt{Control-c Control-t}
+
+  Parfois la compilation échoue (doc. non actualisé) mais fonctionne directement en
+  ligne de commande...
+  
+  \subsection{pythontex basique}
+  
+  \begin{enumerate}
+  \item \verb|\py|~: évaluation et écrit ce qui est renvoyé en \texttt{string}
+
+    \verb|\py{str(2**3)}| donne \py{str(2**3)}
+    
+  \item \verb|\pyc| et env. \verb|\pycode|~: évaluation et écrit les \texttt{print}
+    
+    \begin{Verbatim}
+      \pyc{print("OK",end="")}
+      \begin{pycode}
+      print(r"\begin{tabular}{c|c}")
+      print(r"$m$ & $2^m$ \\ \hline")
+      print(r"%d & %d \\" % (1, 2**1))
+      print(r"%d & %d \\" % (2, 2**2))
+      print(r"%d & %d \\" % (3, 2**3))
+      print(r"%d & %d \\" % (4, 2**4))
+      print(r"\end{tabular}")
+      \end{pycode}
+    \end{Verbatim}
+    \pyc{print("OK")}
+    
+    \begin{pycode}
+print(r"\begin{tabular}{c|c}")
+print(r"$m$ & $2^m$ \\ \hline")
+print(r"%d & %d \\" % (1, 2**1))
+print(r"%d & %d \\" % (2, 2**2))
+print(r"%d & %d \\" % (3, 2**3))
+print(r"%d & %d \\" % (4, 2**4))
+print(r"\end{tabular}") 
+\end{pycode}
+
+\item \verb|\pycon| et env. \verb|pyconsole| renvoie l'exécution
+  dans une console (sans l'entrée pour la commande)
+
+  \pycon{[i**2 for i in range(10)]}
+\begin{pyconsole}
+a = [i**2 for i in range(10)]
+sum(a)
+\end{pyconsole}
+\end{enumerate}
+
+\subsection{pythontex commandes persos}
+
+\subsubsection{dft utilisable avec py}
+Import de \texttt{profPythonPY} qui contient les biblios~:
+\texttt{random}, \texttt{math}, \texttt{requests}, \texttt{imgkit},
+\texttt{shutil} et \texttt{dvtdecimal} (as dvt)
+
+\verb|\py[dft]{prof_dec_let("mathématiques")}| donne~:\\
+\py[dft]{prof_dec_let("mathématiques")}
+
+\medskip
+\verb|\py[dft]{prof_mel_mot("mathématiques")}| donne~:\\
+\py[dft]{prof_mel_mot("mathématiques")}
+
+\medskip
+\verb|\py[dft]{prof_mel_phr("la vie est belle")}| donne~:\\
+\py[dft]{prof_mel_phr("la vie est belle")}
+
+\medskip
+\verb|\py[dft]{prof_tab_val(lambda x:x**2, -3, 2, .5, "t", "c(t)", precision=2)}| donne~:\\
+\py[dft]{prof_tab_val(lambda x:x**2, -3, 2, .5, "t", "c(t)", precision=2)}
+
+\medskip
+\verb|\py[dft]{prof_tab_ind(9, "positif", "liste", "négatif")}| donne~:\\
+\py[dft]{prof_tab_ind(9, "positif", "liste", "négatif")}
+
+\medskip
+\verb|\py[dft]{prof_oeis_A(45, nb_termes=20)}| donne~:\\
+\py[dft]{prof_oeis_A(45, nb_termes=20)}
+
+\medskip
+\verb|\py[dft]{prof_oeis_web_A(306475, angle=0)}| donne~:\\
+\py[dft]{prof_oeis_web_A(306475, angle=0)}
+
+\medskip
+\verb|\py[dft]{prof_tri_bulle([1, 3, 0, 9, 5, 7, 4, 6, 2, 8], avec_couleur=True)}| donne~:\\
+\py[dft]{prof_tri_bulle([1, 3, 0, 9, 5, 7, 4, 6, 2, 8], avec_couleur=True)}
+
+\medskip
+\verb|\py[dft]{prof_tri_insertion([1, 3, 0, 9, 5, 7, 4, 6, 2, 8], avec_couleur=True)}| donne~:\\
+\py[dft]{prof_tri_insertion([1, 3, 0, 9, 5, 7, 4, 6, 2, 8], avec_couleur=True)}
+
+\medskip
+\verb|\py[dft]{prof_tri_selection([1, 3, 0, 9, 5, 7, 4, 6, 2, 8], avec_couleur=True)}| donne~:\\
+\py[dft]{prof_tri_selection([1, 3, 0, 9, 5, 7, 4, 6, 2, 8], avec_couleur=True)}
+
+\medskip
+\verb|\py[dft]{prof_image_site("https://www.oeis.org", "oeis.png", texte="oeis", dimension=r".9\linewidth")}| donne~:\\
+\py[dft]{prof_image_site("https://www.oeis.org", "oeis.png", texte="site de oeis", dimension=r".9\linewidth")}
+
+\medskip
+\verb|\py[dft]{prof_BM_mc("nsi et isn ne sont pas identiques.", "ne sont pas")}| donne~:\\
+\py[dft]{prof_BM_mc("nsi et isn ne sont pas identiques.", "ne sont pas")}
+
+\medskip
+\verb|\py[dft]{prof_BM_mc("51528995084834006858415458848660202", "848")}| donne~:\\
+\py[dft]{prof_BM_mc("51528995084834006858415458848660202", "848")}
+
+\medskip
+\verb|\py[dft]{prof_arbre_binaire(noeud(1, noeud(2, noeud(4, noeud(6)), noeud(5)), noeud(3)))}| donne~:\\
+\py[dft]{prof_arbre_binaire(noeud(1,
+  noeud(2, noeud(4, noeud(6)), noeud(5)),
+  noeud(3))
+  )}
+
+\medskip
+\verb|\py[dft]{prof_arbre_binaire_complet(3, "->", "scale=.5")}| donne~:\\
+\py[dft]{prof_arbre_binaire_complet(3, "->", "scale=.5")}
+
+
+\subsubsection{math}
+
+Import pour calcul comme dans mon plugin \texttt{calc} de \texttt{zsh}
+
+\verb|La dérivée de $f(x)=\cos(x)$ est $f\prime(x)=\py[math]{latex(diff(cos(x), x))}$| donne~:\\
+La dérivée de $f(x)=\cos(x)$ est $f\prime(x)=\py[math]{latex(diff(cos(x), x))}$
+
+%% \end{multicols}
+
+% \medskip
+% \begin{Verbatim}
+%   \operation{+}{2}{5}
+% \end{Verbatim}
+% \begin{minipage}{\linewidth}
+%   \operation{+}{\operation{-}{4}{8}}{5}
+% \end{minipage}
+
+% \section{\LuaLaTeX}
+% \medskip
+% \begin{Verbatim}
+%   \algoEuclide{1045}{760}
+% \end{Verbatim}
+% \begin{minipage}{\linewidth}
+%   \algoEuclide{1045}{760}  
+% \end{minipage}
+
+% \medskip
+% \begin{Verbatim}
+%   \algoSSS{1045}{760}
+% \end{Verbatim}
+% \begin{minipage}{\linewidth}
+%   \algoSSS{1045}{760}  
+% \end{minipage}
+
+% \medskip
+% \begin{Verbatim}
+%   \pgcd{1045}{760}
+% \end{Verbatim}
+% \begin{minipage}{\linewidth}
+%   \pgcd{1045}{760}  
+% \end{minipage}
+
+% \medskip
+% \begin{Verbatim}
+%   \premiersEntreEux{1045}{760}
+% \end{Verbatim}
+% \begin{minipage}{\linewidth}
+%   \premiersEntreEux{1045}{760}  
+% \end{minipage}
+
+% \medskip
+% \begin{Verbatim}
+%   \listeDiviseurs{1045}
+% \end{Verbatim}
+% \begin{minipage}{\linewidth}
+%   \listeDiviseurs{1045}
+% \end{minipage}
+
+% \medskip
+% \begin{Verbatim}
+%   \pythRedac{"A"}{"B"}{"C"}
+% \end{Verbatim}
+% \begin{minipage}{\linewidth}
+%   \pythRedac{"A"}{"B"}{"C"}
+% \end{minipage}
+
+% \medskip
+% \begin{Verbatim}
+%   \pythCalculHyp{"BC"}{2.8}{4.6}
+% \end{Verbatim}
+% \begin{minipage}{\linewidth} 
+%   \pythCalculHyp{"BC"}{2.8}{4.6} 
+% \end{minipage}
+
+% \medskip
+% \begin{Verbatim}
+%   \pythCalculCote{"BC"}{2.8}{4.6}
+% \end{Verbatim}
+% \begin{minipage}{\linewidth}
+%   \pythCalculCote{"BC"}{4.6}{2.8} 
+% \end{minipage}
+
+% \medskip
+% \begin{Verbatim}
+%   \begin{luacode}
+%     p = luatexperso.Pc:new({valeurs ={5}})
+%     t = {"ajoute(8)", "soustrait(4)",
+%       "multiplie(2)", "ajouteVI()", "carre()"}
+%     luatexperso.Pc.applique("p",t)
+%     p:sortieLaTeX()
+%   \end{luacode}
+% \end{Verbatim}
+% \begin{minipage}{\linewidth}
+% \begin{luacode}
+%     p = luatexperso.Pc:new({valeurs ={5}})
+%     t = {"ajoute(8)", "soustrait(4)", "multiplie(2)", "ajouteVI()", "carre()"}
+%     luatexperso.Pc.applique("p",t)
+%     p:sortieLaTeX()
+%   \end{luacode}
+% \end{minipage}
+
+% \end{multicols}
+% \newpage
+
+% \section{\MP}
+
+% \titrepolysarah{analyse}
+% \begin{Verbatim}
+%   exp (expr x)
+%   ln  (expr x)
+%   log (expr x)
+%   trace (suffix f)(expr a,b,inc)
+%   pointTrace (suffix f)(expr x)
+%   suite (suffix f)(expr debut,nb)
+%   tangente (suffix f)(expr x)
+%   pointTangente (suffix f)(expr x)
+% \end{Verbatim}
+
+% \titrepolysarah{const}
+% \begin{Verbatim}
+%   rouge vert bleu jaune
+%   violet cyan noir orange
+% \end{Verbatim}
+% \columnbreak
+% \titrepolysarah{geo}
+% \begin{Verbatim}
+%   barydeux (expr a,alpha,b,beta)
+%   barytrois (expr a,alpha,b,beta,c,gamma)
+%   centredegravite (expr a,b,c)
+%   orthocentre (expr a,b,c)
+%   centrecerclecirconscrit (expr a,b,c)
+%   cerclecirconscrit (expr a,b,c)
+%   centrecercleinscrit (expr a,b,c)
+%   cercleinscrit (expr a,b,c)
+%   projete (expr a,b,c)
+%   rotation@# (expr p,o)
+%   symetrieaxiale (expr p,a,b)
+%   symetriecentrale (expr p,o)
+%   note_angle@# (expr a,o,b,e)
+%   noteangle (expr a,o,b,e)
+%   cheminfleche (expr a,b,e)
+%   noteangledroit (expr a,o,b,e)
+%   droite@# (expr a,b)
+%   cube (expr depart,dimarete)
+%   nommecube
+%   tetraedre (expr depart,unite)
+%   tetraedreregulier (expr depart,unite)
+%   nommetetraedre
+%   marksize=4pt
+%   draw_mark (expr p,a)
+%   draw_marked (expr p,n)
+%   patate
+%   hachurage(expr chemin, angle, ecart, trace)suffix couleur
+%   meshachures(expr chemin, angle, ecart)suffix motif
+%   vonkoch (expr i,j)
+% \end{Verbatim}
+
+% \titrepolysarah{graphe}
+% \begin{Verbatim}
+%   liencourbe (suffix a,b)
+%   ponderation@# (suffix a,b)(text t)
+%   pondseul@#(expr p)(text t)
+%   lien (suffix a,b)
+%   lienoriente (suffix a,b)
+%   sommet (suffix a) (expr couple,t)
+%   sommetcouleur (suffix a) (expr couple) (expr couleur)
+% \end{Verbatim}
+
+% \titrepolysarah{repere}
+% \begin{Verbatim}
+%   papiermi@# (expr larg,long)
+%   quadrillage@# (expr larg,long,espace)
+%   base@# (expr unitex,unitey)
+%   quadrillagesimple (expr larg,long,espace)
+%   axeh@# (expr xmin, xmax, inc, u)
+%   axev@# (expr ymin, ymax, inc, u)
+% \end{Verbatim}
+
+% \titrepolysarah{stat}
+% \begin{Verbatim}
+%   bam (expr vmin,vmax,un,med,trois,larg,haut,pos)
+  
+% \end{Verbatim}
+% \end{multicols}
+
+\end{document}  
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

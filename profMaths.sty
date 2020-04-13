@@ -10,7 +10,19 @@
 \newcommand{\D}{\textrm{\sffamily\bfseries D}}
 \newcommand{\Q}{\textrm{\sffamily\bfseries Q}}
 \newcommand{\vi}[1]{\ensuremath{\backslash\!\left\{#1\right\}}}
-\newcommand{\VI}{\vi}
+%% anciennes commandes lycée
+\let\dps=\displaystyle
+\newcommand{\intff}[2]{\ensuremath{[#1;#2]}}
+\newcommand{\intoo}[2]{\ensuremath{]#1;#2[}}
+\newcommand{\intof}[2]{\ensuremath{]#1;#2]}}
+\newcommand{\intfo}[2]{\ensuremath{[#1;#2[}}
+\newcommand{\rg}[1]{\ensuremath{\mathscr{C}\!\!_{#1}}}
+\newcommand{\ora}[1]{\ensuremath{\overrightarrow{#1}}}
+\newcommand{\calt}[1]{$\mathscr{#1}$}
+\newcommand{\infa}{\ensuremath{\leqslant}}
+\newcommand{\supa}{\ensuremath{\geqslant}}
+%% \newcommand{\dinv}[1]{\ensuremath{\displaystyle\dfrac{1}{#1}}}
+%%
 
 %%
 \newcommand{\fonc}[4]{\ensuremath{#1} est la fonction définie sur
@@ -38,97 +50,19 @@
 \newcommand{\vecti}{\ensuremath{\vect{i}}}
 \newcommand{\vectj}{\ensuremath{\vect{j}}}
 \newcommand{\ron}{repère orthonormé $\left(O;\vecti,\vectj\right)$}
-%%des arcs
-\newlength{\@longarc}
-\newcommand{\arc}[1]{\settowidth{\@longarc}{$#1$}%
-  % \addtolength{\@longarc}{-0.5em}%
-  \unitlength \@longarc%
-  \ensuremath{%
-    \stackrel{\begin{picture}(1,0.2)
-        \qbezier(0.1,-0.1)(0.6,0.2)(1.1,-0.1)
-      \end{picture}}
-    {#1}
-  }}
-
-\newcommand{\arcoriente}[1]{\settowidth{\@longarc}{$#1$}%
-  \addtolength{\@longarc}{-0.5em}%
-  \ensuremath{%
-    \unitlength \@longarc%
-    \stackrel{\begin{picture}(1,0.2)
-        \psset{unit=\@longarc}
-        \pscurve{->}(0,0)(0.5,0.3)(1,0)
-      \end{picture}}
-    {#1}
-  }}
-%%
-%%
 
 \newcommand{\lv}{\mbox{}\par}
 \newcommand{\lec}{\hfill\mbox{}}
-\newcommand{\ecrancalc}[1]{%%
-  \psframebox{%%
-    %%\setlength{\tempdimc}{13*\widthof{9}}%%
-      \parbox[b]{3cm}{%%
-        \raggedleft #1%%
-      }%
-  }%
-}
-%%
-\newcommand{\operation}[3]{%
-  \expandafter\begin{postscript}
-    \pstree[treemode=U,treesep=1cm,nodesep=3pt,levelsep=.8cm]%%
-    {\TR{$#1$}}{%%
-      #2%%
-      #3%%
-    }%%
-  \end{postscript}%
-}
-\newcommand{\arbre}[1]{%
-  \psframebox[framearc=.1]{#1}
-}
-\newcommand{\calcularbre}[2]{%
-  \begin{tabular}[t]{c}
-    #1\\
-    \arbre{#2}
-  \end{tabular}
-}
 
-%% anciennes commandes lycée
-\let\dps=\displaystyle
-%%\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
-%%\newcommand{\D}{\ensuremath{\mathbb{D}}}
-%%\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
-\newcommand{\intff}[2]{\ensuremath{[#1;#2]}}
-\newcommand{\intoo}[2]{\ensuremath{]#1;#2[}}
-\newcommand{\intof}[2]{\ensuremath{]#1;#2]}}
-\newcommand{\intfo}[2]{\ensuremath{[#1;#2[}}
-\newcommand{\rg}[1]{\ensuremath{\mathscr{C}\!\!_{#1}}}
-\newcommand{\ora}[1]{\ensuremath{\overrightarrow{#1}}}
-\newcommand{\calt}[1]{$\mathscr{#1}$}
-\newcommand{\infa}{\ensuremath{\leqslant}}
-\newcommand{\supa}{\ensuremath{\geqslant}}
-\newcommand{\dinv}[1]{\ensuremath{\displaystyle\dfrac{1}{#1}}}
-%%
 \theorembodyfont{\slshape}
 
 \newtheorem{definition}{Définition }
 \newtheorem{exemple}{Exemple }
 \newtheorem{propriete}{Propriété }
 \newtheorem{theoreme}{Théorème }
-\newtheorem{demonstration}{Démonstration }
+\newtheorem{demo}{Démonstration }
 \newtheorem{remarque}{Remarque }
 %
-%%
-%% Racine carrée fermante !
-%% NE FONCTIONNE PAS !!
-% \let\oldr@@t\r@@t
-% \def\r@@t#1#2{%
-%   \setbox0=\hbox{$\oldr@@t#1{#2\,}$}\dimen0=\ht0
-%   \advance\dimen0-0.2\ht0
-%   \setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
-%   {\box0\lower0.4pt\box2}}
-% \LetLtxMacro{\oldsqrt}{\sqrt}
-% \renewcommand*{\sqrt}[2][\ ]{\oldsqrt[#1]{#2} }
 
 % New definition of square root:
 % it renames \sqrt as \oldsqrt
@@ -140,8 +74,17 @@
   \advance\dimen0-0.2\ht0
   \setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
   {\box0\lower0.8pt\box2}}
-
 %%
+% \def\DHLhksqrt#1#2{%
+%   \setbox0=\hbox{$#1\oldsqrt{#2\,}$}\dimen0=\ht0\relax%
+%   \advance\dimen0-0.2\ht0\relax%
+%   \setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
+%   {%
+%     \hbox{$#1\expandafter\oldsqrt\expandafter[\DHLindex]{#2\,}$}%
+%     \lower\ifx\math@version\bold@name0.6pt\else0.4pt\fi\box2%
+%   }%
+% }
+
 \newcommand{\histo}[3]{%
   \begin{tikzpicture}
     \begin{axis}[
@@ -159,5 +102,170 @@
     \end{axis}
   \end{tikzpicture}
 }
+\newcounter{numeroexo}
 
+\newenvironment{exercice}{
+  \par\noindent\stepcounter{numeroexo}%%\linebreak\hspace*{-\lgex}%
+  \begin{mdframed}[linecolor=blue!10,
+    roundcorner=3pt,
+    innerleftmargin=0pt,
+    innerrightmargin=0pt,
+    innertopmargin=0pt,
+    innerbottommargin=0pt,
+    linewidth=2bp,
+    backgroundcolor=blue!5
+    ]%%
+    {\large \bfseries \sffamily Exercice \arabic{numeroexo}}%
+  \end{mdframed}
+}{%
+  %%\vspace{.5\baselineskip}\par%
+}
+ 
+
+%% titres de devoirs
+\newcommand{\nom}{{\scshape Nom~:}\makebox[.5\linewidth]{\dotfill}}
+
+\newcommand{\devoir}[4]{%%
+  \begin{mdframed}[linewidth=2bp,
+    linecolor=blue!10,
+    backgroundcolor=blue!5,
+    roundcorner=5pt]%
+    \titrepoly{Devoir #1 \no#2}{devoirs}
+    \noindent{\color{\macouleur}\sffamily#3\hfill{\itshape #4\hspace*{0ex}}}
+  \end{mdframed}%
+}
+
+%%%%%%%%%%%%%%%
+%% Dans les tableaux de signes et de variations
+\newlength{\@vardelongueur}
+\settowidth{\@vardelongueur}{Var. de}
+\newcommand{\varde}[1]{%%
+  \TVcenter{%
+    \parbox{\@vardelongueur}{\centering%
+      Var. de\\$#1$%
+    }
+  }
+}
+
+\newlength{\@signedelongueur}
+\settowidth{\@signedelongueur}{Signe de}
+\newcommand{\sgnde}[1]{%%
+  \TVcenter{%
+    \parbox{\@signedelongueur}{\centering%
+      {\tiny Signe de }\\$#1$%
+    }
+  }
+}
+\newcommand{\sgnduq}{%%
+  \TVcenter{%
+    \parbox{\@signedelongueur}{\centering%
+      \scriptsize Signe du\\quotient%
+    }
+  }
+}
+\newcommand{\sgndup}{%%
+  \TVcenter{%
+    \parbox{\@signedelongueur}{\centering%
+      \scriptsize Signe du\\produit%
+    }
+  }
+}
+
+%%%%%%%   UTILISE PSTRICKS
+
+% \newcommand{\operation}[3]{%
+%   \expandafter\begin{postscript}
+%     \pstree[treemode=U,treesep=1cm,nodesep=3pt,levelsep=.8cm]%%
+%     {\TR{$#1$}}{%%
+%       #2%%
+%       #3%%
+%     }%%
+%   \end{postscript}%
+% }
+% \newcommand{\arbre}[1]{%
+%   \psframebox[framearc=.1]{#1}
+% }
+% \newcommand{\calcularbre}[2]{%
+%   \begin{tabular}[t]{c}
+%     #1\\
+%     \arbre{#2}
+%   \end{tabular}
+% }
+
+%%des arcs
+% \newlength{\@longarc}
+% \newcommand{\arc}[1]{\settowidth{\@longarc}{$#1$}%
+%   % \addtolength{\@longarc}{-0.5em}%
+%   \unitlength \@longarc%
+%   \ensuremath{%
+%     \stackrel{\begin{picture}(1,0.2)
+%         \qbezier(0.1,-0.1)(0.6,0.2)(1.1,-0.1)
+%       \end{picture}}
+%     {#1}
+%   }
+% }
+% \newcommand{\arcoriente}[1]{\settowidth{\@longarc}{$#1$}%
+%   \addtolength{\@longarc}{-0.5em}%
+%   \ensuremath{%
+%     \unitlength \@longarc%
+%     \stackrel{\begin{picture}(1,0.2)
+%         \psset{unit=\@longarc}
+%         \pscurve{->}(0,0)(0.5,0.3)(1,0)
+%       \end{picture}}
+%     {#1}
+%   }
+% }
+%%
+% \newcommand{\ecrancalc}[1]{%%
+%   \psframebox{%%
+%     %%\setlength{\tempdimc}{13*\widthof{9}}%%
+%       \parbox[b]{3cm}{%%
+%         \raggedleft #1%%
+%       }%
+%   }%
+% }
+% \newlength{\htex}
+% \newlength{\lgex}
+% \settowidth{\htex}{\encadrepointilles{%
+%     \scalebox{1.5}[1]{\sffamily Exercice \arabic{numeroexo}}%%
+%   }}
+% \addtolength{\htex}{-\baselineskip}
+% \settoheight{\lgex}{\encadrepointilles{%%
+%     \scalebox{1.5}[1]{\sffamily Exercice \arabic{numeroexo}}%%
+%   }}
+%     \addtolength{\lgex}{10pt}
+% \newenvironment{exerciceh}{%%
+%   \ifthenelse{\equal{\value{numeroexo}}{0}}{}{%%
+%     %% la séparation des exercices
+%     \par\noindent{\macouleur\hrule}%%
+%   }%%
+%   \par\noindent\stepcounter{numeroexo}\linebreak\hspace*{-\lgex}%
+%    \smash{%\raisebox{-\htex}{%
+%        %%\rotatebox{90}{%
+%        \encadrepointilles{%
+%          \scalebox{.7}[1]{\white \bfseries \sffamily Exercice \arabic{numeroexo}}%%
+%        }%
+%        % }%
+%        % }%
+%    }%
+%    %%\hspace*{\lgex}\hspace*{3pt}%%
+%  }{%
+%    \vspace{.5\baselineskip}\par
+%  }
+% \newenvironment{nival}{%%
+%   \ifthenelse{\equal{\value{numeroexo}}{0}}{}{%%
+%     %% la séparation des exercices
+%     \par\noindent\hrule%%
+%   }%%
+%   \par\noindent\stepcounter{numeroexo}\linebreak\hspace*{-\lgex}%
+%    \smash{\raisebox{-\htex}{%
+%        \rotatebox{90}{\encadrepointilles{%
+%              \scalebox{1.5}[1]{\sffamily Niveau \arabic{numeroexo}}%%
+%            }}}}%
+%      \hspace*{\lgex}\hspace*{3pt}%%
+%  }{%
+%    \vspace{.5\baselineskip}
+
+%  }
+%
 \endinput

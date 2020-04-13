@@ -1,0 +1,4 @@
+function creationDiv(parent) {
+    document.createElement("div");
+    parent.appendChild(parent);
+}

@@ -1,0 +1,7 @@
+\begin{tabular}{c|c}
+$m$ & $2^m$ \\ \hline
+1 & 2 \\
+2 & 4 \\
+3 & 8 \\
+4 & 16 \\
+\end{tabular}

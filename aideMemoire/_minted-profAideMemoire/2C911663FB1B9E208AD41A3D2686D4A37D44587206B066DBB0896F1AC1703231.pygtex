@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYG{n}{function} \PYG{n}{creationDiv}\PYG{p}{(}\PYG{n}{parent}\PYG{p}{,} \PYG{n}{n}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{let} \PYG{n}{d}\PYG{p}{;}
+    \PYG{k}{for} \PYG{p}{(}\PYG{n}{let} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{n}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{d} \PYG{o}{=} \PYG{n}{document}\PYG{o}{.}\PYG{n}{createElement}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}div\PYGZdq{}}\PYG{p}{);}
+        \PYG{n}{d}\PYG{o}{.}\PYG{n}{appendChild}\PYG{p}{(}\PYG{n}{parent}\PYG{p}{);}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

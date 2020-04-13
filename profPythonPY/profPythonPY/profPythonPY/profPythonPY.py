@@ -3,11 +3,12 @@ import math
 import requests
 import imgkit
 import shutil
+import dvtDecimal as dvt
 
 ##########################################################
 # This is a SO code at this adress:
 # https://stackoverflow.com/questions/24852345/hsv-to-rgb-color-conversion
-def hsv_to_rgb(h, s, v):
+def __hsvto_rgb(h, s, v):
     if s == 0.0:
         v *= 255
         return (v, v, v)
@@ -27,7 +28,7 @@ def hsv_to_rgb(h, s, v):
 ############################################################
 
 
-def prof_deb_env(nomEnv, options=None):
+def __prof_deb_env(nomEnv, options=None):
     if options is None:
         return r"\begin{" + nomEnv + "}"
     else:
@@ -35,7 +36,7 @@ def prof_deb_env(nomEnv, options=None):
         return r"\begin{" + nomEnv + "}[" + options + "]"
 
 
-def prof_fin_env(nomEnv):
+def __prof_fin_env(nomEnv):
     return r"\end{" + nomEnv + "}"
 
 
@@ -53,7 +54,7 @@ def prof_dec_let(mot):
     return s
 
 
-def prof_mel_let(mot):
+def prof_mel_mot(mot):
     l = list(mot)
     random.shuffle(l)
     return "".join(l)
@@ -61,27 +62,27 @@ def prof_mel_let(mot):
 
 def prof_mel_phr(phrase):
     mots = phrase.split()
-    phraseReponse = prof_mel_let(mots[0]).capitalize() + " "
+    phraseReponse = prof_mel_mot(mots[0]).capitalize() + " "
     for mot in mots[1:]:
-        phraseReponse += prof_mel_let(mot) + " "
+        phraseReponse += prof_mel_mot(mot) + " "
     return phraseReponse[:-1]
 
 
-def prof_est_ent(n, precision=1e-5):
+def __prof_est_ent(n, precision=1e-5):
     return abs(n - round(n)) < precision
 
 
-def prof_Tab_Val(fonction, debut, fin, pas, precision=2):
+def __prof_Tab_Val(fonction, debut, fin, pas, precision=2):
     # fonction interne à ne pas appeler
     nb = int(1 + (fin - debut) / pas)
     x = debut
     liste = []
     for i in range(nb):
-        if prof_est_ent(x):
+        if __prof_est_ent(x):
             x = round(x)
         liste += [x]
         y = round(fonction(x), precision)
-        if prof_est_ent(y):
+        if __prof_est_ent(y):
             y = round(y)
         liste += [y]
         x = round(x + pas, precision)
@@ -91,7 +92,7 @@ def prof_Tab_Val(fonction, debut, fin, pas, precision=2):
 def prof_tab_val(fonction, debut, fin, pas,
                  xlabel, ylabel, precision=2):
     passageLigne = "\\\\ \\hline\n"
-    liste = prof_Tab_Val(fonction, debut, fin, pas, precision)
+    liste = __prof_Tab_Val(fonction, debut, fin, pas, precision)
     longueur = round(len(liste) / 2)
     l = iter(liste)
     X = "\\hline\n" + xlabel + "&"
@@ -102,14 +103,14 @@ def prof_tab_val(fonction, debut, fin, pas,
     X = X[:-1] + passageLigne
     Y = Y[:-1] + passageLigne
     formatage = "{|c||*{" + str(longueur) + "}{c|}}"
-    return prof_deb_env("tabular") + formatage + "\n" +\
-        X + Y + prof_fin_env("tabular")
+    return __prof_deb_env("tabular") + formatage + "\n" +\
+        X + Y + __prof_fin_env("tabular")
 
 
-def prof_tab_ind(i0, iend, xlabel, ylabel, zlabel):
+def prof_tab_ind(iend, xlabel, ylabel, zlabel):
     passageLigne = "\\\\ \\hline\n"
-    longueur = iend - i0 + 1
-    s = prof_deb_env("tabular") + \
+    longueur = iend + 1
+    s = __prof_deb_env("tabular") + \
         "{|c||*{" + str(longueur) + "}{c|}}"
     X = "\\hline\n" + xlabel + "&"
     Y = ylabel + "&"
@@ -122,7 +123,7 @@ def prof_tab_ind(i0, iend, xlabel, ylabel, zlabel):
     X = X[:-1] + passageLigne
     Y = Y[:-1] + passageLigne
     Z = Z[:-1] + passageLigne
-    return s + "\n" + X + Y + Z + prof_fin_env("tabular")
+    return s + "\n" + X + Y + Z + __prof_fin_env("tabular")
 
 
 ##################
@@ -147,20 +148,20 @@ def prof_oeis_web_A(n, angle=90, dimension="10cm"):
     url = "https://oeis.org/" + suite
     options = {'quiet': ''}
     imgkit.from_url(url, image, options=options)
-    code = prof_deb_env("mdframed",
+    code = __prof_deb_env("mdframed",
                         options=["roundcorner=10pt",
                                  "linewidth=1bp",
                                  r"frametitle=\textbf{Vue du site }\url{"+url+r"}",
                                  "frametitlebackgroundcolor=gray!30",
                                  "frametitlerule=true"])
-    code += prof_deb_env("center")
+    code += __prof_deb_env("center")
     code += r"\includegraphics[angle=" + \
         str(angle) + \
         ",width=" + \
         dimension + \
         "]{" + image + "}"
-    code += prof_fin_env("center")
-    code += prof_fin_env("mdframed")
+    code += __prof_fin_env("center")
+    code += __prof_fin_env("mdframed")
     return code
 
 
@@ -169,7 +170,7 @@ def prof_oeis_web_A(n, angle=90, dimension="10cm"):
 ##################
 
 
-def prof_rep_tri_ligne(T, num_ligne, hauteur=1, couleur=False, nombre=True):
+def __prof_rep_tri_ligne(T, num_ligne, hauteur=1, couleur=False, nombre=True):
     T = T.copy()
     #
     if not couleur:
@@ -177,7 +178,7 @@ def prof_rep_tri_ligne(T, num_ligne, hauteur=1, couleur=False, nombre=True):
     else:
         couleurs = []
         for i in range(len(T)):
-            r, g, b = hsv_to_rgb(i/len(T), 1.0, 1.0)
+            r, g, b = __hsvto_rgb(i/len(T), 1.0, 1.0)
             nuance = [round(c/255, 2) for c in [r, g, b]]
             couleurs.append(nuance)
     #
@@ -211,8 +212,8 @@ def prof_tri_bulle(T, avec_couleur=False, avec_nombre=True):
     T = T.copy()
     n = len(T)
     etape = 0
-    code = prof_deb_env("tikzpicture", options=["x=.5cm"])
-    code += prof_rep_tri_ligne(T,
+    code = __prof_deb_env("tikzpicture", options=["x=.5cm"])
+    code += __prof_rep_tri_ligne(T,
                                etape,
                                hauteur=.5,
                                couleur=avec_couleur,
@@ -223,7 +224,7 @@ def prof_tri_bulle(T, avec_couleur=False, avec_nombre=True):
             if T[j] > T[j+1]:
                 T[j], T[j+1] = T[j+1], T[j]
                 etape += 1
-                code += prof_rep_tri_ligne(T,
+                code += __prof_rep_tri_ligne(T,
                                            etape,
                                            hauteur=.5,
                                            couleur=avec_couleur,
@@ -232,8 +233,8 @@ def prof_tri_bulle(T, avec_couleur=False, avec_nombre=True):
         if not travail:
             break
         # etape += 1
-        # code += prof_rep_tri_ligne(T, etape)
-    code += prof_fin_env("tikzpicture")
+        # code += __prof_rep_tri_ligne(T, etape)
+    code += __prof_fin_env("tikzpicture")
     return code
 
 
@@ -241,8 +242,8 @@ def prof_tri_insertion(T, avec_couleur=False, avec_nombre=True):
     T = T.copy()
     n = len(T)
     etape = 0
-    code = prof_deb_env("tikzpicture", options=["x=.5cm"])
-    code += prof_rep_tri_ligne(T,
+    code = __prof_deb_env("tikzpicture", options=["x=.5cm"])
+    code += __prof_rep_tri_ligne(T,
                                etape,
                                hauteur=.5,
                                couleur=avec_couleur,
@@ -253,15 +254,15 @@ def prof_tri_insertion(T, avec_couleur=False, avec_nombre=True):
         while position > 0 and T[position-1] > nombre:
             T[position] = T[position-1]
             position -= 1
-            # code += prof_rep_tableau(T)
+            # code += __prof_rep_tableau(T)
         T[position] = nombre
         etape += 1
-        code += prof_rep_tri_ligne(T,
+        code += __prof_rep_tri_ligne(T,
                                    etape,
                                    hauteur=.5,
                                    couleur=avec_couleur,
                                    nombre=avec_nombre)
-    code += prof_fin_env("tikzpicture")
+    code += __prof_fin_env("tikzpicture")
     return code
 
 
@@ -269,8 +270,8 @@ def prof_tri_selection(T, avec_couleur=False, avec_nombre=True):
     T = T.copy()
     n = len(T)
     etape = 0
-    code = prof_deb_env("tikzpicture", options=["x=.5cm"])
-    code += prof_rep_tri_ligne(T,
+    code = __prof_deb_env("tikzpicture", options=["x=.5cm"])
+    code += __prof_rep_tri_ligne(T,
                                etape,
                                hauteur=.5,
                                couleur=avec_couleur,
@@ -282,30 +283,30 @@ def prof_tri_selection(T, avec_couleur=False, avec_nombre=True):
                 position = j
         T[position], T[i] = T[i], T[position]
         etape += 1
-        code += prof_rep_tri_ligne(T,
+        code += __prof_rep_tri_ligne(T,
                                    etape,
                                    hauteur=.5,
                                    couleur=avec_couleur,
                                    nombre=avec_nombre)
-    code += prof_fin_env("tikzpicture")
+    code += __prof_fin_env("tikzpicture")
     return code
 
 #####
 def prof_image_site(url, image, texte="", dimension="10cm"):
     options = {'quiet': ''}
     imgkit.from_url(url, image, options=options)
-    code = prof_deb_env("mdframed",
+    code = __prof_deb_env("mdframed",
                         options=["roundcorner=10pt",
                                  "linewidth=1bp",
                                  r"frametitle=\textbf{Vue du site }"+texte,
                                  "frametitlebackgroundcolor=gray!30",
                                  "frametitlerule=true"])
-    code += prof_deb_env("center")
+    code += __prof_deb_env("center")
     code += r"\includegraphics[width=" + \
         dimension + \
         "]{" + image + "}"
-    code += prof_fin_env("center")
-    code += prof_fin_env("mdframed")
+    code += __prof_fin_env("center")
+    code += __prof_fin_env("mdframed")
     return code
 
 # https://stackoverflow.com/questions/13137817/how-to-download-image-using-requests#13137873
@@ -436,7 +437,7 @@ def prof_BM_mc(T, M):
                 decalage = m - i
         position += decalage
         #
-        code_sortie += prof_deb_env("tikzpicture", options=["x=.5cm"])
+        code_sortie += __prof_deb_env("tikzpicture", options=["x=.5cm"])
         code_sortie += prof_tableau_texte_ligne(T,
                                                 num_ligne=0,
                                                 match=match,
@@ -446,7 +447,7 @@ def prof_BM_mc(T, M):
             num_ligne=1,
             match=list(match) + matchm,
             mismatch=mismatch) + "\n"
-        code_sortie += prof_fin_env("tikzpicture") + "\\\\"
+        code_sortie += __prof_fin_env("tikzpicture") + "\\\\"
         #
 
     #
@@ -474,7 +475,7 @@ def prof_BM_mc(T, M):
 #     if flechage:
 #         code_forest += ",edge=->"
 #     code_forest += r"}}}"
-#     code_forest += prof_deb_env("forest")
+#     code_forest += __prof_deb_env("forest")
 #     structure = " ".join(str(arbre).split(', '))
 #     structure = structure.replace("[]", "[,phantom]")
 #     structure = structure.replace('"', "")
@@ -482,7 +483,7 @@ def prof_BM_mc(T, M):
 
 #     code_forest += structure
 #     code_forest += code_supp
-#     code_forest += prof_fin_env("forest")
+#     code_forest += __prof_fin_env("forest")
 #     return code_forest
 
 
@@ -502,7 +503,7 @@ def prof_BM_mc(T, M):
 
 #     code_forest += structure
 #     code_forest += code_supp
-#     code_forest += prof_fin_env("forest")
+#     code_forest += __prof_fin_env("forest")
 #     return code_forest
 
 class noeud:
@@ -613,10 +614,10 @@ def prof_arbre_binaire(arbre, *opt):
     o = ""
     for s in opt:
         o += ',' + str(s)
-    code_tikz = prof_deb_env("tikzpicture",
+    code_tikz = __prof_deb_env("tikzpicture",
                              options=["nodes={draw, circle, thick}" + o])
     code_tikz += arbre.__repr__()
-    code_tikz += prof_fin_env("tikzpicture")
+    code_tikz += __prof_fin_env("tikzpicture")
     return code_tikz
 
 

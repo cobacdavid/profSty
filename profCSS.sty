@@ -1,0 +1,101 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{profCSS}[2019/01/29]
+
+
+\newlength{\cssLogoSize}
+\setlength{\cssLogoSize}{\f@size pt}
+%% \multiply\htmlLogoSize by 1.05
+\setlength{\cssLogoSize}{1.1\cssLogoSize}
+
+
+\newmintedfile[comcss]{css}{%
+  fontfamily=tt,
+  linenos,
+  mathescape,
+  breaklines,
+  autogobble,
+  framerule=1pt,
+  rulecolor=blue,
+  numbersep=3pt%
+}%%
+
+\newminted[envcss]{css}{%
+  fontfamily=tt,
+  linenos,
+  mathescape,
+  breaklines,
+  autogobble,
+  framerule=1pt,
+  rulecolor=blue,
+  numbersep=3pt%
+}%%
+
+
+
+%% style tcolorbox
+%% pour encadrer le code
+\newtcolorbox{boitecss}{%%
+  enhanced,
+  breakable,
+  colback=blue!5,
+  colframe=blue,
+  colbacktitle=blue!30,
+  title={\sffamily\texttt{\color{blue} Code CSS}%%
+    \hfill%
+    \includegraphics[height=\cssLogoSize]{css.png}%%
+  },
+  %% title style={left color=yellow!30, right color=blue!20},
+  boxrule=5pt,
+  titlerule=.5pt,
+  bottomtitle=-2pt,
+  toptitle=-2pt,
+  arc=10pt,
+  watermark graphics=css.png,
+  watermark zoom=1.00,
+  watermark opacity=.1,
+  %% drop fuzzy shadow=blue!50!black
+}
+
+%% À UTILISER AVEC UN FICHIER
+\newcommand{\fichiercss}[1]{%
+  \begin{english}%%
+    \begin{boitecss}
+      \comcss{#1}
+    \end{boitecss}
+  \end{english}%%
+}
+
+%% À UTILISER DIRECTEMENT
+\newenvironment{codecss}{
+  \VerbatimEnvironment
+  \begin{english}%%
+    \begin{boitecss}
+      \begin{envcss}%
+      }{\end{envcss}
+    \end{boitecss}
+  \end{english}
+}
+
+% \newcommand{\vcss}[1]{%
+%   \begin{english}%%
+%     \begin{mdframed}[%%
+%       linecolor=blue,
+%       linewidth=5pt,
+%       frametitlebackgroundcolor=blue!30,
+%       frametitlerule=true,
+%       backgroundcolor=blue!5,
+%       roundcorner=10pt,
+%       frametitle={\bfseries\sffamily\texttt{\color{white} Code CSS}%%
+%         \hfill%
+%         \includegraphics[height=\htmlLogoSize]{images/css.png}%%
+%       }]%
+%       \vcs{#1}%%
+%     \end{mdframed}%%
+%   \end{english}%%
+% }
+
+\endinput
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

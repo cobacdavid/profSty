@@ -1,0 +1,91 @@
+=>PYTHONTEX#py#dft#default#0#code####profPython.sty#6#
+from profPythonPY import *
+=>PYTHONTEX#py#math#default#0#code####profPython.sty#10#
+import math as m
+from cmath import polar, rect
+from sympy import *
+from dvtDecimal import *
+#
+x, y, n = symbols('x, y, n')
+r = m.sqrt
+dD = dvtDecimal
+simp = simplify
+#
+def cosd(x):
+    return m.cos(m.radians(x))
+def sind(x):
+    return m.sin(m.radians(x))
+=>PYTHONTEX#py#default#default#0#i#####268#
+str(2**3)
+=>PYTHONTEX#py#default#default#1#c#####284#
+print("OK")
+=>PYTHONTEX#py#default#default#2#code#####286#
+print(r"\begin{tabular}{c|c}")
+print(r"$m$ & $2^m$ \\ \hline")
+print(r"%d & %d \\" % (1, 2**1))
+print(r"%d & %d \\" % (2, 2**2))
+print(r"%d & %d \\" % (3, 2**3))
+print(r"%d & %d \\" % (4, 2**4))
+print(r"\end{tabular}")
+=>PYTHONTEX#pycon#default#default#0#i#####299#
+[i**2 for i in range(10)]
+=>PYTHONTEX#pycon#default#default#1#console#####300#
+a = [i**2 for i in range(10)]
+sum(a)
+=>PYTHONTEX#py#dft#default#1#i#####314#
+prof_dec_let("mathématiques")
+=>PYTHONTEX#py#dft#default#2#i#####318#
+prof_mel_mot("mathématiques")
+=>PYTHONTEX#py#dft#default#3#i#####322#
+prof_mel_phr("la vie est belle")
+=>PYTHONTEX#py#dft#default#4#i#####326#
+prof_tab_val(lambda x:x**2, -3, 2, .5, "t", "c(t)", precision=2)
+=>PYTHONTEX#py#dft#default#5#i#####330#
+prof_tab_ind(9, "positif", "liste", "négatif")
+=>PYTHONTEX#py#dft#default#6#i#####334#
+prof_oeis_A(45, nb_termes=20)
+=>PYTHONTEX#py#dft#default#7#i#####338#
+prof_oeis_web_A(306475, angle=0)
+=>PYTHONTEX#py#dft#default#8#i#####342#
+prof_tri_bulle([1, 3, 0, 9, 5, 7, 4, 6, 2, 8], avec_couleur=True)
+=>PYTHONTEX#py#dft#default#9#i#####346#
+prof_tri_insertion([1, 3, 0, 9, 5, 7, 4, 6, 2, 8], avec_couleur=True)
+=>PYTHONTEX#py#dft#default#10#i#####350#
+prof_tri_selection([1, 3, 0, 9, 5, 7, 4, 6, 2, 8], avec_couleur=True)
+=>PYTHONTEX#py#dft#default#11#i#####354#
+prof_image_site("https://www.oeis.org", "oeis.png", texte="site de oeis", dimension=r".9\linewidth")
+=>PYTHONTEX#py#dft#default#12#i#####358#
+prof_BM_mc("nsi et isn ne sont pas identiques.", "ne sont pas")
+=>PYTHONTEX#py#dft#default#13#i#####362#
+prof_BM_mc("51528995084834006858415458848660202", "848")
+=>PYTHONTEX#py#dft#default#14#i#####369#
+prof_arbre_binaire(noeud(1,   noeud(2, noeud(4, noeud(6)), noeud(5)),   noeud(3))   )
+=>PYTHONTEX#py#dft#default#15#i#####373#
+prof_arbre_binaire_complet(3, "->", "scale=.5")
+=>PYTHONTEX#py#math#default#1#i#####381#
+latex(diff(cos(x), x))
+=>PYTHONTEX:SETTINGS#
+version=0.17
+outputdir=pythontex-files-profAideMemoire
+workingdir=.
+workingdirset=false
+gobble=none
+rerun=default
+hashdependencies=default
+makestderr=false
+stderrfilename=full
+keeptemps=none
+pyfuture=default
+pyconfuture=none
+pygments=true
+pygglobal=:GLOBAL||
+fvextfile=-1
+pyconbanner=none
+pyconfilename=stdin
+depythontex=false
+pygfamily=py|python3|
+pygfamily=pycon|pycon|
+pygfamily=sympy|python3|
+pygfamily=sympycon|pycon|
+pygfamily=pylab|python3|
+pygfamily=pylabcon|pycon|

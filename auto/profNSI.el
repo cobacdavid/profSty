@@ -2,9 +2,9 @@
  "profNSI"
  (lambda ()
    (TeX-add-symbols
-    '("nsiEnteteB" 2)
     '("nsiEntete" 2))
    (LaTeX-add-environments
-    "nsiEnonce"))
+    '("commentaire" LaTeX-env-args ["argument"] 1)
+    '("monbloc" LaTeX-env-args ["argument"] 1)))
  :latex)
 

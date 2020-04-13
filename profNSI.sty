@@ -8,43 +8,6 @@
   middlelinecolor=red,
   middlelinewidth=4pt,%
   backgroundcolor=blue!5,
-  ]
-  \begin{tabular}{p{.2\linewidth}m{.55\linewidth}p{.2\linewidth}}
-    \begin{minipage}[m]{1.0\linewidth}
-      \includegraphics[width=\linewidth]{logoJM2.png}
-    \end{minipage}
-    &
-      \begin{minipage}[m]{1.0\linewidth}
-        \vspace*{-5mm}
-        \begin{minipage}[t]{.7\linewidth}
-          \begin{center}
-            \huge\bfseries \textsc{#1}
-          \end{center}
-        \end{minipage}
-        \par\vspace*{-0cm}{\small\sffamily\texttt{\color{red}{\rightarrowfill #2}}}
-      \end{minipage}
-    &
-      \begin{minipage}[m]{1.0\linewidth}
-        \includegraphics[width=\linewidth]{logo_base.png}
-
-        % \par\vspace*{-8mm}
-        % \begin{center}
-        %   {\tiny \scshape \color{red}{Première générale}}
-        % \end{center}
-
-      \end{minipage}
-  \end{tabular}
-\end{mdframed}
-\end{center}%%
-}
-
-\newcommand{\nsiEnteteB}[2]{%%
-\begin{center}
-\begin{mdframed}[%%
-  roundcorner=20pt,
-  middlelinecolor=red,
-  middlelinewidth=4pt,%
-  backgroundcolor=blue!5,
   innertopmargin=-7pt,
   innerbottommargin=0pt
   ]
@@ -82,12 +45,5 @@
 \end{mdframed}
 \end{center}%%
 }
-
-\newenvironment{nsiEnonce}{%%
-  \textbf{Énoncé}\par%%
-}{%%
-  \par\medskip%%
-}
-
 
 \endinput

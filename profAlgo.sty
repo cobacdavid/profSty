@@ -1,14 +1,17 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{profAlgo}[2018/04/06]
 
+
 %%%%%%%%%%%%%%%%%%%%%
 \newcommand{\geogebra}{\texttt{Geogebra}\xspace}
-\DefineVerbatimEnvironment{verbatimgg}{Verbatim}{%%
-  label={Commande \texttt{GeoGebra}},frame=single,commandchars=\\__}
-%
 \newcommand{\lua}{\texttt{Lua}\xspace}
+
+
+\DefineVerbatimEnvironment{verbatimgg}{Verbatim}{%%
+  label={Commande \geogebra},frame=single,commandchars=\\__}
+%
 \DefineVerbatimEnvironment{verbatimlua}{Verbatim}{%%
-  label={Code \lua},frame=single,commandchars=\\\{\}}
+  label={Code \lua},frame=single,commandchars=\\__}
 %
 % 
 \newcommand{\titrealgo}[1]{%%

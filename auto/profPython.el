@@ -2,17 +2,13 @@
  "profPython"
  (lambda ()
    (TeX-add-symbols
-    '("vcss" 1)
-    '("vueSite" 1)
-    '("vhtml" 1)
-    '("vpython" 1)
+    '("fichierpython" 1)
     "python")
    (LaTeX-add-environments
-    "pythondirect"
-    "htmldirect")
+    '("commentaire" LaTeX-env-args ["argument"] 1)
+    '("monbloc" LaTeX-env-args ["argument"] 1)
+    "codepython")
    (LaTeX-add-lengths
-    "pythonLogoSize"
-    "htmlLogoSize"
-    "cssLogoSize"))
+    "pythonLogoSize"))
  :latex)
 

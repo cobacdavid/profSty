@@ -63,12 +63,6 @@
 \DeclareOption{nocit}{%
   \@nocittrue
 }
-%% sans pstricks dans le style
-\newif\if@pststyle
-\@pststylefalse
-\DeclareOption{pststyle}{%
-  \@pststyletrue
-}
 %% enlèvement du numéro de page
 \DeclareOption{unepage}{\AtEndOfPackage{\cfoot{}}}
 %% mode poster (fond coloré)
@@ -221,7 +215,7 @@
 %%
 \RequirePackage{pythontex}
 \RequirePackage[unicode=true]{hyperref}
-\RequirePackage{auto-pst-pdf}
+%% \RequirePackage{auto-pst-pdf}
 %% package de francisation
 \ifluatex
 \RequirePackage{polyglossia}
@@ -233,58 +227,27 @@
 \fi
 \RequirePackage[autolanguage]{numprint}
 %% package pour le fond de page
-\if@poster
-%%\RequirePackage[pagecolor={blue!10}]{pagecolor}
-\pagecolor{blue!5!white}
-\def\maPScouleurGradBegin{blue!10}
-\else
-\def\maPScouleurGradBegin{white}
-\fi
+
 \ifluatex
-\newcommand{\nombre}[1]{\ensuremath{\numprint{#1}}}
-\newcommand{\np}{\numprint}
-\npthousandsep{\hspace{0.3em}}
-\providecommand{\dfrac}{\displaystyle\frac}
-\providecommand{\degres}{\textdegree}
-\providecommand{\text}{\textrm}
-\providecommand{\og}{«~}
-\providecommand{\fg}{»}
-\providecommand{\ieme}{$^\textrm{e}\,$}
-\providecommand{\ier}{\textsuperscript{er}}
-\providecommand{\iere}{\textsuperscript{ère}}
-\providecommand{\no}{n\textsuperscript{o}}
+%% profTypo (sans ifluatex)
 \fi
 %%
-%% \def\maPScouleur{gray}
-\def\maPScouleur{blue!50}
-\def\pythonBleu{blue!20}
-\def\pythonJaune{yellow!15}
-\providecommand{\pybleu}{\color{\pythonBleu}}
-\providecommand{\pyjaune}{\color{\pythonJaune}}
-%%\providecommand{\macouleur}{\color{\maPScouleur}}
-\providecommand{\macouleur}{\color{blue!50}}
-\providecommand{\gris}{\color{gray}}
+\graphicspath{{/home/david/travail/david/production/info/config/texmf/tex/latex/prof/images}}
 %
-%% \RequirePackage{profCompetencesCollege}%%
-%% \RequirePackage{profCompetencesSNT}%%
+\RequirePackage{profCouleurs}
 \RequirePackage{profNumDevoir}
-\RequirePackage{profCitation}
-\RequirePackage{profMOTD}
+%% \RequirePackage{profCitation}
+%% \RequirePackage{profMOTD}
+\RequirePackage{profTypo}
 \RequirePackage{profMaths}%%
 \RequirePackage{profDivers}%%
 \RequirePackage{profAlgo}%%
-\RequirePackage{profPython_tcb}%%
+\RequirePackage{profPython}%%
+\RequirePackage{profHTML}%%
+\RequirePackage{profCSS}%%
+\RequirePackage{profJS}%%
 \RequirePackage{profNSI}%%
-%%\if@college
-%%\RequirePackage{profCollege}
-%%\else
-\if@pststyle
-\RequirePackage{profStylePST}
-\else
-\RequirePackage{profStyleSansPST}
-\fi
-%%\fi
-
+\RequirePackage{profStyle}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
