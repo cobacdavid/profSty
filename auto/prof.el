@@ -2,24 +2,7 @@
  "prof"
  (lambda ()
    (TeX-add-to-alist 'LaTeX-provided-package-options
-                     '(("fontspec" "no-math") ("inputenc" "utf8") ("xcolor" "rgb" "dvipsnames" "svgnames" "luatex") ("algorithm2e" "french" "onelanguage") ("mdframed" "tikz") ("tcolorbox" "many") ("hyperref" "unicode=true") ("babel" "frenchb" "english") ("numprint" "autolanguage")))
-   (add-to-list 'LaTeX-verbatim-environments-local "minted")
-   (add-to-list 'LaTeX-verbatim-environments-local "Verbatim")
-   (add-to-list 'LaTeX-verbatim-environments-local "Verbatim*")
-   (add-to-list 'LaTeX-verbatim-environments-local "BVerbatim")
-   (add-to-list 'LaTeX-verbatim-environments-local "BVerbatim*")
-   (add-to-list 'LaTeX-verbatim-environments-local "LVerbatim")
-   (add-to-list 'LaTeX-verbatim-environments-local "LVerbatim*")
-   (add-to-list 'LaTeX-verbatim-environments-local "SaveVerbatim")
-   (add-to-list 'LaTeX-verbatim-environments-local "VerbatimOut")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "path")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "url")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "nolinkurl")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperbaseurl")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperimage")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperref")
-   (add-to-list 'LaTeX-verbatim-macros-with-delims-local "path")
-   (add-to-list 'LaTeX-verbatim-macros-with-delims-local "Verb")
+                     '(("inputenc" "utf8") ("xcolor" "rgb" "dvipsnames" "svgnames" "luatex") ("algorithm2e" "french" "onelanguage") ("minted" "cache=false") ("mdframed" "tikz") ("tcolorbox" "many") ("hyperref" "unicode=true") ("babel" "frenchb" "english") ("numprint" "autolanguage")))
    (TeX-run-style-hooks
     "random"
     "geometry"
@@ -29,7 +12,6 @@
     "ifluatex"
     "xcolor"
     "fontspec"
-    "luatexbase"
     "metalogo"
     "luacode"
     "luamplib"
@@ -69,6 +51,7 @@
     "mdframed"
     "tcolorbox"
     "forest"
+    "pgfgantt"
     "pythontex"
     "hyperref"
     "polyglossia"
@@ -83,16 +66,14 @@
     "profAlgo"
     "profPython"
     "profHTML"
+    "profSQL"
+    "profLua"
     "profCSS"
+    "profC"
     "profJS"
     "profNSI"
     "profStyle")
    (TeX-add-symbols
-    "lamatiere")
-   (LaTeX-add-environments
-    '("bclogo" LaTeX-env-args ["argument"] 1))
-   (LaTeX-add-polyglossia-langs
-    '("french" "defaultlanguage" "")
-    '("english" "otherlanguage" "")))
+    "lamatiere"))
  :latex)
 

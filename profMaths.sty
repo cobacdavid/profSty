@@ -54,16 +54,6 @@
 \newcommand{\lv}{\mbox{}\par}
 \newcommand{\lec}{\hfill\mbox{}}
 
-\theorembodyfont{\slshape}
-
-\newtheorem{definition}{Définition }
-\newtheorem{exemple}{Exemple }
-\newtheorem{propriete}{Propriété }
-\newtheorem{theoreme}{Théorème }
-\newtheorem{demo}{Démonstration }
-\newtheorem{remarque}{Remarque }
-%
-
 % New definition of square root:
 % it renames \sqrt as \oldsqrt
 \let\oldsqrt\sqrt
@@ -84,6 +74,42 @@
 %     \lower\ifx\math@version\bold@name0.6pt\else0.4pt\fi\box2%
 %   }%
 % }
+
+%%%%%%%%%%%%%%%
+%% Dans les tableaux de signes et de variations
+\newlength{\@vardelongueur}
+\settowidth{\@vardelongueur}{Var. de}
+\newcommand{\varde}[1]{%%
+  \TVcenter{%
+    \parbox{\@vardelongueur}{\centering%
+      Var. de\\$#1$%
+    }
+  }
+}
+
+\newlength{\@signedelongueur}
+\settowidth{\@signedelongueur}{Signe de}
+\newcommand{\sgnde}[1]{%%
+  \TVcenter{%
+    \parbox{\@signedelongueur}{\centering%
+      {\tiny Signe de }\\$#1$%
+    }
+  }
+}
+\newcommand{\sgnduq}{%%
+  \TVcenter{%
+    \parbox{\@signedelongueur}{\centering%
+      \scriptsize Signe du\\quotient%
+    }
+  }
+}
+\newcommand{\sgndup}{%%
+  \TVcenter{%
+    \parbox{\@signedelongueur}{\centering%
+      \scriptsize Signe du\\produit%
+    }
+  }
+}
 
 \newcommand{\histo}[3]{%
   \begin{tikzpicture}
@@ -130,46 +156,21 @@
     linecolor=blue!10,
     backgroundcolor=blue!5,
     roundcorner=5pt]%
-    \titrepoly{Devoir #1 \no#2}{devoirs}
+    \titrepoly{Devoir #1 n\no#2}{devoirs}
     \noindent{\color{\macouleur}\sffamily#3\hfill{\itshape #4\hspace*{0ex}}}
   \end{mdframed}%
 }
 
-%%%%%%%%%%%%%%%
-%% Dans les tableaux de signes et de variations
-\newlength{\@vardelongueur}
-\settowidth{\@vardelongueur}{Var. de}
-\newcommand{\varde}[1]{%%
-  \TVcenter{%
-    \parbox{\@vardelongueur}{\centering%
-      Var. de\\$#1$%
-    }
-  }
-}
+%% \theorembodyfont{\slshape}
 
-\newlength{\@signedelongueur}
-\settowidth{\@signedelongueur}{Signe de}
-\newcommand{\sgnde}[1]{%%
-  \TVcenter{%
-    \parbox{\@signedelongueur}{\centering%
-      {\tiny Signe de }\\$#1$%
-    }
-  }
-}
-\newcommand{\sgnduq}{%%
-  \TVcenter{%
-    \parbox{\@signedelongueur}{\centering%
-      \scriptsize Signe du\\quotient%
-    }
-  }
-}
-\newcommand{\sgndup}{%%
-  \TVcenter{%
-    \parbox{\@signedelongueur}{\centering%
-      \scriptsize Signe du\\produit%
-    }
-  }
-}
+\newtcbtheorem{definition}{Définition}{tdefinitionstyle}{def}
+\newtcbtheorem{exemple}{Exemple}{tmonblocbstyle}{exe}
+\newtcbtheorem{propriete}{Propriété}{tdefinitionstyle}{pro}
+\newtcbtheorem{theoreme}{Théorème}{tdefinitionstyle}{the}
+% \newtcbtheorem{demo}{Démonstration}{tmonblocbstyle}{dem}
+\newtcbtheorem{remarque}{Remarque}{tmonblocbstyle}{rem}
+% 
+
 
 %%%%%%%   UTILISE PSTRICKS
 

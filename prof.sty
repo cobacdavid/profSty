@@ -32,7 +32,7 @@
 }
 %
 \DeclareOption{ecran}{%
-  \PassOptionsToPackage{paperwidth=17cm,paperheight=12cm,body={16cm,11cm}}{geometry}%
+  \PassOptionsToPackage{paperwidth=20cm,paperheight=14cm,body={19cm,13cm}}{geometry}%
 }
 %
 % \newif\if@mono
@@ -100,9 +100,10 @@
 \RequirePackage{ifluatex}
 \ifluatex
   \RequirePackage[rgb,dvipsnames,svgnames,luatex]{xcolor}
-  \RequirePackage[no-math]{fontspec}
-  \RequirePackage{luatexbase}
-  \RequireLuaModule{lualibs}
+  %% \RequirePackage[no-math]{fontspec}
+  \RequirePackage{fontspec}
+  %% \RequirePackage{luatexbase}
+  %% \RequireLuaModule{lualibs}
   \RequirePackage{metalogo}
   \RequirePackage{luacode}
   %%\RequirePackage{fixltx2e} %% plante avec des versions > 2015
@@ -117,10 +118,10 @@
   %%\setmathfont{Asana Math}
   %%
   %% choix avant passage unicode
-  \setmainfont[BoldFont= texgyrepagella-bold.otf ,
-  ItalicFont= texgyrepagella-italic.otf ,
-  BoldItalicFont = texgyrepagella-bolditalic.otf ]
-  {texgyrepagella-regular.otf}
+  \setmainfont[BoldFont= texgyreadventor-bold.otf ,
+   ItalicFont= texgyreadventor-italic.otf ,
+   BoldItalicFont = texgyreadventor-bolditalic.otf ]
+   {texgyreadventor-regular.otf}
   %%
   % \setmainfont[UprightFont={* Light},
   % BoldFont={* Bold},
@@ -131,10 +132,12 @@
   % BoldItalicFont = OpenDyslexic-BoldItalic.otf ]
   % {OpenDyslexic-Regular.otf}
   % xits-math permet d'avoir un mathscr correct !
-  \setmathfont{XITSMath}
   %% \setmathfont{LatinModernMath-Regular}
   %% \usepackage[italic]{mathastext}
   %% \RequirePackage[unicode=true]{hyperref}
+  %% \setmainfont{STIX}
+  \setmathfont{XITSmath}
+  %%
   \setmonofont{Inconsolata}
 \else
   %% \RequirePackage[dvipsnames,svgnames,rgb]{xcolor}
@@ -203,7 +206,7 @@
 %% pour le pseudo-code
 %% \RequirePackage[french]{algorithme}
 \RequirePackage[french,onelanguage]{algorithm2e}
-\RequirePackage{minted}%%
+\RequirePackage[cache=false]{minted}%%
 \RequirePackage{etoolbox}%%
 \RequirePackage[tikz]{mdframed}
 \RequirePackage[many]{tcolorbox}
@@ -212,6 +215,8 @@
 %%
 %% pour les arbres
 \RequirePackage{forest}
+%% diagramme d'ordonnancement
+\RequirePackage{pgfgantt}
 %%
 \RequirePackage{pythontex}
 \RequirePackage[unicode=true]{hyperref}
@@ -240,7 +245,10 @@
 \RequirePackage{profAlgo}%%
 \RequirePackage{profPython}%%
 \RequirePackage{profHTML}%%
+\RequirePackage{profSQL}%%
+\RequirePackage{profLua}%%
 \RequirePackage{profCSS}%%
+\RequirePackage{profC}%%
 \RequirePackage{profJS}%%
 \RequirePackage{profNSI}%%
 \RequirePackage{profStyle}

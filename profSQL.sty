@@ -1,0 +1,80 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{profSQL}[2020/10/24]
+
+
+\newcommand{\sql}{\texttt{SQL}\xspace}
+%
+\newlength{\sqlLogoSize}
+\setlength{\sqlLogoSize}{\f@size pt}
+
+%% styles minted
+%% pour colorer le python
+\newmintedfile[comsql]{sql}{%
+  fontfamily=tt,
+  linenos,
+  mathescape,
+  breaklines,
+  autogobble,
+  framerule=1pt,
+  rulecolor=red,
+  numbersep=3pt%
+}%%
+\newminted[envsql]{sql}{%
+  fontfamily=tt,
+  linenos,
+  mathescape,
+  breaklines,
+  autogobble,
+  framerule=1pt,
+  rulecolor=red,
+  numbersep=3pt%
+}%%
+%% style tcolorbox
+%% pour encadrer le code
+\newtcolorbox{boitesql}{%%
+  enhanced,
+  breakable,
+  colback=violet!15,
+  colframe=violet!20,
+  colbacktitle=violet!30,
+  title={\sffamily\texttt{\color{violet!80} Code SQL}%%
+    \hfill%
+    \includegraphics[height=\clangLogoSize]{sql.png}%%
+  },
+  %% title style={left color=yellow!30, right color=violet!20},
+  boxrule=5pt,
+  titlerule=.5pt,
+  bottomtitle=-2pt,
+  toptitle=-2pt,
+  arc=10pt,
+  watermark graphics=sql.png,
+  watermark zoom=1.00,
+  watermark opacity=.1,
+  %% drop fuzzy shadow=violet!50!black
+}
+
+%% À UTILISER AVEC UN FICHIER
+\newcommand{\fichiersql}[1]{%
+  \begin{english}%%
+    \begin{boitesql}
+      \comsql{#1}
+    \end{boitesql}
+  \end{english}%%
+}
+
+%% À UTILISER DIRECTEMENT
+\newenvironment{codesql}{
+  \VerbatimEnvironment
+  \begin{english}%%
+    \begin{boitesql}
+      \begin{envsql}%
+      }{\end{envsql}
+    \end{boitesql}
+  \end{english}
+}
+
+\endinput
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

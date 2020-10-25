@@ -11,10 +11,9 @@
     "pointillles"
     "pointilllles"
     "pointillllles"
-    "pointilllllles")
-   (LaTeX-add-environments
-    '("commentaire" LaTeX-env-args ["argument"] 1)
-    '("monbloc" LaTeX-env-args ["argument"] 1))
+    "pointilllllles"
+    "pointillllllles"
+    "pointilllllllles")
    (LaTeX-add-counters
     "nbrep"
     "nbfois"))

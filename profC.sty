@@ -1,0 +1,80 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{profC}[2020/10/22]
+
+
+\newcommand{\clang}{\texttt{C}\xspace}
+%
+\newlength{\clangLogoSize}
+\setlength{\clangLogoSize}{\f@size pt}
+
+%% styles minted
+%% pour colorer le python
+\newmintedfile[comclang]{c}{%
+  fontfamily=tt,
+  linenos,
+  mathescape,
+  breaklines,
+  autogobble,
+  framerule=1pt,
+  rulecolor=red,
+  numbersep=3pt%
+}%%
+\newminted[envclang]{c}{%
+  fontfamily=tt,
+  linenos,
+  mathescape,
+  breaklines,
+  autogobble,
+  framerule=1pt,
+  rulecolor=red,
+  numbersep=3pt%
+}%%
+%% style tcolorbox
+%% pour encadrer le code
+\newtcolorbox{boiteclang}{%%
+  enhanced,
+  breakable,
+  colback=blue!15,
+  colframe=blue!20,
+  colbacktitle=blue!30,
+  title={\sffamily\texttt{\color{blue!80} Code C}%%
+    \hfill%
+    \includegraphics[height=\clangLogoSize]{clang.png}%%
+  },
+  %% title style={left color=yellow!30, right color=blue!20},
+  boxrule=5pt,
+  titlerule=.5pt,
+  bottomtitle=-2pt,
+  toptitle=-2pt,
+  arc=10pt,
+  watermark graphics=clang.png,
+  watermark zoom=1.00,
+  watermark opacity=.1,
+  %% drop fuzzy shadow=blue!50!black
+}
+
+%% À UTILISER AVEC UN FICHIER
+\newcommand{\fichierc}[1]{%
+  \begin{english}%%
+    \begin{boiteclang}
+      \comclang{#1}
+    \end{boiteclang}
+  \end{english}%%
+}
+
+%% À UTILISER DIRECTEMENT
+\newenvironment{codec}{
+  \VerbatimEnvironment
+  \begin{english}%%
+    \begin{boiteclang}
+      \begin{envclang}%
+      }{\end{envclang}
+    \end{boiteclang}
+  \end{english}
+}
+
+\endinput
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

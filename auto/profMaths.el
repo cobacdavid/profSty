@@ -2,10 +2,10 @@
  "profMaths"
  (lambda ()
    (TeX-add-symbols
-    '("sgnde" 1)
-    '("varde" 1)
     '("devoir" 4)
     '("histo" 3)
+    '("sgnde" 1)
+    '("varde" 1)
     '("cvect" 2)
     '("norme" 1)
     '("vect" 1)
@@ -32,9 +32,9 @@
     "ron"
     "lv"
     "lec"
-    "nom"
     "sgnduq"
     "sgndup"
+    "nom"
     "dps"
     "Vect"
     "vecu"
@@ -43,14 +43,6 @@
     "sqrt"
     "DHLhksqrt")
    (LaTeX-add-environments
-    '("commentaire" LaTeX-env-args ["argument"] 1)
-    '("monbloc" LaTeX-env-args ["argument"] 1)
-    "definition"
-    "exemple"
-    "propriete"
-    "theoreme"
-    "demo"
-    "remarque"
     "exercice")
    (LaTeX-add-counters
     "numeroexo"))
