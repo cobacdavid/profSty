@@ -3,23 +3,27 @@
  (lambda ()
    (TeX-add-to-alist 'LaTeX-provided-package-options
                      '(("fontspec" "no-math") ("inputenc" "utf8") ("algorithm2e" "french" "onelanguage") ("mdframed" "tikz") ("babel" "frenchb") ("numprint" "autolanguage")))
-   (add-to-list 'LaTeX-verbatim-environments-local "minted")
-   (add-to-list 'LaTeX-verbatim-environments-local "Verbatim")
-   (add-to-list 'LaTeX-verbatim-environments-local "Verbatim*")
-   (add-to-list 'LaTeX-verbatim-environments-local "BVerbatim")
-   (add-to-list 'LaTeX-verbatim-environments-local "BVerbatim*")
-   (add-to-list 'LaTeX-verbatim-environments-local "LVerbatim")
-   (add-to-list 'LaTeX-verbatim-environments-local "LVerbatim*")
-   (add-to-list 'LaTeX-verbatim-environments-local "SaveVerbatim")
    (add-to-list 'LaTeX-verbatim-environments-local "VerbatimOut")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "path")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "url")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "nolinkurl")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperbaseurl")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperimage")
+   (add-to-list 'LaTeX-verbatim-environments-local "SaveVerbatim")
+   (add-to-list 'LaTeX-verbatim-environments-local "LVerbatim*")
+   (add-to-list 'LaTeX-verbatim-environments-local "LVerbatim")
+   (add-to-list 'LaTeX-verbatim-environments-local "BVerbatim*")
+   (add-to-list 'LaTeX-verbatim-environments-local "BVerbatim")
+   (add-to-list 'LaTeX-verbatim-environments-local "Verbatim*")
+   (add-to-list 'LaTeX-verbatim-environments-local "Verbatim")
+   (add-to-list 'LaTeX-verbatim-environments-local "minted")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "EscVerb*")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "EscVerb")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "href")
    (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperref")
-   (add-to-list 'LaTeX-verbatim-macros-with-delims-local "Verb")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperimage")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperbaseurl")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "nolinkurl")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "url")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "path")
+   (add-to-list 'LaTeX-verbatim-macros-with-delims-local "Verb*")
    (add-to-list 'LaTeX-verbatim-macros-with-delims-local "path")
+   (add-to-list 'LaTeX-verbatim-macros-with-delims-local "Verb")
    (TeX-run-style-hooks
     "fontspec"
     "luatexbase"
@@ -54,7 +58,6 @@
     "mflogo"
     "algorithm2e"
     "minted"
-    "etoolbox"
     "mdframed"
     "polyglossia"
     "babel"
@@ -66,9 +69,6 @@
     '("Section" 1)
     "og"
     "fg"
-    "ieme"
-    "ier"
-    "no"
     "macouleur"
     "blanc"
     "noir"
@@ -89,7 +89,7 @@
     "rtQuestion"
     "rtQuestions")
    (LaTeX-add-polyglossia-langs
-    '("francais" "mainlanguage" "")
+    '("french" "defaultlanguage" "")
     '("english" "otherlanguage" "")))
  :latex)
 

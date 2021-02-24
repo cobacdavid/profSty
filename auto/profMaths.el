@@ -10,6 +10,7 @@
     '("norme" 1)
     '("vect" 1)
     '("fonc" 4)
+    '("dinv" 1)
     '("calt" 1)
     '("ora" 1)
     '("rg" 1)

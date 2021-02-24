@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{profLycee}[2014/05/19]
+\ProvidesPackage{profStylePST}[2019/09/16]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -15,7 +15,8 @@
     %% \color{\maPScouleur}%%
     \macouleur%
 \vskip\footruleskip\vskip-\footrulewidth
-\hrule width\headwidth height\footrulewidth\vskip\footruleskip}}
+\hrule width\headwidth height\footrulewidth\vskip\footruleskip
+}}
 \renewcommand{\headrulewidth}{0mm}
 % 
 \newcommand{\rheadTexte}{\large\sffamily\slshape%%
@@ -245,9 +246,9 @@
   \par\noindent\traitDegrade\par%
 }
 \newcommand{\dm}[3]{%%
-  \titrepoly{Devoir Maison n\no#1}{devoir}
+  \titrepoly{Devoir Maison n\no#1}
   {\sffamily#2\hfill{\itshape pour le #3\hspace*{2ex}}}\par
-  %% \par\noindent\traitDegrade\par%
+  \par\noindent\traitDegrade\par%
 }
 
 %%%%%%%%%%%%%%%

@@ -1,14 +1,13 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{profLua}[2020/05/03]
+\ProvidesPackage{proftex}[2020/05/03]
 
 
-\newlength{\luaLogoSize}
-\setlength{\luaLogoSize}{\f@size pt}
-\setlength{\luaLogoSize}{1.1\luaLogoSize}
+\newlength{\texLogoSize}
+\setlength{\texLogoSize}{\f@size pt}
 
 %% styles minted
 %% pour colorer le html
-\newmintedfile[comlua]{lua}{%
+\newmintedfile[comtex]{latex}{%
   fontfamily=tt,
   linenos,
   mathescape,
@@ -18,7 +17,7 @@
   rulecolor=blue,
   numbersep=3pt%
 }%%
-\newminted[envlua]{lua}{%
+\newminted[envtex]{latex}{%
   fontfamily=tt,
   linenos,
   mathescape,
@@ -31,22 +30,22 @@
 
 %% style tcolorbox
 %% pour encadrer le code
-\newtcolorbox{boitelua}{%%
+\newtcolorbox{boitetex}{%%
   enhanced,
   breakable,
-  colback=blue!5,
-  colframe=blue,
-  colbacktitle=blue!30,
-  title={\sffamily\texttt{\color{blue!80} Code Lua}%%
+  %colback=blue!5,
+  %colframe=blue,
+  %colbacktitle=blue!30,
+  title={\sffamily\texttt{Code \LaTeX}%%
     \hfill%
-    \includegraphics[height=\luaLogoSize]{lua.png}%%
+    \includegraphics[height=\luaLogoSize]{latex.png}%%
   },
   boxrule=5pt,
   titlerule=.5pt,
   bottomtitle=-2pt,
   toptitle=-2pt,
   arc=10pt,
-  watermark graphics=lua.png,
+  watermark graphics=latex.png,
   watermark zoom=1.00,
   watermark opacity=.1,
   %% drop fuzzy shadow=blue!50!black
@@ -54,22 +53,22 @@
 
 
 %% À UTILISER AVEC UN FICHIER
-\newcommand{\fichierlua}[1]{%
+\newcommand{\fichiertex}[1]{%
   \begin{english}%%
-    \begin{boitelua}
-      \comlua{#1}
-    \end{boitelua}
+    \begin{boitetex}
+      \comtex{#1}
+    \end{boitetex}
   \end{english}%%
 }
 
 %% À UTILISER DIRECTEMENT
-\newenvironment{codelua}{
+\newenvironment{codetex}{
   \VerbatimEnvironment
   \begin{english}%%
-    \begin{boitelua}
-      \begin{envlua}%
-      }{\end{envlua}
-    \end{boitelua}
+    \begin{boitetex}
+      \begin{envtex}%
+      }{\end{envtex}
+    \end{boitetex}
   \end{english}
 }
 

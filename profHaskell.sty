@@ -1,0 +1,85 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{profHaskell}[2021/02/24]
+
+
+\newlength{\haskellLogoSize}
+\setlength{\haskellLogoSize}{\f@size pt}
+\setlength{\haskellLogoSize}{1.1\haskellLogoSize}
+
+\definecolor{haskellun}{rgb}{.561,.306,.545}
+\definecolor{haskelldeux}{rgb}{.369,.314,.525}
+\definecolor{haskelltrois}{rgb}{.271,.227,.384}
+
+%% styles minted
+%% pour colorer le html
+\newmintedfile[comhaskell]{haskell}{%
+  fontfamily=tt,
+  linenos,
+  mathescape,
+  breaklines,
+  autogobble,
+  framerule=1pt,
+  rulecolor=haskelltrois,
+  numbersep=3pt%
+}%%
+\newminted[envhaskell]{haskell}{%
+  fontfamily=tt,
+  linenos,
+  mathescape,
+  breaklines,
+  autogobble,
+  framerule=1pt,
+  rulecolor=haskelltrois,
+  numbersep=3pt%
+}%%
+
+%% style tcolorbox
+%% pour encadrer le code
+\newtcolorbox{boitehaskell}{%%
+  enhanced,
+  breakable,
+  colback=haskellun!5,
+  colframe=haskellun,
+  colbacktitle=haskelltrois!30,
+  title={\sffamily\texttt{\color{haskelldeux} Code Haskell}%%
+    \hfill%
+    \includegraphics[height=\haskellLogoSize]{haskell.png}%%
+  },
+  boxrule=5pt,
+  titlerule=.5pt,
+  bottomtitle=-2pt,
+  toptitle=-2pt,
+  arc=10pt,
+  watermark graphics=haskell.png,
+  watermark zoom=1.00,
+  watermark opacity=.1,
+  %% drop fuzzy shadow=blue!50!black
+}
+
+
+%% À UTILISER AVEC UN FICHIER
+\newcommand{\fichierhaskell}[1]{%
+  \begin{english}%%
+    \begin{boitehaskell}
+      \comhaskell{#1}
+    \end{boitehaskell}
+  \end{english}%%
+}
+
+%% À UTILISER DIRECTEMENT
+\newenvironment{codehaskell}{
+  \VerbatimEnvironment
+  \begin{english}%%
+    \begin{boitehaskell}
+      \begin{envhaskell}%
+      }{\end{envhaskell}
+    \end{boitehaskell}
+  \end{english}
+}
+
+
+\endinput
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

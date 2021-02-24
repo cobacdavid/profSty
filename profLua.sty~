@@ -1,0 +1,127 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{profHTML}[2019/01/29]
+
+
+\newlength{\htmlLogoSize}
+\setlength{\htmlLogoSize}{\f@size pt}
+\setlength{\htmlLogoSize}{1.1\htmlLogoSize}
+
+%% styles minted
+%% pour colorer le html
+\newmintedfile[comhtml]{html}{%
+  fontfamily=tt,
+  linenos,
+  mathescape,
+  breaklines,
+  autogobble,
+  framerule=1pt,
+  rulecolor=red,
+  numbersep=3pt%
+}%%
+\newminted[envhtml]{html}{%
+  fontfamily=tt,
+  linenos,
+  mathescape,
+  breaklines,
+  autogobble,
+  framerule=1pt,
+  rulecolor=red,
+  numbersep=3pt%
+}%%
+
+%% style tcolorbox
+%% pour encadrer le code
+\newtcolorbox{boitehtml}{%%
+  enhanced,
+  breakable,
+  colback=red!5,
+  colframe=red,
+  colbacktitle=red!30,
+  title={\sffamily\texttt{\color{red!80} Code HTML}%%
+    \hfill%
+    \includegraphics[height=\htmlLogoSize]{html.png}%%
+  },
+  %% title style={left color=yellow!30, right color=blue!20},
+  boxrule=5pt,
+  titlerule=.5pt,
+  bottomtitle=-2pt,
+  toptitle=-2pt,
+  arc=10pt,
+  watermark graphics=html.png,
+  watermark zoom=1.00,
+  watermark opacity=.1,
+  %% drop fuzzy shadow=blue!50!black
+}
+
+
+%% À UTILISER AVEC UN FICHIER
+\newcommand{\fichierhtml}[1]{%
+  \begin{english}%%
+    \begin{boitehtml}
+      \comhtml{#1}
+    \end{boitehtml}
+  \end{english}%%
+}
+
+%% À UTILISER DIRECTEMENT
+\newenvironment{codehtml}{
+  \VerbatimEnvironment
+  \begin{english}%%
+    \begin{boitehtml}
+      \begin{envhtml}%
+      }{\end{envhtml}
+    \end{boitehtml}
+  \end{english}
+}
+
+% \newcommand{\vhtml}[1]{%
+%   \begin{english}%%
+%     \begin{mdframed}[%%
+%       linecolor=red,
+%       linewidth=5pt,
+%       frametitlebackgroundcolor=red!30,
+%       frametitlerule=true,
+%       backgroundcolor=red!5,
+%       roundcorner=10pt,
+%       frametitle={\bfseries\sffamily\texttt{\color{white} Code HTML}%%
+%         \hfill%
+%         \includegraphics[height=\htmlLogoSize]{images/html.png}%%
+%       }]%
+%       \comhtml{#1}%%
+%     \end{mdframed}%%
+%   \end{english}%%
+% }
+
+% \newenvironment{htmldirect}{
+%   \VerbatimEnvironment
+%   \begin{english}%%
+%     \begin{mdframed}[%%
+%       linecolor=blue!20,
+%       linewidth=5pt,
+%       frametitlebackgroundcolor=yellow!30,
+%       frametitlerule=true,
+%       backgroundcolor=yellow!15,
+%       roundcorner=10pt,
+%       frametitle={\bfseries\sffamily\texttt{\color{white} Code HTML}%%
+%         \hfill%
+%         \includegraphics[height=\htmlLogoSize]{images/html.png}%%
+%       }]%
+%       \begin{minted}[%
+%         fontfamily=tt,
+%         linenos,
+%         mathescape,
+%         breaklines,
+%         autogobble,
+%         framerule=1pt,
+%         rulecolor=red,
+%         numbersep=3pt%
+%         ]{html}}{%
+%       \end{minted}
+%     \end{mdframed}
+%   \end{english}
+% }
+\endinput
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

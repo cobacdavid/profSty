@@ -4,6 +4,7 @@ import requests
 import imgkit
 import shutil
 import dvtDecimal as dvt
+import abrviz as abr
 
 ##########################################################
 # This is a SO code at this adress:
@@ -137,8 +138,8 @@ def prof_oeis_A(n, nb_termes=10):
     reponse = requests.get(url)
     resultat = reponse.json()['results'][0]['data']
     resultat = resultat.split(',')[:nb_termes]
-    r = ", ".join(resultat[:nb_termes-1])
-    r += " et " + resultat[nb_termes-1]
+    r = ", ".join(resultat[:nb_termes - 1])
+    r += " et " + resultat[nb_termes - 1]
     return r
 
 
@@ -296,15 +297,13 @@ def prof_image_site(url, image, texte="", dimension="10cm"):
     options = {'quiet': ''}
     imgkit.from_url(url, image, options=options)
     code = __prof_deb_env("mdframed",
-                        options=["roundcorner=10pt",
-                                 "linewidth=1bp",
-                                 r"frametitle=\textbf{Vue du site }"+texte,
-                                 "frametitlebackgroundcolor=gray!30",
-                                 "frametitlerule=true"])
+                          options=["roundcorner=10pt",
+                                   "linewidth=1bp",
+                                   r"frametitle=\textbf{Vue du site }"+texte,
+                                   "frametitlebackgroundcolor=gray!30",
+                                   "frametitlerule=true"])
     code += __prof_deb_env("center")
-    code += r"\includegraphics[width=" + \
-        dimension + \
-        "]{" + image + "}"
+    code += r"\includegraphics[width=" + dimension + "]{" + image + "}"
     code += __prof_fin_env("center")
     code += __prof_fin_env("mdframed")
     return code
@@ -573,7 +572,7 @@ class noeud:
         #
         return "node{" + str(valeur) + "} " + \
             delmg_g + gauche + delmg_d + \
-            "child [missing]" * (nb-1) + \
+            "child [missing]" * (nb - 1) + \
             delmd_g + droite + delmd_d
 
     def to_tikz(self, h):
@@ -587,27 +586,27 @@ class noeud:
                and self.droit is not None:
                 g = noeud._feuille(self.gauche) \
                     if isinstance(self.gauche, int) \
-                    else self.gauche.to_tikz(h//2)
+                    else self.gauche.to_tikz(h // 2)
                 d = noeud._feuille(self.droit) \
                     if isinstance(self.droit, int) \
-                    else self.droit.to_tikz(h//2)
+                    else self.droit.to_tikz(h // 2)
                 return noeud._parent((self.etiquette), g, d, h)
             elif self.gauche is not None:
                 g = noeud._feuille(self.gauche) \
                     if isinstance(self.gauche, int) \
-                    else self.gauche.to_tikz(h//2)
+                    else self.gauche.to_tikz(h // 2)
                 return noeud._parent(self.etiquette, g, manquant, h)
             elif self.droit is not None:
                 d = noeud._feuille(self.droit) \
                     if isinstance(self.droit, int) \
-                    else self.droit.to_tikz(h//2)
+                    else self.droit.to_tikz(h // 2)
                 return noeud._parent(self.etiquette, manquant, d, h)
             else:
                 return noeud._parent(self.etiquette, manquant, manquant, h)
 
     def __repr__(self):
         h = self.get_hauteur()
-        return "\\" + str(self.to_tikz(2**(h-2))) + ";"
+        return "\\" + str(self.to_tikz(2 ** (h - 2))) + ";"
 
 
 def prof_arbre_binaire(arbre, *opt):
@@ -615,7 +614,7 @@ def prof_arbre_binaire(arbre, *opt):
     for s in opt:
         o += ',' + str(s)
     code_tikz = __prof_deb_env("tikzpicture",
-                             options=["nodes={draw, circle, thick}" + o])
+                               options=["nodes={draw, circle, thick}" + o])
     code_tikz += arbre.__repr__()
     code_tikz += __prof_fin_env("tikzpicture")
     return code_tikz
@@ -625,11 +624,26 @@ def _arbre_binaire_complet(hauteur, etiquette):
     if hauteur == 0:
         return "None"
     return f"noeud({etiquette}," + \
-        _arbre_binaire_complet(hauteur-1, 2*etiquette) + "," + \
-        _arbre_binaire_complet(hauteur-1, 2*etiquette+1) + ")"
+        _arbre_binaire_complet(hauteur - 1, 2 * etiquette) + "," + \
+        _arbre_binaire_complet(hauteur - 1, 2 * etiquette + 1) + ")"
 
 
 def prof_arbre_binaire_complet(hauteur, *options):
-    arbre = eval(_arbre_binaire_complet(hauteur+1, 1))
+    arbre = eval(_arbre_binaire_complet(hauteur + 1, 1))
     return prof_arbre_binaire(arbre, *options)
 
+#################
+###### ABR ######
+#################
+
+
+def prof_abr(T, nom_sortie, largeur):
+    a = abr.Arbre()
+    for e in T:
+        a.inserer(abr.Noeud(e))
+
+    a.sortie(a.racine, nom_sortie, "png")
+
+    code = r"\includegraphics[width=" + largeur + "]" +\
+        "{" + nom_sortie + ".png}"
+    return code

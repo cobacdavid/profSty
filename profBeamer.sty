@@ -84,13 +84,15 @@
 %%
 \RequirePackage[french,onelanguage]{algorithm2e}
 \RequirePackage{minted}%%
-\RequirePackage{etoolbox}%%
+%% \RequirePackage{etoolbox}%%
 \RequirePackage[tikz]{mdframed}
 %% \RequirePackage{profPython}
 \ifluatex
 \RequirePackage{polyglossia}
-\setmainlanguage{francais}
+\setdefaultlanguage{french}
 \setotherlanguage{english}
+% \setmainlanguage{francais}
+% \setotherlanguage{english}
 \else
 \RequirePackage[frenchb]{babel}
 \fi
@@ -102,9 +104,9 @@
 % \newcommand{\text}{\textrm}
 \newcommand{\og}{«~}
 \newcommand{\fg}{»}
-\newcommand{\ieme}{$^\textrm{e}\,$}
-\newcommand{\ier}{\textsuperscript{er}}
-\newcommand{\no}{n\textsuperscript{o}}
+%% \newcommand{\ieme}{$^\textrm{e}\,$}
+%%\newcommand{\ier}{\textsuperscript{er}}
+%% \newcommand{\no}{n\textsuperscript{o}}
 \fi
 %%
 \def\maPScouleur{gray}

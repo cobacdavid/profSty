@@ -206,6 +206,8 @@
 %% pour le pseudo-code
 %% \RequirePackage[french]{algorithme}
 \RequirePackage[french,onelanguage]{algorithm2e}
+%%\RequirePackage[cache=false]{minted}%%
+%%\RequirePackage[outputdir=cache,cachedir=cache,cache=true]{minted}%%
 \RequirePackage[cache=false]{minted}%%
 \RequirePackage{etoolbox}%%
 \RequirePackage[tikz]{mdframed}
@@ -217,7 +219,9 @@
 \RequirePackage{forest}
 %% diagramme d'ordonnancement
 \RequirePackage{pgfgantt}
-%%
+%% environnement axis
+\RequirePackage{pgfplots}
+%% 
 \RequirePackage{pythontex}
 \RequirePackage[unicode=true]{hyperref}
 %% \RequirePackage{auto-pst-pdf}
@@ -247,6 +251,8 @@
 \RequirePackage{profHTML}%%
 \RequirePackage{profSQL}%%
 \RequirePackage{profLua}%%
+\RequirePackage{profHaskell}%%
+\RequirePackage{proftex}%%
 \RequirePackage{profCSS}%%
 \RequirePackage{profC}%%
 \RequirePackage{profJS}%%

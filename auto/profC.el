@@ -1,12 +1,12 @@
 (TeX-add-style-hook
- "profPython"
+ "profC"
  (lambda ()
    (TeX-add-symbols
-    '("fichierpython" 1)
-    "python")
+    '("fichierc" 1)
+    "clang")
    (LaTeX-add-environments
-    "codepython")
+    "codec")
    (LaTeX-add-lengths
-    "pythonLogoSize"))
+    "clangLogoSize"))
  :latex)
 

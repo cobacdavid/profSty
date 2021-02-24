@@ -1,12 +1,11 @@
 (TeX-add-style-hook
- "profPython"
+ "profLua"
  (lambda ()
    (TeX-add-symbols
-    '("fichierpython" 1)
-    "python")
+    '("fichierlua" 1))
    (LaTeX-add-environments
-    "codepython")
+    "codelua")
    (LaTeX-add-lengths
-    "pythonLogoSize"))
+    "luaLogoSize"))
  :latex)
 

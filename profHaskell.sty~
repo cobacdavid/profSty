@@ -57,7 +57,7 @@
 \newcommand{\fichierlua}[1]{%
   \begin{english}%%
     \begin{boitelua}
-      \comlua{#1}
+      \comhtml{#1}
     \end{boitelua}
   \end{english}%%
 }

@@ -1,0 +1,301 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{profPython}[2019/01/29]
+
+%% styles minted
+\newmintedfile[vpy]{python}{%
+  fontfamily=tt,
+  linenos,
+  mathescape,
+  breaklines,
+  autogobble,
+  framerule=1pt,
+  rulecolor=red,
+  python3,
+  numbersep=3pt%
+}%%
+\newmintedfile[vhtm]{html}{%
+  fontfamily=tt,
+  linenos,
+  mathescape,
+  breaklines,
+  autogobble,
+  framerule=1pt,
+  rulecolor=red,
+  numbersep=3pt%
+}%%
+\newmintedfile[vcs]{css}{%
+  fontfamily=tt,
+  linenos,
+  mathescape,
+  breaklines,
+  autogobble,
+  framerule=1pt,
+  rulecolor=blue,
+  numbersep=3pt%
+}%%
+
+\newmintedfile[vjs]{js}{%
+  fontfamily=tt,
+  linenos,
+  mathescape,
+  breaklines,
+  autogobble,
+  framerule=1pt,
+  rulecolor=yellow,
+  numbersep=3pt%
+}%%
+
+
+%%% Python
+\newcommand{\python}{\texttt{Python}\xspace}
+%%\DefineVerbatimEnvironment{verbatimpython}{Verbatim}{%%
+%%  label={Code \python},frame=single,commandchars=\\\{\}}
+\DefineVerbatimEnvironment{verbatimpython}{Verbatim}{%%
+  label={Code \python},frame=single}
+
+\graphicspath{{/home/david/travail/david/production/info/config/texmf/tex/latex/prof/}}
+\newlength{\pythonLogoSize}
+\setlength{\pythonLogoSize}{\f@size pt}
+%% \multiply\pythonLogoSize by 1.05
+% \newcommand{\vpython}[1]{%
+%   \begin{english}%%
+%     \begin{mdframed}[%%
+%       linecolor=blue!20,
+%       linewidth=5pt,
+%       frametitlebackgroundcolor=yellow!30,
+%       frametitlerule=true,
+%       backgroundcolor=yellow!15,
+%       roundcorner=10pt,
+%       frametitle={\sffamily\texttt{\color{blue!80} Code Python}%%
+%         \hfill%
+%         \includegraphics[height=\pythonLogoSize]{python.png}%%
+%       }]%
+%       \vpy{#1}%%
+%     \end{mdframed}%%
+%   \end{english}%%
+% }
+
+\newtcolorbox{boitepython}{%%
+  enhanced,
+  breakable,
+  colback=yellow!15,
+  colframe=blue!20,
+  colbacktitle=yellow!30,
+  title={\sffamily\texttt{\color{blue!80} Code Python}%%
+    \hfill%
+    \includegraphics[height=\pythonLogoSize]{python.png}%%
+  },
+  %% title style={left color=yellow!30, right color=blue!20},
+  boxrule=5pt,
+  titlerule=.5pt,
+  bottomtitle=-2pt,
+  toptitle=-2pt,
+  arc=10pt,
+  watermark graphics=python.png,
+  watermark zoom=1.00,
+  watermark opacity=.1,
+  %% drop fuzzy shadow=blue!50!black
+}
+
+\newcommand{\vpython}[1]{%
+  \begin{english}%%
+    % \begin{mdframed}[%%
+    %   % linecolor=blue!20,
+    %   % linewidth=5pt,
+    %   % frametitlebackgroundcolor=yellow!30,
+    %   % frametitlerule=true,
+    %   % backgroundcolor=yellow!15,
+    %   roundcorner=10pt,
+    %   frametitle={\sffamily\texttt{\color{blue!80} Code Python}%%
+    %     \hfill%
+    %     \includegraphics[height=\pythonLogoSize]{python.png}%%
+    %   }]%
+    %   \vpy{#1}%%
+    % \end{mdframed}%%
+    \begin{boitepython}
+      \vpy{#1}
+    \end{boitepython}
+  \end{english}%%
+}
+
+
+\newenvironment{pythondirect}{
+  \VerbatimEnvironment
+  \begin{english}%%
+    \begin{mdframed}[%%
+      linecolor=blue!20,
+      linewidth=5pt,
+      frametitlebackgroundcolor=yellow!30,
+      frametitlerule=true,
+      backgroundcolor=yellow!15,
+      roundcorner=10pt,
+      frametitle={\sffamily\texttt{\color{blue!80} Code Python}%%
+        \hfill%
+        \includegraphics[height=\pythonLogoSize]{python.png}%%
+      }]%
+      \begin{minted}[%
+        fontfamily=tt,
+        linenos,
+        mathescape,
+        breaklines,
+        autogobble,
+        framerule=1pt,
+        rulecolor=red,
+        numbersep=3pt%
+        ]{python3}}{%
+      \end{minted}
+    \end{mdframed}
+  \end{english}
+}
+
+\begin{pycode}[dft]
+from profPythonPY import *
+\end{pycode}
+
+\begin{pycode}[dvt]
+from dvtDecimal import *
+\end{pycode}
+
+%% html
+\newlength{\htmlLogoSize}
+\setlength{\htmlLogoSize}{\f@size pt}
+%% \multiply\htmlLogoSize by 1.05
+\setlength{\htmlLogoSize}{1.1\htmlLogoSize}
+\newcommand{\vhtml}[1]{%
+  \begin{english}%%
+    \begin{mdframed}[%%
+      linecolor=red,
+      linewidth=5pt,
+      frametitlebackgroundcolor=red!30,
+      frametitlerule=true,
+      backgroundcolor=red!5,
+      roundcorner=10pt,
+      frametitle={\bfseries\sffamily\texttt{\color{white} Code HTML}%%
+        \hfill%
+        \includegraphics[height=\htmlLogoSize]{html.png}%%
+      }]%
+      \vhtm{#1}%%
+    \end{mdframed}%%
+  \end{english}%%
+}
+
+\newenvironment{htmldirect}{
+  \VerbatimEnvironment
+  \begin{english}%%
+    \begin{mdframed}[%%
+      linecolor=blue!20,
+      linewidth=5pt,
+      frametitlebackgroundcolor=yellow!30,
+      frametitlerule=true,
+      backgroundcolor=yellow!15,
+      roundcorner=10pt,
+      frametitle={\bfseries\sffamily\texttt{\color{white} Code HTML}%%
+        \hfill%
+        \includegraphics[height=\htmlLogoSize]{html.png}%%
+      }]%
+      \begin{minted}[%
+        fontfamily=tt,
+        linenos,
+        mathescape,
+        breaklines,
+        autogobble,
+        framerule=1pt,
+        rulecolor=red,
+        numbersep=3pt%
+        ]{html}}{%
+      \end{minted}
+    \end{mdframed}
+  \end{english}
+}
+
+\newcommand{\vueSite}[1]{%%
+  \begin{mdframed}[
+    roundcorner=10pt,
+    linewidth=1bp,
+    frametitle=\textbf{Rendu du navigateur},
+    frametitlebackgroundcolor=gray!30]
+    \begin{center}
+      \includegraphics[width=\linewidth]{#1}
+    \end{center}
+  \end{mdframed}%%
+  }
+
+%% css
+\newlength{\cssLogoSize}
+\setlength{\cssLogoSize}{\f@size pt}
+%% \multiply\htmlLogoSize by 1.05
+\setlength{\cssLogoSize}{1.1\cssLogoSize}
+\newcommand{\vcss}[1]{%
+  \begin{english}%%
+    \begin{mdframed}[%%
+      linecolor=blue,
+      linewidth=5pt,
+      frametitlebackgroundcolor=blue!30,
+      frametitlerule=true,
+      backgroundcolor=blue!5,
+      roundcorner=10pt,
+      frametitle={\bfseries\sffamily\texttt{\color{white} Code CSS}%%
+        \hfill%
+        \includegraphics[height=\htmlLogoSize]{css.png}%%
+      }]%
+      \vcs{#1}%%
+    \end{mdframed}%%
+  \end{english}%%
+}
+
+%% JS
+\newlength{\javascriptLogoSize}
+\setlength{\javascriptLogoSize}{\f@size pt}
+%% \multiply\pythonLogoSize by 1.05
+\newcommand{\vjscript}[1]{%
+  \begin{english}%%
+    \begin{mdframed}[%%
+      linecolor=yellow!20,
+      linewidth=5pt,
+      frametitlebackgroundcolor=yellow!30,
+      frametitlerule=true,
+      backgroundcolor=yellow!15,
+      roundcorner=10pt,
+      frametitle={\sffamily\texttt{\color{green!80} Code Javascript}%%
+        \hfill%
+        \includegraphics[height=\javascriptLogoSize]{js.png}%%
+      }]%
+      \vjs{#1}%%
+    \end{mdframed}%%
+  \end{english}%%
+}
+
+\newenvironment{jscriptdirect}{
+  \VerbatimEnvironment
+  \begin{english}%%
+    \begin{mdframed}[%%
+      linecolor=yellow!20,
+      linewidth=5pt,
+      frametitlebackgroundcolor=yellow!30,
+      frametitlerule=true,
+      backgroundcolor=yellow!15,
+      roundcorner=10pt,
+      frametitle={\sffamily\texttt{\color{green!30!black} Code Javascript}%%
+        \hfill%
+        \includegraphics[height=\javascriptLogoSize]{js.png}%%
+      }]%
+      \begin{minted}[%
+        fontfamily=tt,
+        linenos,
+        mathescape,
+        breaklines,
+        autogobble,
+        framerule=1pt,
+        rulecolor=yellow,
+        numbersep=3pt%
+        ]{js}}{%
+      \end{minted}
+    \end{mdframed}
+  \end{english}
+}
+
+\endinput
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
