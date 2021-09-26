@@ -6,9 +6,6 @@
     "lfootTexte"
     "cfootTexte"
     "rfootTexte")
-   (LaTeX-add-environments
-    '("commentaire" LaTeX-env-args ["argument"] 1)
-    '("monbloc" LaTeX-env-args ["argument"] 1))
    (LaTeX-add-lengths
     "longauteur"
     "hautmatiere"

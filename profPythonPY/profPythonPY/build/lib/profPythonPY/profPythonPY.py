@@ -329,17 +329,19 @@ def prof_tableau_texte_ligne(texte,
                              hauteur=0.5,
                              match=None,
                              mismatch=None,
-                             num_ligne=0):
+                             num_ligne=0,
+                             eleve=False):
     #
     couleurs = [(1, 1, 1)] * len(texte)
     couleurs_texte = [(0, 0, 0)] * len(texte)
-    if match is not None:
+    if match is not None and not eleve:
         for i in match:
             couleurs[i] = (.5, 1, .5)
             couleurs_texte[i] = (1, 1, 1)
-    if mismatch is not None:
+    if mismatch is not None and not eleve:
         for i in mismatch:
             couleurs[i] = (1, .5, .5)
+        
     #
     nb_vide = 0
     while texte[nb_vide] == " ":
@@ -397,7 +399,7 @@ def __prof_tableau_MC(M):
     return mc
 
 
-def prof_BM_mc(T, M):
+def prof_BM_mc(T, M, eleve=False):
     mc = __prof_tableau_MC(M)
     m = len(M)
     #
@@ -436,16 +438,21 @@ def prof_BM_mc(T, M):
                 decalage = m - i
         position += decalage
         #
-        code_sortie += __prof_deb_env("tikzpicture", options=["x=.5cm"])
+        code_sortie += __prof_deb_env("tikzpicture", options=["x=.25cm, y=.5cm"])
         code_sortie += prof_tableau_texte_ligne(T,
                                                 num_ligne=0,
                                                 match=match,
-                                                mismatch=mismatch) + "\n"
-        code_sortie += prof_tableau_texte_ligne(
-            " " * (position - decalage - m + 1) + M,
-            num_ligne=1,
-            match=list(match) + matchm,
-            mismatch=mismatch) + "\n"
+                                                mismatch=mismatch,
+                                                eleve=eleve) + "\n"
+        if eleve:
+            code_sortie += "\draw[draw=none] (0, 0) rectangle (1, -.7);\n" 
+        else:
+            code_sortie += prof_tableau_texte_ligne(
+                " " * (position - decalage - m + 1) + M,
+                num_ligne=1,
+                match=list(match) + matchm,
+                mismatch=mismatch,
+                eleve=eleve) + "\n"
         code_sortie += __prof_fin_env("tikzpicture") + "\\\\"
         #
 

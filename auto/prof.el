@@ -2,7 +2,7 @@
  "prof"
  (lambda ()
    (TeX-add-to-alist 'LaTeX-provided-package-options
-                     '(("inputenc" "utf8") ("xcolor" "rgb" "dvipsnames" "svgnames" "luatex") ("algorithm2e" "french" "onelanguage") ("minted" "cache=false") ("mdframed" "tikz") ("tcolorbox" "many") ("hyperref" "unicode=true") ("babel" "frenchb" "english") ("numprint" "autolanguage")))
+                     '(("inputenc" "utf8") ("xcolor" "rgb" "dvipsnames" "svgnames" "luatex") ("algorithm2e" "french" "onelanguage") ("minted" "cache=false") ("mdframed" "tikz") ("tcolorbox" "many") ("hyperref" "unicode=true") ("babel" "frenchb" "english") ("numprint" "noautolanguage")))
    (TeX-run-style-hooks
     "random"
     "geometry"
