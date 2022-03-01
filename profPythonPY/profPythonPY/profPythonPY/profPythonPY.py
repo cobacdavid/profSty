@@ -6,6 +6,7 @@ import shutil
 import dvtDecimal as dvt
 import abrviz as abr
 
+
 ##########################################################
 # This is a SO code at this adress:
 # https://stackoverflow.com/questions/24852345/hsv-to-rgb-color-conversion
@@ -292,10 +293,12 @@ def prof_tri_selection(T, avec_couleur=False, avec_nombre=True):
     code += __prof_fin_env("tikzpicture")
     return code
 
-#####
-def prof_image_site(url, image, texte="", dimension="10cm"):
-    options = {'quiet': ''}
-    imgkit.from_url(url, image, options=options)
+
+###
+def prof_image_site(url, image, texte="", dimension="10cm", **kwargs):
+    kwargs = kwargs if kwargs else {}
+    kwargs['quiet'] = ''
+    imgkit.from_url(url, image, options=kwargs)
     code = __prof_deb_env("mdframed",
                           options=["roundcorner=10pt",
                                    "linewidth=1bp",
@@ -654,3 +657,4 @@ def prof_abr(T, nom_sortie, largeur):
     code = r"\includegraphics[width=" + largeur + "]" +\
         "{" + nom_sortie + ".png}"
     return code
+
