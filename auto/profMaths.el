@@ -46,7 +46,8 @@
     "sqrt"
     "DHLhksqrt")
    (LaTeX-add-environments
-    "exercice")
+    '("exercice" LaTeX-env-args ["argument"] 0)
+    "exerciceseul")
    (LaTeX-add-counters
     "numeroexo"))
  :latex)

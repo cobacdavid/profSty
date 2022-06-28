@@ -20,6 +20,7 @@
     "sgndup")
    (LaTeX-add-environments
     "exercice"
+    "exerciceseul"
     "exerciceh"
     "nival")
    (LaTeX-add-counters

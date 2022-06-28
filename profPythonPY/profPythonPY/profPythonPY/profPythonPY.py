@@ -658,3 +658,55 @@ def prof_abr(T, nom_sortie, largeur):
         "{" + nom_sortie + ".png}"
     return code
 
+
+### Arbres probabilités ###
+def prof_arbre_bernoulli(prof, evt, p_evt, fraction=True, echelle=1):
+    # aspect numérique
+    if fraction:
+        proba = dvt.dvtDecimal(p_evt)
+        proba = dvt.dvtDecimal(*proba.simpValues)
+        proba_txt = proba.toTeX()[0]
+        n_proba = 1 - proba
+        n_proba_txt = n_proba.toTeX()[0]
+    else:
+        proba_txt = f"\\nombre{{{p_evt}}}"
+        n_proba = 1 - float(p_evt)
+        n_proba_txt = f"\\nombre{{{n_proba}}}"
+    # style level
+    sd = [.5*2**i for i in range(prof)][::-1]
+    lvl_sty = ""
+    for p in range(prof):
+        lvl_dist = 1 if p == 0 else 1.5
+        sbg_dist = sd[p] # 2 ** (prof - p - 1)
+        lvl_sty += f"level {p+1}/.style={{level distance={lvl_dist}cm,\
+sibling distance={sbg_dist}cm}}," + "\n"
+    # node style
+    nd_sty = f"nodS/.style={{node contents=${evt}$}},"\
+        + "\n" + f"nodE/.style={{node contents=$\\overline {evt}$}},"
+    # etiq style
+    if fraction:
+        et_sty = f"etiqS/.style={{left=-1mm,black,node contents=$\\scriptstyle{proba_txt}$}},"\
+            + "\n" + f"etiqE/.style={{right=-1mm,black,node contents=$\\scriptstyle{n_proba_txt}$}}"
+    else:
+        et_sty = f"etiqS/.style={{black,node contents=$\\scriptstyle{proba_txt}$}},"\
+            + "\n" + f"etiqE/.style={{black,node contents=$\\scriptstyle{n_proba_txt}$}}"
+
+    return r"\begin{tikzpicture}" + "\n[" + \
+        f"scale={echelle}," +\
+        lvl_sty +\
+        nd_sty + "\n" + \
+        et_sty + "]\n" + \
+        r"\node{} [grow'=right]" + "\n" + _prof_arbre_bernoulli(prof) + "\n;" + \
+        r"\end{tikzpicture}" + "\n"
+
+
+def _prof_arbre_bernoulli(prof):
+    if prof == 0:
+        return ""
+    else:
+        return """\nchild { node[nodS] {}""" + \
+            _prof_arbre_bernoulli(prof-1) + \
+            """\nedge from parent[help lines] node[etiqS]}
+            child { node[nodE] {}""" + \
+            _prof_arbre_bernoulli(prof-1) + \
+            """\nedge from parent[help lines] node[etiqE]}"""
