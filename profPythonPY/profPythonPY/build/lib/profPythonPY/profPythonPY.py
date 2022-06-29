@@ -672,6 +672,14 @@ def prof_arbre_bernoulli(prof, evt, p_evt, fraction=True, echelle=1):
         proba_txt = f"\\nombre{{{p_evt}}}"
         n_proba = 1 - float(p_evt)
         n_proba_txt = f"\\nombre{{{n_proba}}}"
+    # texte des noeuds
+    if evt == "...":
+        evt = n_evt_txt = "\\dots"
+    else:
+        n_evt_txt = f"$\\overline {evt}$"
+    # couleur proba
+    coul_proba = "black"
+
     # style level
     sd = [.5*2**i for i in range(prof)][::-1]
     lvl_sty = ""
@@ -682,14 +690,18 @@ def prof_arbre_bernoulli(prof, evt, p_evt, fraction=True, echelle=1):
 sibling distance={sbg_dist}cm}}," + "\n"
     # node style
     nd_sty = f"nodS/.style={{node contents=${evt}$}},"\
-        + "\n" + f"nodE/.style={{node contents=$\\overline {evt}$}},"
+        + "\n" + f"nodE/.style={{node contents={n_evt_txt}}},"
     # etiq style
     if fraction:
-        et_sty = f"etiqS/.style={{left=-1mm,black,node contents=$\\scriptstyle{proba_txt}$}},"\
-            + "\n" + f"etiqE/.style={{right=-1mm,black,node contents=$\\scriptstyle{n_proba_txt}$}}"
+        et_sty = f"etiqS/.style={{left=-1mm,{coul_proba},\
+node contents=$\\scriptstyle{proba_txt}$}},"\
+            + "\n" + f"etiqE/.style={{right=-1mm,{coul_proba},\
+node contents=$\\scriptstyle{n_proba_txt}$}}"
     else:
-        et_sty = f"etiqS/.style={{black,node contents=$\\scriptstyle{proba_txt}$}},"\
-            + "\n" + f"etiqE/.style={{black,node contents=$\\scriptstyle{n_proba_txt}$}}"
+        et_sty = f"etiqS/.style={{{coul_proba},\
+node contents=$\\scriptstyle{proba_txt}$}},"\
+            + "\n" + f"etiqE/.style={{{coul_proba},\
+node contents=$\\scriptstyle{n_proba_txt}$}}"
 
     return r"\begin{tikzpicture}" + "\n[" + \
         f"scale={echelle}," +\
