@@ -20,13 +20,17 @@
   composé avec Lua\LaTeX{} sous linux debian à~%
   \directlua{tex.print(os.time())}%
 }
+
 \newcommand{\cfootTexte}{\color{\pybleu}\thepage/\pageref{LastPage}}
 \newcommand{\rfootTexte}{%%
   \begin{tikzpicture}
-    \draw (0,0) node {\color{\pybleu}\large\sffamily\slshape\RRoman{\number\year}~---~%
+    \draw (0,0) node {\color{\pybleu}\large\sffamily\slshape%
+      \RRoman{\number\year}~---~%
     \textsc{Cobac}};
   \end{tikzpicture}
 }
+% Janvier 2023
+\renewcommand{\rfootTexte}{}
 % 
   % \begin{tikzpicture}
   %   \begin{scope}
@@ -36,9 +40,9 @@
   %   \clip (0,0) rectangle (\longCitation,\profCitation);
   %   \node[inner sep=0pt,anchor=south west,blue] at (0,0) {\citationformatee};
   % \end{tikzpicture}
-%%
-% \newcommand{\rheadCitation}{\usebox{\textecitation}}
-% %
+
+\newcommand{\rheadCitation}{\usebox{\textecitation}}
+%
 \newlength{\longauteur}
 \settowidth{\longauteur}{\rfootTexte}
 \newlength{\hautmatiere}
@@ -78,18 +82,31 @@
 %   \end{postscript}% 
 % } mai
 %
-\rfoot{\hbox to0pt{\hspace*{\rfootYOff}\vbox to0pt{\vspace*{-\longauteur}%
-      \rotatebox{90}{\rfootTexte}
-    }}}
+\rfoot{
+  \hbox{%
+    \hspace*{\rfootYOff}\vbox to0pt{%
+      \vspace*{-\longauteur}%
+      \rotatebox{90}{\rfootTexte}%
+    }%
+  }%
+}
 \lfoot{\vspace*{-.4cm}\scalebox{-1}[1]{\lfootTexte}}
 \cfoot{\vspace*{-3mm}\cfootTexte}
 \lhead{}
 \chead{}
 \rhead{%%
-  \hbox to0pt{\hspace*{\rheadXOff}\vbox to0pt{\vspace*{3mm}%%
+%  \hbox to0pt{%
+    \hspace*{\rheadXOff}\vbox to0pt{%
+      \vspace*{3mm}%%
       \rotatebox{-90}{\colorbox{\pybleu}{%%
           \color{\blanc}\large\sffamily\bfseries\lamatiere%%
-        }}\vss}\hss}}
+        }%
+      }%
+      \vss%
+    }%
+    %\hss%
+%  }%
+}
 %% 
 %
 %% environnements exo et pb

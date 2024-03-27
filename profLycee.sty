@@ -80,17 +80,30 @@
   \end{postscript}% 
 } 
 %
-\rfoot{\hbox to0pt{\hspace*{\rfootYOff}\vbox to0pt{\vspace*{-\longauteur}%
+\rfoot{
+%  \hbox to0pt{
+    \hspace*{\rfootYOff}\vbox to0pt{
+      \vspace*{-\longauteur}%
       \rotatebox{90}{\rfootTexte}
-    }}}
+    }
+%  }
+}
 \lfoot{\scalebox{-1}[1]{\lfootTexte}}
 \cfoot{\cfootTexte}
 \lhead{}
 \chead{}
-\rhead{\hbox to0pt{\hspace*{\rheadXOff}\vbox to0pt{\vspace*{3mm}\rotatebox{-90}{%%
-        \usebox\PSTBoxDroite%%
-      }\vss}\hss}}
-%
+% \rhead{
+%   \hbox to0pt{
+%     \hspace*{\rheadXOff}\vbox to0pt{
+%       \vspace*{3mm}\rotatebox{-90}{%%
+%         \usebox\PSTBoxDroite%%
+%       }
+%       \vss
+%     }
+%     \hss
+%   }
+% }
+% %
 %% environnements exo et pb
 %% encadrements en pointillés
 %

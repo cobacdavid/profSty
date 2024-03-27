@@ -2,9 +2,9 @@
  "prof"
  (lambda ()
    (TeX-add-to-alist 'LaTeX-provided-package-options
-                     '(("inputenc" "utf8") ("xcolor" "rgb" "dvipsnames" "svgnames" "luatex") ("algorithm2e" "french" "onelanguage") ("minted" "cache=false") ("mdframed" "tikz") ("tcolorbox" "many") ("hyperref" "unicode=true") ("babel" "frenchb" "english") ("numprint" "noautolanguage")))
+                     '(("xcolor" "table" "svgnames" "luatex") ("inputenc" "utf8") ("algorithm2e" "french" "onelanguage" "linesnumbered") ("minted" "cache=false") ("mdframed" "tikz") ("tcolorbox" "many") ("hyperref" "unicode=true") ("numprint" "noautolanguage")))
    (TeX-run-style-hooks
-    "random"
+    "r"
     "geometry"
     "graphicx"
     "amsmath"
@@ -25,7 +25,6 @@
     "bclogo"
     "mathrsfs"
     "tikz"
-    "pdfrender"
     "textcomp"
     "ifthen"
     "calc"
@@ -45,6 +44,7 @@
     "xlop"
     "tabvar"
     "letltxmacro"
+    "enumitem"
     "algorithm2e"
     "minted"
     "etoolbox"
@@ -56,15 +56,19 @@
     "pythontex"
     "hyperref"
     "polyglossia"
-    "babel"
     "numprint"
+    "pdfrender"
     "profImages"
     "profCouleurs"
     "profNumDevoir"
     "profTypo"
+    "profTitres"
+    "profBlocs"
+    "profBoites"
     "profMaths"
     "profDivers"
     "profAlgo"
+    "profInfo"
     "profPython"
     "profHTML"
     "profSQL"
@@ -77,6 +81,11 @@
     "profNSI"
     "profStyle")
    (TeX-add-symbols
-    "lamatiere"))
+    "lamatiere")
+   (LaTeX-add-environments
+    '("commentaire" LaTeX-env-args ["argument"] 1)
+    '("monblocnb" LaTeX-env-args ["argument"] 2)
+    '("monblocb" LaTeX-env-args ["argument"] 2)
+    '("monbloc" LaTeX-env-args ["argument"] 3)))
  :latex)
 

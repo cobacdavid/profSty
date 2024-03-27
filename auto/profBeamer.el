@@ -2,28 +2,7 @@
  "profBeamer"
  (lambda ()
    (TeX-add-to-alist 'LaTeX-provided-package-options
-                     '(("fontspec" "no-math") ("inputenc" "utf8") ("algorithm2e" "french" "onelanguage") ("mdframed" "tikz") ("babel" "frenchb") ("numprint" "autolanguage")))
-   (add-to-list 'LaTeX-verbatim-environments-local "VerbatimOut")
-   (add-to-list 'LaTeX-verbatim-environments-local "SaveVerbatim")
-   (add-to-list 'LaTeX-verbatim-environments-local "LVerbatim*")
-   (add-to-list 'LaTeX-verbatim-environments-local "LVerbatim")
-   (add-to-list 'LaTeX-verbatim-environments-local "BVerbatim*")
-   (add-to-list 'LaTeX-verbatim-environments-local "BVerbatim")
-   (add-to-list 'LaTeX-verbatim-environments-local "Verbatim*")
-   (add-to-list 'LaTeX-verbatim-environments-local "Verbatim")
-   (add-to-list 'LaTeX-verbatim-environments-local "minted")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "EscVerb*")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "EscVerb")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "href")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperref")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperimage")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperbaseurl")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "nolinkurl")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "url")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "path")
-   (add-to-list 'LaTeX-verbatim-macros-with-delims-local "Verb*")
-   (add-to-list 'LaTeX-verbatim-macros-with-delims-local "path")
-   (add-to-list 'LaTeX-verbatim-macros-with-delims-local "Verb")
+                     '(("fontspec" "no-math") ("hyperref" "pdftex") ("inputenc" "utf8") ("algorithm2e" "french" "onelanguage") ("mdframed" "tikz") ("babel" "frenchb") ("numprint" "autolanguage")))
    (TeX-run-style-hooks
     "fontspec"
     "luatexbase"
@@ -81,15 +60,16 @@
     "otablo"
     "maPScouleur")
    (LaTeX-add-environments
+    '("commentaire" LaTeX-env-args ["argument"] 1)
+    '("monblocnb" LaTeX-env-args ["argument"] 2)
+    '("monblocb" LaTeX-env-args ["argument"] 2)
+    '("monbloc" LaTeX-env-args ["argument"] 3)
     "madef"
     "remar"
     "remars"
     "cmConsignes"
     "cmQuestion"
     "rtQuestion"
-    "rtQuestions")
-   (LaTeX-add-polyglossia-langs
-    '("french" "defaultlanguage" "")
-    '("english" "otherlanguage" "")))
+    "rtQuestions"))
  :latex)
 

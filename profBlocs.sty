@@ -1,0 +1,98 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{profBoites}[2023/01/02]
+
+\tcbset{
+  tmonblocbstyle/.style={enhanced, breakable, colback=white, colframe=black,
+    colbacktitle=white, fonttitle=\color{\noir}, boxrule=2pt,
+    titlerule=.5pt, bottomtitle=-2pt, toptitle=-2pt, arc=4pt,
+    drop fuzzy shadow=black},
+  tmonblocnbstyle/.style={enhanced, breakable, fonttitle=\bfseries,
+    boxrule=2pt, titlerule=.5pt, bottomtitle=-2pt, toptitle=-2pt,
+    arc=4pt, drop fuzzy shadow=black},
+  tdefinitionstyle/.style={enhanced, breakable, colback=bleu!5, colframe=bleu!80,
+    colbacktitle=bleu!10, fonttitle=\bfseries\color{bleu!80!black}, boxrule=2pt,
+    titlerule=.5pt, bottomtitle=-2pt, toptitle=-2pt, arc=4pt,
+    drop fuzzy shadow=black},
+}
+
+% #1: tcolorbox options
+% #2: couleur
+% #3: titre
+\newtcolorbox{tmonbloc}[3][]
+{%%
+  enhanced,
+  breakable,
+  colback=#2!5,
+  colframe=#2!80,
+  colbacktitle=#2!10,
+  title={\bfseries\texttt{\color{#2} #3}},
+  %% title style={left color=yellow!30, right color=blue!20},
+  boxrule=2pt,
+  titlerule=.5pt,
+  bottomtitle=-2pt,
+  toptitle=-2pt,
+  arc=4pt,
+  % watermark graphics=python.png,
+  % watermark zoom=1.00,
+  % watermark opacity=.1,
+  drop fuzzy shadow=#2!30!black
+}
+
+% #1: tcolorbox options
+% #2: box title
+\newtcolorbox{tmonblocb}[2][]
+{%%
+  tmonblocbstyle,
+  title={#2},
+}
+\newtcolorbox{tmonblocnb}[2][]
+{%%
+  tmonblocnbstyle,
+  title={#2}
+}
+
+% #1 optionnel options tcb
+% #2 (vrai 1) couleur
+% #3 (vrai 2) titre
+% #4 (vrai 3) largeur minipage
+\newenvironment{monbloc}[4][]{
+  \begin{minipage}[t]{#4}
+    \begin{tmonbloc}[#1]{#2}{#3}%
+}{%
+\end{tmonbloc}
+\end{minipage}%
+}
+
+
+\newenvironment{monblocb}[3][]{
+  \begin{minipage}[t]{#3}
+    \begin{tmonblocb}[#1]{#2}%
+}{%
+\end{tmonblocb}
+\end{minipage}%
+}
+
+
+\newenvironment{monblocnb}[3][]{
+  \begin{minipage}[t]{#3}
+    \begin{tmonblocnb}[#1]{#2}%
+}{%
+\end{tmonblocnb}
+\end{minipage}%
+}
+
+
+\newenvironment{commentaire}[2][\linewidth]{%%
+  \noindent%%
+  \begin{minipage}[t]{#1}%
+    \begin{mdframed}[%
+      roundcorner=5pt,
+      linewidth=2bp,
+      frametitlebackgroundcolor=gray!30,
+      frametitle={\large\bfseries Commentaires},
+      frametitlerule=true,
+      ]
+      #2%
+}{\end{mdframed}\end{minipage}}
+
+\endinput

@@ -5,6 +5,7 @@
     '("fichierpython" 1)
     "python")
    (LaTeX-add-environments
+    '("codepython" LaTeX-env-args ["argument"] 0)
     "codepython")
    (LaTeX-add-lengths
     "pythonLogoSize"))

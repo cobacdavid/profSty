@@ -1,0 +1,279 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{profTitres}[2023/01/02]
+
+\setlength{\unitlength}{1cm}
+%
+%% titres de polys
+\newlength{\@largeurtitre}
+\newlength{\@profondtitre}
+\newlength{\@restanttitre}
+\newlength{\@hauteurtitre}
+
+\newcommand{\@titre}[1]{%%
+  \huge\sffamily\bfseries%%
+  \color{\macouleur}
+  \textpdfrender{
+    TextRenderingMode=FillStrokeClip,
+    LineWidth=.5pt,
+    FillColor=blue!90,
+    StrokeColor=white,
+    MiterLimit=1
+  }{#1}%%
+}
+
+\newsavebox{\@titrecomplet}%%
+\newlength{\@epaisseurtraittitre}
+\setlength{\@epaisseurtraittitre}{2bp}
+\newlength{\@coinsarrondis}
+\setlength{\@coinsarrondis}{10pt}
+\newlength{\@largeursoustitre}
+\newlength{\@restantlargeursoustitre}
+%%
+\newcommand{\titrepoly}[2]{%%
+  \settowidth{\@largeurtitre}{\@titre #1}%%
+  \settowidth{\@largeursoustitre}{\small #2}
+  \setlength{\@restantlargeursoustitre}{\@largeurtitre - \@largeursoustitre}
+  %%
+  \savebox{\@titrecomplet}{%%
+    \begin{minipage}{\@largeurtitre}
+      \huge\sffamily\bfseries%%
+      \color{\macouleur}
+      \textpdfrender{
+        TextRenderingMode=FillStrokeClip,
+        LineWidth=.5pt,
+        FillColor=blue!70,
+        StrokeColor=yellow!5,
+        MiterLimit=1
+      }{#1}
+      \\[-4.2mm]
+      {\makebox[.6\@restantlargeursoustitre]{\small\color{blue!80}\rightarrowfill}%%
+        \hfill{\small\color{blue!80} #2}%%
+        \hfill%%
+        \makebox[.3\@restantlargeursoustitre]{\small\color{blue!80}\leftarrowfill}%%
+      }%%
+    \end{minipage}%%
+  }%%
+  \settodepth{\@profondtitre}{\usebox\@titrecomplet}%%
+  \settoheight{\@hauteurtitre}{\usebox\@titrecomplet}%
+  \setlength{\@restanttitre}{(\linewidth - \@largeurtitre)/2 }%%
+  %%
+  \noindent%
+  %%\mbox{}\par\bigskip%%
+  {
+    \begin{tikzpicture}[decoration=Koch snowflake]
+      %% rectangle 1/3 de fond avant la boite
+      \shade[%%
+            rounded corners=0pt,
+            opacity=1,
+            left color=white,
+            right color=blue!20]
+            (0,-\@profondtitre+10pt)
+            rectangle
+            (\@restanttitre - \@coinsarrondis, \@hauteurtitre + \@profondtitre - 10pt);
+      %%
+      %% fond jaune/blanc du rectangle de titre
+      \fill[white,
+            rounded corners=\@coinsarrondis,
+            line width=0]
+            (\@restanttitre - \@coinsarrondis, -\@profondtitre)
+            rectangle
+            (\@restanttitre+\@largeurtitre + \@coinsarrondis, \@hauteurtitre+\@profondtitre);%%
+      %% 
+      %% rectangle 2/3 de fond sur le titre
+      \fill[%%
+            blue!10,
+            rounded corners=0pt, opacity=.95]
+            (\@restanttitre - \@coinsarrondis, -\@profondtitre+10pt)
+            rectangle
+            (\@restanttitre+\@largeurtitre + \@coinsarrondis,
+            \@hauteurtitre+\@profondtitre-10pt);
+            %% 
+            %%
+      %% rectangle 3/3 de fond après la boîte
+      \shade[%%
+      %% rounded corners=0pt,
+            line width=0pt,
+            opacity=1,
+            left color=blue!20,
+            right color=white]
+            (\@restanttitre + \@largeurtitre + \@coinsarrondis, -\@profondtitre+10pt)
+            rectangle
+            (\linewidth, \@hauteurtitre + \@profondtitre - 10pt);
+      %%
+      %%
+      %% rectangle de fond du titre
+      \draw[blue!30,
+            rounded corners=\@coinsarrondis,
+            line width=\@epaisseurtraittitre]
+            (\@restanttitre - \@coinsarrondis, -\@profondtitre)
+            rectangle
+            (\@restanttitre+\@largeurtitre + \@coinsarrondis, \@hauteurtitre+\@profondtitre);%%
+      %%
+      %% fractale de fond
+      \begin{scope}
+        %% on découpe ce scope au rectangle précédent
+        \clip(\@restanttitre, -\@profondtitre)
+        rectangle (\@restanttitre + \@largeurtitre,
+                   \@hauteurtitre + \@profondtitre - \@epaisseurtraittitre / 2);
+        %% la fractale
+        \filldraw[%%
+              draw=blue!80,
+              line width=.5pt,
+              fill=blue!12,
+              opacity=.8]
+              decorate { decorate { decorate { decorate { decorate { %%
+                        (\@restanttitre, -\@profondtitre + \@epaisseurtraittitre / 2)
+                        -- (\@restanttitre + \@largeurtitre,
+                        -\@profondtitre + \@epaisseurtraittitre / 2)%
+                      }}}}};
+      \end{scope}
+      %% titre
+      \draw (\@restanttitre,0)
+      node[shift={(\@largeurtitre / 2,\@hauteurtitre / 2)}] {\usebox\@titrecomplet};
+    \end{tikzpicture}%%
+  }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\titrepolyseul}[1]{%%
+  \settowidth{\@largeurtitre}{\@titre #1}%%
+  \savebox{\@titrecomplet}{%%
+    \begin{minipage}{\@largeurtitre}
+      \huge\sffamily\bfseries%%
+      \color{\macouleur}
+      % \textpdfrender{
+      %   TextRenderingMode=FillStrokeClip,
+      %   LineWidth=.5pt,
+      %   FillColor=blue!70,
+      %   StrokeColor=yellow!5,
+      %   MiterLimit=1
+      % }{#1}
+      #1
+      % 
+      % \\[-4.2mm]
+      % {\makebox[.6\@restantlargeursoustitre]{\small\color{blue!80}\rightarrowfill}%%
+      %   \hfill{\small\color{blue!80} #2}%%
+      %   \hfill%%
+      %   \makebox[.3\@restantlargeursoustitre]{\small\color{blue!80}\leftarrowfill}%%
+      % }%%
+    \end{minipage}%%
+  }%%
+  \settodepth{\@profondtitre}{\usebox\@titrecomplet}%%
+  \settoheight{\@hauteurtitre}{\usebox\@titrecomplet}%
+  \setlength{\@restanttitre}{(\linewidth - \@largeurtitre)/2 }%%
+  %%
+  \noindent%
+  %%\mbox{}\par\bigskip%%
+  {
+    \begin{tikzpicture}[decoration=Koch snowflake]
+      %% rectangle 1/3 de fond avant la boite
+      \shade[%%
+            rounded corners=0pt,
+            opacity=1,
+            left color=white,
+            right color=blue!20]
+            (0,-\@profondtitre+10pt)
+            rectangle
+            (\@restanttitre - \@coinsarrondis, \@hauteurtitre + \@profondtitre - 10pt);
+      %%
+      %% fond jaune/blanc du rectangle de titre
+      \fill[white,
+            rounded corners=\@coinsarrondis,
+            line width=0]
+            (\@restanttitre - \@coinsarrondis, -\@profondtitre)
+            rectangle
+            (\@restanttitre+\@largeurtitre + \@coinsarrondis, \@hauteurtitre+\@profondtitre);%%
+      %% 
+      %% rectangle 2/3 de fond sur le titre
+      \fill[%%
+            blue!10,
+            rounded corners=0pt, opacity=.95]
+            (\@restanttitre - \@coinsarrondis, -\@profondtitre+10pt)
+            rectangle
+            (\@restanttitre+\@largeurtitre + \@coinsarrondis,
+            \@hauteurtitre+\@profondtitre-10pt);
+            %% 
+            %%
+      %% rectangle 3/3 de fond après la boîte
+      \shade[%%
+      %% rounded corners=0pt,
+            line width=0pt,
+            opacity=1,
+            left color=blue!20,
+            right color=white]
+            (\@restanttitre + \@largeurtitre + \@coinsarrondis, -\@profondtitre+10pt)
+            rectangle
+            (\linewidth, \@hauteurtitre + \@profondtitre - 10pt);
+      %%
+      %%
+      %% rectangle de fond du titre
+      \draw[blue!30,
+            rounded corners=\@coinsarrondis,
+            line width=\@epaisseurtraittitre]
+            (\@restanttitre - \@coinsarrondis, -\@profondtitre)
+            rectangle
+            (\@restanttitre+\@largeurtitre + \@coinsarrondis, \@hauteurtitre+\@profondtitre);%%
+      %%
+      %% fractale de fond
+      \begin{scope}
+        %% on découpe ce scope au rectangle précédent
+        \clip(\@restanttitre, -\@profondtitre)
+        rectangle (\@restanttitre + \@largeurtitre,
+                   \@hauteurtitre + \@profondtitre - \@epaisseurtraittitre / 2);
+        %% la fractale
+        \filldraw[%%
+              draw=blue!80,
+              line width=.5pt,
+              fill=blue!12,
+              opacity=.8]
+              decorate { decorate { decorate { decorate { decorate { %%
+                        (\@restanttitre, -\@profondtitre + \@epaisseurtraittitre / 2)
+                        -- (\@restanttitre + \@largeurtitre,
+                        -\@profondtitre + \@epaisseurtraittitre / 2)%
+                      }}}}};
+      \end{scope}
+      %% titre
+      \draw (\@restanttitre,0)
+      node[shift={(\@largeurtitre / 2,\@hauteurtitre / 2)}] {\usebox\@titrecomplet};
+    \end{tikzpicture}%%
+  }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%
+% \newcount\randnbtitre
+% \newlength{\reste}
+% \newcommand{\titrepolydeux}[1]{%%
+%   \providecommand{\@titre}[1]{\LARGE\sffamily\bfseries##1}%%
+%   \settowidth{\@largeurtitre}{\@titre #1}%%
+%   \settodepth{\@profondtitre}{\@titre #1}%%
+% %%   \setlength{\@restanttitre}{%%
+% %%     (\linewidth              -              \@largeurtitre             -
+% %%     \widthof{$\left<\vphantom{\text{\@titre #1}}\right>$}) / 2 -.315cm}%%
+%   \begin{center}\mathversion{bold}
+%     \rightarrowfill${\bigl<\!\!\Bigl<
+%       \parbox[c]{\@largeurtitre}{%%
+%         %% \rule{\@largeurtitre}{1bp}\par
+%         \makebox[0mm][l]{\@titre #1}%%
+%         %%      \rule[-\@profondtitre - 2.3bp]{\@largeurtitre}{1bp}
+%       }\Bigr>\!\!\bigr>}$\leftarrowfill
+%   \end{center}
+%   \setlength{\reste}{\linewidth - \@largeurtitre}
+%   %%\setrannum{\randnb}{1}{\reste}%
+%   %%\rule{\reste}{2pt}
+% }
+
+
+% \newcommand{\titrepolysarah}[1]{
+%   \medskip
+%   \settowidth{\@largeurtitre}{\large #1}
+%   \noindent\begin{center}
+%     \rule[.5ex]{\@largeurtitre}{2bp}\\
+%     {\large #1}\\
+%     \rule[1.2ex]{\@largeurtitre}{2bp}
+%   \end{center}
+%   \medskip
+% }
+\endinput

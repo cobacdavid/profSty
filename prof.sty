@@ -49,6 +49,10 @@
   \renewcommand{\lamatiere}{Numérique et Sciences Informatiques\/}
   \@algotrue
 }
+\DeclareOption{snt}{%
+  \renewcommand{\lamatiere}{Sciences Numériques et Technologie\/}
+  \@algotrue
+}
 \DeclareOption{fonctions}{%
   \renewcommand{\lamatiere}{Math\'ematiques -- Fonctions\/}
 }
@@ -99,7 +103,8 @@
 %% on charge lualatex
 \RequirePackage{ifluatex}
 \ifluatex
-  \RequirePackage[rgb,dvipsnames,svgnames,luatex]{xcolor}
+  %% \RequirePackage[rgb,dvipsnames,svgnames,luatex]{xcolor}
+  \RequirePackage[table,svgnames,luatex]{xcolor}
   %% \RequirePackage[no-math]{fontspec}
   \RequirePackage{fontspec}
   %% \RequirePackage{luatexbase}
@@ -152,14 +157,13 @@
   %% \RequirePackage{tikz}
   %% \RequirePackage{hyperref}
 \fi
-\RequirePackage[dvipsnames,svgnames,rgb]{xcolor}
+% \RequirePackage[dvipsnames,svgnames,rgb]{xcolor}
 \RequirePackage{tikz}
-\usetikzlibrary{trees}
-\usetikzlibrary{backgrounds} 
+% \usetikzlibrary{trees}
+% \usetikzlibrary{backgrounds} 
 \usetikzlibrary{decorations.fractals}
-\usetikzlibrary{shapes.misc}
-\usetikzlibrary{shapes.geometric}
-\RequirePackage{pdfrender}
+% \usetikzlibrary{shapes.misc}
+% \usetikzlibrary{shapes.geometric}
 %% symbole de degres
 \RequirePackage{textcomp}
 %% tests
@@ -171,20 +175,22 @@
 %% package de mise en forme de tableaux
 \RequirePackage{array}
 \RequirePackage{tabularx}
-%% packages de multi-colonnes
+% packages de multi-colonnes
 \RequirePackage{multicol}
 %% package de symboles (notammant l'euro)
 \RequirePackage{eurosym}
 %% gestion des espaces après macros
 \RequirePackage{xspace}
-%% packages fancy 
+% %% packages fancy 
 \RequirePackage{fancyhdr}
 \RequirePackage{fancyvrb}
+% incompatiblité minted ??? Janvier 2023
 % \RequirePackage{fancybox}
 % \setlength{\shadowsize}{2pt}
 %% package numérotation des pages 1/n 2/n etc
+% incompatibilité avec erreur Janvier 2023
 \RequirePackage{lastpage}
-%% pour l'env. boxedverbatim
+% pour l'env. boxedverbatim
 \RequirePackage{moreverb}
 %% pour des hline biens faites
 \RequirePackage{hhline}
@@ -202,15 +208,16 @@
 % ne semble pas indispensable...
 \RequirePackage{letltxmacro}
 %% pour les listes
-%% \RequirePackage{enumitem}
+\RequirePackage{enumitem}
 %% pour le pseudo-code
 %% \RequirePackage[french]{algorithme}
-\RequirePackage[french,onelanguage]{algorithm2e}
+\RequirePackage[french,onelanguage,linesnumbered]{algorithm2e}
 %% \RequirePackage[outputdir=cache,cachedir=cache,cache=true]{minted}%%
-\RequirePackage[cache=false]{minted}%%
+\RequirePackage[cache=false]{minted}
 \RequirePackage{etoolbox}%%
 \RequirePackage[tikz]{mdframed}
 \RequirePackage[many]{tcolorbox}
+\tcbuselibrary{theorems}
 % \BeforeBeginEnvironment{minted}{}%%
 % \AfterEndEnvironment{minted}{}%%
 %%
@@ -230,22 +237,29 @@
 \setdefaultlanguage{french}
 \setotherlanguage{english}
 \else
-\RequirePackage[frenchb,english]{babel}
-\selectlanguage{frenchb}
+%% \RequirePackage[frenchb,english]{babel}
+%% \selectlanguage{frenchb}
 \fi
 \RequirePackage[noautolanguage]{numprint}
-%% package pour le fond de page
-%% ?
+% package pour le fond de page ?
 %% 
+\RequirePackage{pdfrender}
+\def\PdfRender@PatchColorSetGroup{\PdfRender@ColorSetGroupHook}
+%%
 \RequirePackage{profImages}
 \RequirePackage{profCouleurs}
 \RequirePackage{profNumDevoir}
-%% \RequirePackage{profCitation}
-%% \RequirePackage{profMOTD}
+% %% \RequirePackage{profCitation}
+% %% \RequirePackage{profMOTD}
 \RequirePackage{profTypo}
+\RequirePackage{profTitres}
+\RequirePackage{profBlocs}
+\RequirePackage{profBoites}
 \RequirePackage{profMaths}%%
 \RequirePackage{profDivers}%%
+%%
 \RequirePackage{profAlgo}%%
+\RequirePackage{profInfo}
 \RequirePackage{profPython}%%
 \RequirePackage{profHTML}%%
 \RequirePackage{profSQL}%%
@@ -256,6 +270,7 @@
 \RequirePackage{profC}%%
 \RequirePackage{profJS}%%
 \RequirePackage{profNSI}%%
+%%
 \RequirePackage{profStyle}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

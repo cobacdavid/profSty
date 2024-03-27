@@ -1,11 +1,8 @@
 setup.py
-setup.py~
 dist/profPythonPY-1.0-py3-none-any.whl
 dist/profPythonPY-1.0.tar.gz
 profPythonPY/__init__.py
-profPythonPY/__init__.py~
 profPythonPY/profPythonPY.py
-profPythonPY/profPythonPY.py~
 profPythonPY.egg-info/PKG-INFO
 profPythonPY.egg-info/SOURCES.txt
 profPythonPY.egg-info/dependency_links.txt

@@ -387,77 +387,70 @@ def prof_tableau_texte_ligne(texte,
     return code_tikz
 
 
-# mauvais caractère 
+# mauvais caractère
 def __prof_tableau_MC(M):
-    # analyse du motif
-    # tableau de décalage
-    # mauvais caractère
-    m = len(M)
-    mc = {}
-    # mc[M[m-1]] = 1
-    for i in range(1, m):
-        car_motif = M[m-i-1]
-        if car_motif not in mc:
-            mc[car_motif] = i
-    return mc
+    dico = {}
+    # on ne prend pas en compte le dernier caractère
+    for i in range(len(M) - 1):
+        dico[M[i]] = len(M) - 1 - i
+    #
+    return dico
 
 
 def prof_BM_mc(T, M, eleve=False):
     mc = __prof_tableau_MC(M)
+    t = len(T)
     m = len(M)
     #
-    nb_match = 0
-    position = m - 1
     code_sortie = "\\noindent"
-    while position < len(T):
-        # print(T)
-        # print(" " * (position-m+1) + M)
-        i = 0
-        while m-i-1 >= 0 and T[position-i] == M[m-i-1]:
-            i += 1
+    i = 0
+    while i + m <= t:
+        j = m - 1
+        while j >= 0 and T[i+j] == M[j]:
+            j -= 1
         #
-        if i == m:
-            # print("** match **")
-            nb_match += 1
-            decalage = mc[T[position]]
-            match = range(position-m+1, position+1)
+        if j == -1:
+            if T[i+m-1] in mc:
+                decalage = mc[T[i+m-1]]
+            else:
+                decalage = m
+            # match partout
+            matcht = range(i, i + m)
             matchm = []
             mismatch = []
         else:
-            # le decalage n'est pas forcément la longueur du motif
-            # ou le nombre lu dans le tableau MC car on peut avoir
-            # matché une partie de l'expression
-            match = range(position, position-i, -1)
+            # match partiel
+            matcht = range(i + j + 1, i + m)
             matchm = []
-            mismatch = [position-i]
-            # cas d'un caractère texte dans
-            # la suite du motif
-            ## à faire !! pour l'instant que le dernier
-            # non matchant est testé comme présent dans le motif
-            if T[position-i] in mc:
-                decalage = mc[T[position-i]] - i
-                matchm += [position-decalage]
+            mismatch = [i + j]
+            if T[i + j] in mc:
+                diff = j - (m - 1 - mc[T[i+j]])
+                decalage = diff if diff > 0 else mc[T[i+m-1]]
+                if diff > 0:
+                    matchm.append(i + j - decalage)
             else:
-                decalage = m - i
-        position += decalage
+                decalage = j + 1
         #
         code_sortie += __prof_deb_env("tikzpicture", options=["x=.25cm, y=.5cm"])
         code_sortie += prof_tableau_texte_ligne(T,
                                                 num_ligne=0,
-                                                match=match,
+                                                match=matcht,
                                                 mismatch=mismatch,
                                                 eleve=eleve) + "\n"
         if eleve:
-            code_sortie += "\draw[draw=none] (0, 0) rectangle (1, -.7);\n" 
+            # code_sortie += "\draw[draw=none] (0, 0) rectangle (1, -.7);\n"
+            for k in range(t):
+                code_sortie += f"\draw ({k}, 0) rectangle ({k+1}, -.7);\n"
         else:
             code_sortie += prof_tableau_texte_ligne(
-                " " * (position - decalage - m + 1) + M,
+                " " * i + M,
                 num_ligne=1,
-                match=list(match) + matchm,
+                match=list(matcht) + matchm,
                 mismatch=mismatch,
                 eleve=eleve) + "\n"
         code_sortie += __prof_fin_env("tikzpicture") + "\\\\"
         #
+        i += decalage
 
     #
     # return str(nb_match) + " correspondance(s) exacte(s)"

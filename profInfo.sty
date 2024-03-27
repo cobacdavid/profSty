@@ -1,0 +1,23 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{profInfo}[2022/11/03]
+
+\newcommand{\commstyle}[1]{%
+  \color{blue!50}#1%
+}
+
+%%
+%% algorithm2e
+%% 
+\LinesNumbered
+\DontPrintSemicolon
+\SetCommentSty{commstyle}
+%% force en noir la numérotation
+\SetNlSty{texttt}{\color{black}}{}
+\SetKw{renvoi}{Renvoyer}
+\SetKw{et}{\textbf{et}}
+\SetKw{ou}{\textbf{ou}}
+\SetKw{non}{\textbf{non}}
+\SetKwFor{tantque}{Tant que}{:}{Fin\ Tant\ que}
+\SetKwProg{fonction}{Fonction}{:}{Fin\ Fonction}
+\SetKwComment{commentaire}{\#\ }{}
+\endinput

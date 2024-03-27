@@ -2,7 +2,6 @@
  "profTypo"
  (lambda ()
    (TeX-add-symbols
-    '("titrepoly" 2)
     '("nombre" 1)
     "np"
     "dfrac"
