@@ -1,8 +1,10 @@
+;; -*- lexical-binding: t; -*-
+
 (TeX-add-style-hook
  "prof"
  (lambda ()
    (TeX-add-to-alist 'LaTeX-provided-package-options
-                     '(("xcolor" "table" "svgnames" "luatex") ("inputenc" "utf8") ("algorithm2e" "french" "onelanguage" "linesnumbered") ("minted" "cache=false") ("mdframed" "tikz") ("tcolorbox" "many") ("hyperref" "unicode=true") ("numprint" "noautolanguage")))
+                     '(("geometry" "") ("graphicx" "") ("amsmath" "") ("amssymb" "") ("ifluatex" "") ("xcolor" "table" "svgnames" "luatex") ("fontspec" "") ("metalogo" "") ("luacode" "") ("luamplib" "") ("unicode-math" "") ("luatexperso" "") ("inputenc" "utf8") ("aeguill" "") ("fourier" "") ("pst-all" "") ("pst-barcode" "") ("bclogo" "") ("mathrsfs" "") ("tikz" "") ("textcomp" "") ("ifthen" "") ("calc" "") ("ulem" "") ("array" "") ("tabularx" "") ("multicol" "") ("eurosym" "") ("xspace" "") ("fancyhdr" "") ("fancyvrb" "") ("lastpage" "") ("moreverb" "") ("hhline" "") ("mflogo" "") ("ntheorem" "") ("xlop" "") ("tabvar" "") ("letltxmacro" "") ("enumitem" "") ("algorithm2e" "french" "onelanguage" "linesnumbered") ("minted" "cache=false") ("etoolbox" "") ("mdframed" "tikz") ("tcolorbox" "many") ("forest" "") ("pgfgantt" "") ("pgfplots" "") ("pythontex" "") ("hyperref" "unicode=true") ("polyglossia" "") ("numprint" "noautolanguage") ("pdfrender" "") ("profImages" "") ("profCouleurs" "") ("profNumDevoir" "") ("profTypo" "") ("profTitres" "") ("profBlocs" "") ("profBoites" "") ("profMaths" "") ("profDivers" "") ("profAlgo" "") ("profInfo" "") ("profPython" "") ("profHTML" "") ("profSQL" "") ("profLua" "") ("profHaskell" "") ("proftex" "") ("profCSS" "") ("profC" "") ("profJS" "") ("profForth" "") ("profNSI" "") ("profStyle" "")))
    (TeX-run-style-hooks
     "r"
     "geometry"
@@ -78,14 +80,10 @@
     "profCSS"
     "profC"
     "profJS"
+    "profForth"
     "profNSI"
     "profStyle")
    (TeX-add-symbols
-    "lamatiere")
-   (LaTeX-add-environments
-    '("commentaire" LaTeX-env-args ["argument"] 1)
-    '("monblocnb" LaTeX-env-args ["argument"] 2)
-    '("monblocb" LaTeX-env-args ["argument"] 2)
-    '("monbloc" LaTeX-env-args ["argument"] 3)))
+    "lamatiere"))
  :latex)
 

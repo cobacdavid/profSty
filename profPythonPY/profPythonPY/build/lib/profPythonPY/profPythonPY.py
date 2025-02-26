@@ -151,11 +151,11 @@ def prof_oeis_web_A(n, angle=90, dimension="10cm"):
     options = {'quiet': ''}
     imgkit.from_url(url, image, options=options)
     code = __prof_deb_env("mdframed",
-                        options=["roundcorner=10pt",
-                                 "linewidth=1bp",
-                                 r"frametitle=\textbf{Vue du site }\url{"+url+r"}",
-                                 "frametitlebackgroundcolor=gray!30",
-                                 "frametitlerule=true"])
+                          options=["roundcorner=10pt",
+                                   "linewidth=1bp",
+                                   r"frametitle=\textbf{Vue du site }\url{"+url+r"}",
+                                   "frametitlebackgroundcolor=gray!30",
+                                   "frametitlerule=true"])
     code += __prof_deb_env("center")
     code += r"\includegraphics[angle=" + \
         str(angle) + \
@@ -329,7 +329,8 @@ def prof_image_site(url, image, texte="", dimension="10cm", **kwargs):
 
 ## recherche textuelle
 def prof_tableau_texte_ligne(texte,
-                             hauteur=0.5,
+                             hauteur=1,
+                             largeur=1.5,
                              match=None,
                              mismatch=None,
                              num_ligne=0,
@@ -344,7 +345,7 @@ def prof_tableau_texte_ligne(texte,
     if mismatch is not None and not eleve:
         for i in mismatch:
             couleurs[i] = (1, .5, .5)
-        
+
     #
     nb_vide = 0
     while texte[nb_vide] == " ":
@@ -354,7 +355,7 @@ def prof_tableau_texte_ligne(texte,
     code_tikz = r"""\draw[color=black] (0,-""" + \
         str(num_ligne*hauteur) + """)""" + \
         r""" rectangle (""" + \
-        str(nb_vide) + \
+        str(nb_vide * largeur) + \
         r""",""" + \
         str(-num_ligne*hauteur+hauteur) + \
         """);"""
@@ -366,11 +367,11 @@ def prof_tableau_texte_ligne(texte,
             str(r) + "," + str(g) + "," + str(b) + r"}"
         code_tikz += r"""\filldraw[fill=macouleurfond""" + \
             r""", draw=black] (""" + \
-            str(i) + \
+            str(i*largeur) + \
             r""",-""" + \
             str(num_ligne*hauteur) + \
             r""") rectangle (""" + \
-            str(i+1) + \
+            str((i+1)*largeur) + \
             r""",""" + \
             str(-num_ligne*hauteur+hauteur) + \
             """);"""
@@ -378,7 +379,7 @@ def prof_tableau_texte_ligne(texte,
         code_tikz += r"\definecolor{macouleurtexte}{rgb}{" + \
             str(r) + "," + str(g) + "," + str(b) + r"}"
         code_tikz += r"\node[color=macouleurtexte] at (" + \
-            str(i+.5) + \
+            str((i+.5) * largeur) + \
             "," + \
             str(-num_ligne*hauteur+hauteur/2) + \
             ") {" + \
@@ -431,8 +432,10 @@ def prof_BM_mc(T, M, eleve=False):
             else:
                 decalage = j + 1
         #
+        largeur = 1.5
         code_sortie += __prof_deb_env("tikzpicture", options=["x=.25cm, y=.5cm"])
         code_sortie += prof_tableau_texte_ligne(T,
+                                                largeur=largeur,
                                                 num_ligne=0,
                                                 match=matcht,
                                                 mismatch=mismatch,
@@ -440,10 +443,11 @@ def prof_BM_mc(T, M, eleve=False):
         if eleve:
             # code_sortie += "\draw[draw=none] (0, 0) rectangle (1, -.7);\n"
             for k in range(t):
-                code_sortie += f"\draw ({k}, 0) rectangle ({k+1}, -.7);\n"
+                code_sortie += f"\draw ({k*largeur}, 0) rectangle ({(k+1)*largeur}, -1);\n"
         else:
             code_sortie += prof_tableau_texte_ligne(
                 " " * i + M,
+                largeur=largeur,
                 num_ligne=1,
                 match=list(matcht) + matchm,
                 mismatch=mismatch,
